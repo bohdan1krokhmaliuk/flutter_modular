@@ -108,7 +108,7 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
           rootRouter: diContainer<GlobalKey<NavigatorState>>(),
           controller: (controller as MultipageFlowController<T>)._controller,
           observers: [
-            // TODO: Here we can add other default observers like Monitoring observer etc
+            // [HINT] Here we can add other default observers like Monitoring observer etc
             ...?widget.observers,
           ],
         );
@@ -149,100 +149,3 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
     });
   }
 }
-
-// TODO: check if extended state solution works and then delete
-// class _EntrypointState<T> extends State<Entrypoint<T>> {
-//   late final Future<void>? initialization;
-
-//   late final FeatureFlowController<T>? controller = switch (widget._type) {
-//     .flow => MultipageFlowController<T>(state: widget.state as T),
-//     .page => SinglePageFlowController<T>(),
-//     .widget => null,
-//   };
-
-//   String get scopeName => hashCode.toString();
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     initialization = ScopeDiInitializer.initScope(
-//       scopeName,
-//       DIInitializer.combined([
-//         widget.initializer,
-//         if (controller case FeatureFlowController<T> controller?)
-//           DIInitializer(
-//             (getIt, _) =>
-//                 getIt.registerSingleton<FeatureFlowController<T>>(controller),
-//           ),
-//       ]),
-//     );
-
-//     /// Fixes the back button behaviour by rebuilding the widget in the end of the frame
-//     /// Doing this give time to the navigator to remove the disposed routes from the stack
-//     /// and the internal FeatureFlow won't add internal WillPopScope that prevents the back navigation.
-//     if (controller case MultipageFlowController<T> controller?) {
-//       controller.addListener(_refresh);
-//     }
-//   }
-
-//   @override
-//   void dispose() {
-//     ScopeDiInitializer.disposeScope(scopeName);
-//     if (controller case MultipageFlowController<T> controller?) {
-//       controller.removeListener(_refresh);
-//       controller.dispose();
-//     }
-//     super.dispose();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Widget child =
-//         widget.child ??
-//         FlowBuilder(
-//           onGeneratePages: widget.onGeneratePages!,
-//           rootRouter: diContainer<GlobalKey<NavigatorState>>(),
-//           controller: (controller as MultipageFlowController<T>)._controller,
-//           observers: [
-//             // TODO: Here we can add other default observers like Monitoring observer etc
-//             ...?widget.observers,
-//           ],
-//         );
-
-//     final delegate = widget.localizationsDelegate;
-//     if (delegate != null) {
-//       child = Localizations.override(
-//         context: context,
-//         delegates: [delegate],
-//         child: child,
-//       );
-//     }
-
-//     child = FutureBuilder<void>(
-//       future: initialization,
-//       builder: (context, snapshot) => switch (snapshot.connectionState) {
-//         .done || .none => child,
-//         _ => widget.placeholder ?? SizedBox.shrink(),
-//       },
-//     );
-
-//     return switch (widget._type) {
-//       .widget => child,
-//       _ => ColoredBox(
-//         color:
-//             widget.backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-//         child: child,
-//       ),
-//     };
-//   }
-
-//   void _refresh() {
-//     WidgetsBinding.instance.addPostFrameCallback((_) {
-//       if (!mounted) {
-//         return;
-//       }
-//       setState(() {});
-//     });
-//   }
-// }

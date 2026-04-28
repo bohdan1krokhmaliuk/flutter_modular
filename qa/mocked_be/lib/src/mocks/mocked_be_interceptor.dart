@@ -9,7 +9,8 @@ import 'package:mocked_be/src/core/response_error.dart';
 import 'package:mocked_be/src/core/scenario.dart';
 import 'package:mocked_be/src/repository/scenario_repository.dart';
 
-// TODO: register
+// [HINT] Though this interceptor mainly serve purpose for bdd setup
+// it can also be implemented in app for mocking real requests for demo purposes
 @injectable
 class MockedBeInterceptor extends Interceptor {
   MockedBeInterceptor(this._scenarioRepository);

@@ -13,7 +13,6 @@ class ScenarioRepository {
 
   List<ScenarioEntry> get scenarios => scenarioEntries;
 
-  // TODO: can be used for activating/deactivating fake BE for app (aka demo app views with predefined scenarios)
   Future<void> setActiveScenario(Scenario scenario) =>
       _preferences.setString(_activeScenarioKey, scenario.name);
 

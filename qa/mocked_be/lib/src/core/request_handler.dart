@@ -39,7 +39,6 @@ RequestAction sendError(
 RequestAction sendException(Exception exception) =>
     (_) => Future.value(failure(ResponseErrorWithException(exception)));
 
-// TODO: why u can't iterate inside? test iteration inside
 List<int> _requestsCount = [];
 RequestAction sendMultiple(
   List<Result<String, ResponseError>> responses, {

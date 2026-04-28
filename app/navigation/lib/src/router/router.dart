@@ -15,7 +15,7 @@ class MiniclientRouter extends RootStackRouter {
   MiniclientRouter(GlobalKey<NavigatorState> _navigatorKey)
     : _routes = featureRoutes,
       _guards = [
-        // Inject here any redirection guards, like auth guard etc
+        // [HINT] Inject here any redirection guards, like auth guard etc
       ],
       super(navigatorKey: _navigatorKey);
 

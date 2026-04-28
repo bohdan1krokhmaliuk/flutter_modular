@@ -64,7 +64,6 @@ class SinglePageFlowController<T> extends FeatureFlowController<T> {
   void complete<R extends Object?>([R? value]) {
     if (!_isCompleted) {
       _isCompleted = true;
-      // TODO: register navigator key
       final nav = diContainer<GlobalKey<NavigatorState>>();
       final context = nav.currentContext;
       if (context == null) {
