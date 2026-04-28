@@ -1,0 +1,9 @@
+name: utility_hooks
+
+environment:
+  sdk: ^3.11.5
+
+dependencies:
+  mason: any
+  path: any
+  yaml_edit: any

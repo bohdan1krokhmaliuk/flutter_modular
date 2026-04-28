@@ -1,0 +1,32 @@
+name: {{#snakeCase}}{{name}}{{/snakeCase}}
+description: {{#titleCase}}{{name}}{{/titleCase}} utility
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  di:
+  get_it:
+  injectable:
+  prelude:
+  freezed_annotation:
+  json_annotation:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  build_runner:
+  flutter_test:
+    sdk: flutter
+  injectable_generator:
+  json_serializable:
+  freezed:
+  mocktail:
+  analysis:
+
+flutter:
+  uses-material-design: true
