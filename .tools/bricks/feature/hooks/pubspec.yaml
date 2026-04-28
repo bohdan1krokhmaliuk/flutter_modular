@@ -1,4 +1,4 @@
-name: utility_hooks
+name: feature_hooks
 
 environment:
   sdk: ^3.11.5

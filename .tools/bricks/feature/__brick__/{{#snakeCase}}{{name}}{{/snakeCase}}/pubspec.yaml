@@ -1,0 +1,37 @@
+name: {{#snakeCase}}{{name}}{{/snakeCase}}
+description: {{#titleCase}}{{name}}{{/titleCase}} utility
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  dio:
+  api_client:
+  di:
+  design_system:
+  flutter:
+    sdk: flutter
+  flutter_bloc:
+  freezed_annotation:
+  get_it:
+  injectable:
+  prelude:
+  domain:
+  retrofit:
+  entrypoint:
+  i69n:
+  localizations:
+  state_management:
+
+dev_dependencies:
+  build_runner:
+  freezed:
+  injectable_generator:
+  json_serializable:
+  retrofit_generator:
+  analysis:
