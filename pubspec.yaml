@@ -56,16 +56,23 @@ melos:
     - "**/build/**"
 
   scripts:
-    # TODO: tests & coverage
+    test:
+      run: melos exec -c 1 --dir-exists="test" --fail-fast -- flutter test --no-pub
+      description: Runs tests in all packages which have tests
+
+    test:diff:
+      run: melos exec -c 1 --dir-exists="test" --fail-fast --diff=origin/main...HEAD
+        --include-dependents -- flutter test --no-pub
+      description: Runs tests in all changed packages which have tests
 
     analyze:
-      run: melos exec -c 1 --location="." -- flutter analyze . --no-congratulate
+      run: melos exec -c 1 -- flutter analyze . --no-congratulate --no-pub
       description: Run analyzer in all packages
 
-    analyze_changes:
+    analyze:diff:
       run: >
-        melos exec --fail-fast --diff=origin/main...HEAD --include-dependents --
-        flutter analyze . --no-congratulate --no-pub
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD
+        --include-dependents -- flutter analyze . --no-congratulate --no-pub
       description: Run analyzer in changed packages
 
     generate:
@@ -96,14 +103,19 @@ melos:
       description: Runs barrel file imports check (if barrel file was imported inside
         package instead of its file import)
 
+    validate_barrel_file_imports:diff:
+      run: melos exec -c 1 --diff=origin/main...HEAD --
+        \$MELOS_ROOT_PATH/scripts/validate_barrel_file_imports.sh
+      description: Runs barrel file imports check for all changed packages
+
     validate_dependency:
       run: |
-        melos exec -c 1 -- "dart pub global run dependency_validator" > /dev/null
+        melos exec -c 1 -- "dart pub global run dependency_validator" 
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
     validate_dependency:diff:
       run: |
-        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator" > /dev/null
+        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator" 
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
     metrics:
@@ -112,19 +124,61 @@ melos:
         - melos run metrics:metric_unused_code
       description: Run unused files & code metrics in all packages
 
+    metrics:diff:
+      steps:
+        - melos run metrics:metric_unused_files
+        - melos run metrics:metric_unused_code
+      description: Run unused files & code metrics in all changed packages
+
     metrics:metric_unused_files:
       run: >
         melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-files lib
         --no-congratulate --disable-sunset-warning | tee -a
-        \$MELOS_ROOT_PATH/unused_files.txt"
+        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
       description: Run `metrics --check-unused-files` in all packages
+
+    metrics:metric_unused_files:diff:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
+        "metrics check-unused-files lib --no-congratulate
+        --disable-sunset-warning | tee -a
+        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
+      description: Run `metrics --check-unused-files` in all changed packages
 
     metrics:metric_unused_code:
       run: >
         melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-code lib
         --no-congratulate --disable-sunset-warning | tee -a
-        \$MELOS_ROOT_PATH/unused_code.txt"
+        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
       description: Run `metrics --check-unused-code` in all packages
+
+    metrics:metric_unused_code:diff:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
+        "metrics check-unused-code lib --no-congratulate
+        --disable-sunset-warning | tee -a
+        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
+      description: Run `metrics --check-unused-code` in all changed packages
+
+    code_checks:
+      steps:
+        - melos run analyze
+        - melos run validate_dependency
+        - melos run validate_barrel_file_imports
+        - melos run metrics:metric_unused_files
+        - melos run metrics:metric_unused_code
+        - melos run test
+      description: Runs code checks on the project
+
+    code_checks:diff:
+      steps:
+        - melos run analyze:diff
+        - melos run validate_dependency:diff
+        - melos run validate_barrel_file_imports:diff
+        - melos run metrics:metric_unused_files:diff
+        - melos run metrics:metric_unused_code:diff
+        - melos run test:diff
+      description: Runs code checks on the project diff
 
     format:
       run: |
