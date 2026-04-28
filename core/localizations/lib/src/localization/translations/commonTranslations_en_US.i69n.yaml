@@ -1,0 +1,20 @@
+button:
+  yes: Yes
+  no: No
+  ok: OK
+  retry: Retry
+  tryAgain: Try again
+  clear: Clear
+  close: Close
+  delete: Delete
+  save: Save
+  skip: Skip
+  more: More
+  submit: Submit
+  apply: Apply
+  accept: Accept
+  discard: discard
+
+error:
+  smthWentWrong: Something went wrong!
+  smthWentWrongTryAgain: Something went wrong. Please try again!

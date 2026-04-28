@@ -1,0 +1,14 @@
+name: domain
+description: Package containing shared app models & logic
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  dio:
+  prelude:
+
+dev_dependencies:
+  analysis:

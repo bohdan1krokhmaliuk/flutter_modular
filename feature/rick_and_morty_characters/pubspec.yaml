@@ -1,0 +1,36 @@
+name: rick_and_morty_characters
+description: people feature
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  api_client:
+  dio:
+  di:
+  design_system:
+  flutter:
+    sdk: flutter
+  flutter_bloc:
+  freezed_annotation:
+  get_it:
+  injectable:
+  prelude:
+  domain:
+  retrofit:
+  entrypoint:
+  i69n:
+  localizations:
+  state_management:
+
+dev_dependencies:
+  build_runner:
+  freezed:
+  injectable_generator:
+  json_serializable:
+  retrofit_generator:
+  analysis:

@@ -1,0 +1,13 @@
+name: di
+description: get_it adaptation for easy modular structure
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  get_it:
+
+dev_dependencies:
+  analysis:

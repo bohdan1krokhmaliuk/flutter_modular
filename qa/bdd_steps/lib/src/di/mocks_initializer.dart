@@ -1,0 +1,15 @@
+part of 'test_app_initializer.dart';
+
+/// Registers all "app wide" used injections which have redefined mocks for tests
+class _MocksInitializer extends DIInitializer {
+  _MocksInitializer()
+    : super(
+        (getIt, _) => getIt
+          ..registerSingleton<Monitoring>(setupMonitoring())
+          ..registerSingleton<Preferences>(setupPreferences())
+          ..registerSingleton<ScenarioRepository>(setupScenarioRepository())
+          ..registerLazySingleton<GlobalKey<NavigatorState>>(
+            GlobalKey<NavigatorState>.new,
+          ),
+      );
+}

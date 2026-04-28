@@ -1,0 +1,144 @@
+name: miniclient_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+
+flutter:
+  uses-material-design: true
+
+dependencies:
+  meta: 1.17.0
+  get_it: 9.2.1
+  dio: 5.9.2
+  i69n: 3.6.0
+  auto_route: 11.1.0
+  injectable: 2.7.1+4
+  json_annotation: 4.11.0
+  retrofit: 4.9.2
+  flutter_bloc: 9.1.1
+  freezed_annotation: 3.1.0
+  mocktail: 1.0.5
+  shared_preferences: 2.5.5
+
+dev_dependencies:
+  melos: 7.5.1
+  build_runner: 2.13.1
+  bdd_widget_test: 2.1.3
+  freezed: 3.2.5
+  injectable_generator: 2.12.1
+  json_serializable: 6.13.1
+  retrofit_generator: 10.2.5
+  auto_route_generator: 10.5.0
+
+workspace:
+  - app/miniclient
+  - app/navigation
+  - utility/analysis
+  - utility/prelude
+  - utility/di
+  - utility/flow_builder
+  - utility/entrypoint
+  - utility/monitoring
+  - utility/state_management
+  - utility/preferences
+  - core/domain
+  - core/api_client
+  - core/api_client_interceptors
+  - core/design_system
+  - core/localizations
+  - qa/bdd_steps
+  - qa/mocked_be
+  - feature/rick_and_morty_characters
+
+melos:
+  ignore:
+    - "**/build/**"
+
+  scripts:
+    # TODO: tests & coverage
+
+    analyze:
+      run: melos exec -c 1 --location="." -- flutter analyze . --no-congratulate
+      description: Run analyzer in all packages
+
+    analyze_changes:
+      run: >
+        melos exec --fail-fast --diff=origin/main...HEAD --include-dependents --
+        flutter analyze . --no-congratulate --no-pub
+      description: Run analyzer in changed packages
+
+    generate:
+      run: >
+        melos exec -c 1 --depends-on="build_runner" -- "dart run build_runner
+        build --delete-conflicting-outputs --build-filter=\"lib/**\"
+        --build-filter=\"test/**\""
+      description: Generate code for all packages
+
+    generate:clean:
+      run: >
+        melos exec -c 1 --depends-on="build_runner" -- "flutter clean && flutter
+        pub get && dart run build_runner clean && dart run build_runner build
+        --delete-conflicting-outputs --build-filter=\"lib/**\"
+        --build-filter=\"test/**\""
+      description: Clean and generate code for all packages
+
+    generate:diff:
+      run: >
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD
+        --depends-on="build_runner" -- "dart run build_runner build
+        --delete-conflicting-outputs --build-filter=\"lib/**\"
+        --build-filter=\"test/**\""
+      description: Clean and generate code for all packages diff with main
+
+    validate_barrel_file_imports:
+      run: melos exec -- \$MELOS_ROOT_PATH/scripts/validate_barrel_file_imports.sh
+      description: Runs barrel file imports check (if barrel file was imported inside
+        package instead of its file import)
+
+    validate_dependency:
+      run: |
+        melos exec -c 1 -- "dart pub global run dependency_validator" > /dev/null
+      description: Runs `dependency_validator` in all packages (finds unused dependencies)
+
+    validate_dependency:diff:
+      run: |
+        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator" > /dev/null
+      description: Runs `dependency_validator` in all packages (finds unused dependencies)
+
+    metrics:
+      steps:
+        - melos run metrics:metric_unused_files
+        - melos run metrics:metric_unused_code
+      description: Run unused files & code metrics in all packages
+
+    metrics:metric_unused_files:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-files lib
+        --no-congratulate --disable-sunset-warning | tee -a
+        \$MELOS_ROOT_PATH/unused_files.txt"
+      description: Run `metrics --check-unused-files` in all packages
+
+    metrics:metric_unused_code:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-code lib
+        --no-congratulate --disable-sunset-warning | tee -a
+        \$MELOS_ROOT_PATH/unused_code.txt"
+      description: Run `metrics --check-unused-code` in all packages
+
+    format:
+      run: |
+        find . \
+          -name "*.dart" \
+          -not -name "*.freezed.dart" \
+          -not -name "*.g.dart" \
+          -not -name "*.config.dart" \
+          -not -name "*.gr.dart" \
+          -not -name "*.gen.dart" \
+          -not -name "*.i69n.dart" \
+          -not -name "*/build/*" \
+          -not -name "*/.dart_tool/*" \
+          -not -name "*/__brick__/*.dart" \
+          -not -name "*/test/feature/*_test.dart" \
+            | xargs dart format > /dev/null
+      description: Format all non generated dart files

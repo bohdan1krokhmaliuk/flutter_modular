@@ -1,0 +1,19 @@
+name: entrypoint
+description: "Entrypoint which manages feature level dependencies, and in this
+  way allows to encapsulate it"
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  flow_builder:
+  di:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  analysis:

@@ -1,0 +1,22 @@
+name: api_client
+description: Marvel API client
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  dio:
+  get_it:
+  injectable:
+  json_annotation:
+  retrofit:
+  di:
+
+dev_dependencies:
+  build_runner:
+  injectable_generator:
+  json_serializable:
+  retrofit_generator:
+  analysis:

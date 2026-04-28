@@ -1,0 +1,22 @@
+name: mocked_be
+description: Package for bdd tests BE handling
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  di:
+  get_it:
+  prelude:
+  dio:
+  preferences:
+  injectable:
+
+dev_dependencies:
+  analysis:
+  build_runner:
+  injectable_generator:

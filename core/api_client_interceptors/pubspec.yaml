@@ -1,0 +1,20 @@
+name: api_client_interceptors
+description: Interceptors for our api client
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  api_client:
+  dio:
+  get_it:
+  injectable:
+  di:
+  monitoring:
+
+dev_dependencies:
+  build_runner:
+  injectable_generator:
+  analysis:

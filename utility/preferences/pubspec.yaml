@@ -1,0 +1,20 @@
+name: preferences
+description: Shared preferences wrapper
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  di:
+  get_it:
+  injectable:
+  shared_preferences:
+
+dev_dependencies:
+  build_runner:
+  injectable_generator:
+  analysis:

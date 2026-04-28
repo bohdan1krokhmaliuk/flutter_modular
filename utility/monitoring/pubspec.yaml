@@ -1,0 +1,19 @@
+name: monitoring
+description: Monitoring package for analytics/crashlitics/logs
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  get_it:
+  injectable:
+  di:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  build_runner:
+  injectable_generator:
+  analysis:

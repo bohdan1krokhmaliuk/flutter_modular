@@ -1,0 +1,25 @@
+name: navigation
+description: Project navigator implementation
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  di:
+  get_it:
+  injectable:
+  auto_route:
+  monitoring:
+  rick_and_morty_characters:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  auto_route_generator:
+  injectable_generator:
+  build_runner:
+  analysis:

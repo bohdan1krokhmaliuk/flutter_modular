@@ -1,0 +1,36 @@
+name: miniclient
+description: Modular app example
+version: 1.0.0+1
+publish_to: "none"
+
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  di:
+  get_it:
+  injectable:
+  entrypoint:
+  navigation:
+  api_client:
+  preferences:
+  localizations:
+  state_management:
+  api_client_interceptors:
+  monitoring:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+dev_dependencies:
+  analysis:
+  build_runner:
+  injectable_generator:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
