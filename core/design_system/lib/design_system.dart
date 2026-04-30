@@ -4,3 +4,5 @@ export 'package:design_system/src/atoms/size.dart';
 export 'package:design_system/src/molecules/list/paginated_list_view.dart';
 export 'package:design_system/src/molecules/placeholders/error_view.dart';
 export 'package:design_system/src/molecules/placeholders/loading_view.dart';
+export 'package:design_system/src/molecules/test_facade.dart';
+export 'package:design_system/src/molecules/toast/toast.dart';

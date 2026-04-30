@@ -1,0 +1,28 @@
+targets:
+  $default:
+    builders:
+      injectable_generator|injectable_config_generator:
+        generate_for:
+          - lib/src/di/di_initializer.dart
+      freezed|freezed:
+        generate_for:
+          - lib/src/flow**/*_state.dart
+          - lib/src/domain/model**/*.dart
+          - lib/src/presentation**/*_bloc.dart
+          - lib/src/presentation**/model**/*_bloc.dart
+      json_serializable:
+        generate_for:
+          - lib/src/domain/api/model**/*.dart
+          - lib/src/domain/model**/*.dart
+        options:
+          include_if_null: false
+          explicit_to_json: true
+      bdd_widget_test|featureBuilder:
+        options:
+          include: package:bdd_steps/bdd_options.yaml
+        generate_for:
+          - test/feature**/*.feature
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable

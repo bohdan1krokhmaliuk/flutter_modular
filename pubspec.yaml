@@ -50,6 +50,7 @@ workspace:
   - qa/bdd_steps
   - qa/mocked_be
   - feature/rick_and_morty_characters
+  - core/presenter
 
 melos:
   ignore:

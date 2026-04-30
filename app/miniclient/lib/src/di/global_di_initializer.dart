@@ -5,6 +5,7 @@ import 'package:miniclient/src/di/di_initializer.dart';
 import 'package:monitoring/monitoring.dart';
 import 'package:navigation/navigation.dart';
 import 'package:preferences/preferences.dart';
+import 'package:presenter/presenter.dart';
 import 'package:state_management/state_management.dart';
 
 final initializer = DIInitializer.combined([
@@ -25,4 +26,5 @@ List<DIInitializer> _utilityInitializers = [
 List<DIInitializer> _coreInitializers = [
   ApiClientDIInitializer(),
   InterceptorsDIInitializer(),
+  PresenterDIInitializer(),
 ];

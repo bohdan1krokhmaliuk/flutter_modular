@@ -1,0 +1,38 @@
+name: presenter
+description: Share your presentations across the app - toasts, dialogs, overlays
+  or whatever ui which should be triggered with a function
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  di:
+  design_system:
+  flutter:
+    sdk: flutter
+  flutter_bloc:
+  freezed_annotation:
+  get_it:
+  prelude:
+  injectable:
+  localizations:
+  state_management:
+
+dev_dependencies:
+  bdd_steps:
+  bdd_widget_test:
+  flutter_test:
+    sdk: flutter
+  build_runner:
+  freezed:
+  injectable_generator:
+  json_serializable:
+  analysis:
+
+flutter:
+  uses-material-design: true

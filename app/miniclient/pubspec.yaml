@@ -15,6 +15,7 @@ dependencies:
   entrypoint:
   navigation:
   api_client:
+  presenter:
   preferences:
   localizations:
   state_management:
