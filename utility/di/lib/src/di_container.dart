@@ -6,7 +6,14 @@ import 'package:get_it/get_it.dart';
 final _getIt = GetIt.instance;
 final diContainer = _DIContainer(_getIt);
 
-Future<void>? initializeDIContainer(DIInitializer initializer) async {
+Future<void>? initializeDIContainer(
+  DIInitializer initializer, {
+  bool shouldReset = true,
+}) async {
+  if (shouldReset) {
+    await _getIt.reset();
+  }
+
   final initialization = initializer.init(_getIt);
   return initialization is Future ? initialization : null;
 }

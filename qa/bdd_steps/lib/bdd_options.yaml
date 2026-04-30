@@ -1,7 +1,6 @@
-include: package:bdd_widget_steps/bdd_options.yaml
-external_steps:
-  - package:bdd_steps/step/interactions/i_wait.dart -
-    package:bdd_steps/step/interactions/i_dismiss_the_page.dart
+externalSteps:
+  - package:bdd_steps/step/interactions/i_wait.dart
+  - package:bdd_steps/step/interactions/i_dismiss_the_page.dart
   - package:bdd_steps/step/interactions/i_hide_the_keyboard.dart
   - package:bdd_steps/step/interactions/i_scroll_down_to_finder.dart
   - package:bdd_steps/step/interactions/i_scroll_to_bottom.dart

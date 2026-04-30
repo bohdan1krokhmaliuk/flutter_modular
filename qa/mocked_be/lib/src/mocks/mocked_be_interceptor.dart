@@ -17,7 +17,7 @@ class MockedBeInterceptor extends Interceptor {
 
   final ScenarioRepository _scenarioRepository;
 
-  final _jsonRegex = RegExp('*(application/).*(json)');
+  final _jsonRegex = RegExp(r'application/.*json');
 
   @override
   void onRequest(

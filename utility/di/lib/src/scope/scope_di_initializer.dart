@@ -9,7 +9,7 @@ final _getIt = GetIt.instance;
 abstract class ScopeDiInitializer {
   static Future<void>? initScope(String scopeName, DIInitializer initializer) {
     _getIt.pushNewScope(scopeName: scopeName);
-    return initializeDIContainer(initializer);
+    return initializeDIContainer(initializer, shouldReset: false);
   }
 
   static Future<void> disposeScope(String scopeName) =>

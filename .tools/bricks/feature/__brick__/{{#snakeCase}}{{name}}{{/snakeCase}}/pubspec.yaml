@@ -1,5 +1,5 @@
 name: {{#snakeCase}}{{name}}{{/snakeCase}}
-description: {{#titleCase}}{{name}}{{/titleCase}} utility
+description: {{#titleCase}}{{name}}{{/titleCase}} feature
 version: 0.0.1
 publish_to: none
 
