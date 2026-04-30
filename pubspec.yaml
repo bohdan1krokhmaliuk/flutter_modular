@@ -134,31 +134,27 @@ melos:
     metrics:metric_unused_files:
       run: >
         melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-files lib
-        --no-congratulate --disable-sunset-warning | tee -a
-        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
+        --no-congratulate --disable-sunset-warning"
       description: Run `metrics --check-unused-files` in all packages
 
     metrics:metric_unused_files:diff:
       run: >
         melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
         "metrics check-unused-files lib --no-congratulate
-        --disable-sunset-warning | tee -a
-        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
+        --disable-sunset-warning"
       description: Run `metrics --check-unused-files` in all changed packages
 
     metrics:metric_unused_code:
       run: >
         melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-code lib
-        --no-congratulate --disable-sunset-warning | tee -a
-        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
+        --no-congratulate --disable-sunset-warning"
       description: Run `metrics --check-unused-code` in all packages
 
     metrics:metric_unused_code:diff:
       run: >
         melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
         "metrics check-unused-code lib --no-congratulate
-        --disable-sunset-warning | tee -a
-        \$MELOS_ROOT_PATH/.logs/unused_code.txt"
+        --disable-sunset-warning"
       description: Run `metrics --check-unused-code` in all changed packages
 
     code_checks:

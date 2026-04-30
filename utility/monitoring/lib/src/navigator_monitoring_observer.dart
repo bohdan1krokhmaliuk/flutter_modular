@@ -52,6 +52,6 @@ class NavigatorMonitoringObserver extends NavigatorObserver {
       return;
     }
 
-    _monitoring.developerLog('navigation: ${log(fromName, toName)}');
+    _monitoring.debug(log(fromName, toName), name: 'navigation');
   }
 }

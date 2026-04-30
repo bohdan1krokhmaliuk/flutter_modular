@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:monitoring/monitoring.dart';
 
+const _name = 'bloc';
+
 @singleton
 class BlocMonitoringObserver extends BlocObserver {
   const BlocMonitoringObserver({required Monitoring monitoring})
@@ -23,7 +25,7 @@ class BlocMonitoringObserver extends BlocObserver {
 
     final e = event?.toString();
     if (e != null) {
-      _monitoring.developerLog('bloc event: ${_truncate(e)}');
+      _monitoring.debug('event: ${_truncate(e)}', name: _name);
     }
   }
 
@@ -31,7 +33,7 @@ class BlocMonitoringObserver extends BlocObserver {
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     super.onChange(bloc, change);
     final state = change.nextState.toString();
-    _monitoring.developerLog('bloc state: ${_truncate(state)}');
+    _monitoring.debug('state: ${_truncate(state)}', name: _name);
   }
 
   String _truncate(String message) {

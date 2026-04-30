@@ -6,5 +6,5 @@ import 'package:monitoring/monitoring.dart';
 /// Usage: verify {'lorem'} log reported
 Future<void> verifyLogReported(WidgetTester tester, String text) async {
   final monitoring = diContainer<Monitoring>();
-  verify(() => monitoring.developerLog(text));
+  verify(() => monitoring.debug(text));
 }

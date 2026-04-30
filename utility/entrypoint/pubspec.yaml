@@ -10,8 +10,9 @@ environment:
 resolution: workspace
 
 dependencies:
-  flow_builder:
   di:
+  monitoring:
+  flow_builder:
   flutter:
     sdk: flutter
 

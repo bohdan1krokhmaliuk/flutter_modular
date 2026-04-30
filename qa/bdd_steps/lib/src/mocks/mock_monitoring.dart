@@ -5,6 +5,6 @@ class MockMonitoring extends Mock implements Monitoring {}
 
 Monitoring setupMonitoring() {
   final mock = MockMonitoring();
-  when(() => mock.developerLog(any())).thenReturn(null);
+  when(() => mock.debug(any())).thenReturn(null);
   return mock;
 }

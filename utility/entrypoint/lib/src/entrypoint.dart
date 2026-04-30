@@ -2,6 +2,7 @@ import 'package:di/di.dart';
 import 'package:entrypoint/src/scope_state.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:monitoring/monitoring.dart';
 
 part 'controller/flow_controller.dart';
 
@@ -63,8 +64,11 @@ class Entrypoint<T> extends StatefulWidget {
 
 class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
   late final FeatureFlowController<T>? controller = switch (widget._type) {
-    .flow => MultipageFlowController<T>(state: widget.state as T),
-    .page => SinglePageFlowController<T>(),
+    .flow => MultipageFlowController<T>(
+      diContainer<Monitoring>(),
+      state: widget.state as T,
+    ),
+    .page => SinglePageFlowController<T>(diContainer<Monitoring>()),
     .widget => null,
   };
 
@@ -108,7 +112,7 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
           rootRouter: diContainer<GlobalKey<NavigatorState>>(),
           controller: (controller as MultipageFlowController<T>)._controller,
           observers: [
-            // [HINT] Here we can add other default observers like Monitoring observer etc
+            diContainer<NavigatorMonitoringObserver>(),
             ...?widget.observers,
           ],
         );

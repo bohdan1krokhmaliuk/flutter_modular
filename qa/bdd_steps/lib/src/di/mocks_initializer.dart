@@ -8,6 +8,9 @@ class _MocksInitializer extends DIInitializer {
           ..registerSingleton<Monitoring>(setupMonitoring())
           ..registerSingleton<Preferences>(setupPreferences())
           ..registerSingleton<ScenarioRepository>(setupScenarioRepository())
+          ..registerSingleton<NavigatorMonitoringObserver>(
+            setupNavigatorMonitoringObserver(),
+          )
           ..registerLazySingleton<GlobalKey<NavigatorState>>(
             GlobalKey<NavigatorState>.new,
           ),
