@@ -5,8 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:{{#snakeCase}}{{name}}{{/snakeCase}}/src/di/di_initializer.config.dart';
 
-class MonitoringDIInitializer extends DIInitializer {
-  const MonitoringDIInitializer() : super(_init);
+class {{#pascalCase}}{{name}}{{/pascalCase}}DIInitializer extends DIInitializer {
+  const {{#pascalCase}}{{name}}{{/pascalCase}}DIInitializer() : super(_init);
 }
 
 @injectableInit

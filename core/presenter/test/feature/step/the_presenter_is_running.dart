@@ -15,8 +15,10 @@ Future<void> thePresenterIsRunning(WidgetTester tester) async => testInit(
     body: BlocProvider<FakeFeatureBloc>(
       create: (context) => diContainer<FakeFeatureBloc>(),
       child: Presenter<FakeFeatureBloc, FakeState, FakePresentation>(
-        builder: (context, presentation) =>
-            Toast.of(context).show('My custom presentation'),
+        builder: (context, presentation) {
+          Toast.of(context).show('My custom presentation');
+          return false;
+        },
         child: const SizedBox(),
       ),
     ),
