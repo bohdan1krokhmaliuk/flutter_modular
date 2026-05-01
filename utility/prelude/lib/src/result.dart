@@ -23,6 +23,9 @@ sealed class Result<S, F> {
   Result<S2, F> map<S2>(S2 Function(S s) f) =>
       fold((S s) => success(f(s)), failure);
 
+  Result<S, F2> mapFailure<F2>(F2 Function(F s) f) =>
+      fold(success, (F e) => failure(f(e)));
+
   void forEach(void Function(S) s) => fold(s, (_) {});
 
   S getOrElse(S Function() f) => fold((s) => s, (_) => f());

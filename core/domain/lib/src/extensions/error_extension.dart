@@ -4,7 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:prelude/prelude.dart';
 
 extension FailureExceptionX on FailureException {
+  T mapDioException<T>(T Function(DioException? exception) builder) =>
+      builder(inner is DioException ? (inner as DioException) : null);
+
   bool get isNotFoundException =>
-      inner is DioException &&
-      (inner as DioException).response?.statusCode == HttpStatus.notFound;
+      mapDioException((e) => e?.response?.statusCode == HttpStatus.notFound);
 }

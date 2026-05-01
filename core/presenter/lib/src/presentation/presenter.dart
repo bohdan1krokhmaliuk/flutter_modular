@@ -9,7 +9,7 @@ import 'package:presenter/src/presentation/models/presentation.dart';
 import 'package:presenter/src/presentation/models/presenting_state.dart';
 
 typedef PresentationBuilder<P extends Presentation> =
-    void Function(BuildContext context, P presentation);
+    bool? Function(BuildContext context, P presentation);
 
 typedef DefaultPresenter<
   B extends StateStreamable<S>,
@@ -26,6 +26,8 @@ class Presenter<
   const Presenter({super.key, required this.child, this.builder});
 
   final Widget child;
+
+  /// if returns [true] exits handling presentaion, otherwise default handler will also handle it
   final PresentationBuilder<P>? builder;
 
   @override
@@ -58,7 +60,10 @@ class Presenter<
 
   void _listener(BuildContext context, S state) {
     if ((state.presentation, builder) case (final P present, final builder?)) {
-      builder(context, present);
+      final shouldExit = builder(context, present);
+      if (shouldExit ?? false) {
+        return;
+      }
     }
 
     // [HINT] you can handle custom app wide presentations/exceptions here, for example:
