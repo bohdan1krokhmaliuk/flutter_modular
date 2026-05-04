@@ -68,9 +68,19 @@ melos:
       description: Runs tests in all packages which have tests
 
     test:diff:
-      run: melos exec -c 1 --dir-exists="test" --fail-fast --diff=origin/main...HEAD
-        --include-dependents -- flutter test --no-pub
-      description: Runs tests in all changed packages which have tests
+      run: |
+        melos exec -c 1 --fail-fast --diff="origin/main" --include-dependents -- \
+        "if [[ \"\$MELOS_PACKAGE_PATH\" == *\"/feature/\"* ]] && [ ! -d \"test\" ]; then \
+          echo \"❌ ERROR: Feature package \$MELOS_PACKAGE_NAME is missing a test directory.\"; \
+          exit 1; \
+        fi; \
+        if [ -d \"test\" ]; then \
+          flutter test --no-pub; \
+        else \
+          echo \"⏭️ Skipping \$MELOS_PACKAGE_NAME\"; \
+        fi"
+      description: Runs tests in all changed packages which have tests, enforcing
+        tests for features
 
     analyze:
       run: melos exec -c 1 -- flutter analyze . --no-congratulate --no-pub
