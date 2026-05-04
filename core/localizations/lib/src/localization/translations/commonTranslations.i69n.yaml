@@ -13,7 +13,8 @@ button:
   submit: Submit
   apply: Apply
   accept: Accept
-  discard: discard
+  discard: Discard
+  next: Next
 
 error:
   smthWentWrong: Something went wrong!

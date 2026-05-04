@@ -72,7 +72,8 @@ class ButtonCommonTranslations implements i69n.I69nMessageBundle {
   String get submit => "Submit";
   String get apply => "Apply";
   String get accept => "Accept";
-  String get discard => "discard";
+  String get discard => "Discard";
+  String get next => "Next";
   Object operator [](String key) {
     var index = key.indexOf('.');
     if (index > 0) {
@@ -110,6 +111,8 @@ class ButtonCommonTranslations implements i69n.I69nMessageBundle {
         return accept;
       case 'discard':
         return discard;
+      case 'next':
+        return next;
       default:
         return key;
     }
