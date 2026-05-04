@@ -25,3 +25,35 @@ class CharactersRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [QuestionnaireEntrypointWrapper]
+class QuestionnaireRoute extends PageRouteInfo<void> {
+  const QuestionnaireRoute({List<PageRouteInfo>? children})
+    : super(QuestionnaireRoute.name, initialChildren: children);
+
+  static const String name = 'QuestionnaireRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const QuestionnaireEntrypointWrapper();
+    },
+  );
+}
+
+/// generated route for
+/// [SandboxEntrypointWrapper]
+class SandboxRoute extends PageRouteInfo<void> {
+  const SandboxRoute({List<PageRouteInfo>? children})
+    : super(SandboxRoute.name, initialChildren: children);
+
+  static const String name = 'SandboxRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SandboxEntrypointWrapper();
+    },
+  );
+}

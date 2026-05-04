@@ -55,6 +55,7 @@ workspace:
   - qa/mocked_be
   - feature/rick_and_morty_characters
   - feature/sandbox
+  - feature/questionnaire
 
 melos:
   ignore:

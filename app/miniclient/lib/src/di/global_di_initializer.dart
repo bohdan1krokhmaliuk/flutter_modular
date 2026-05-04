@@ -1,5 +1,6 @@
 import 'package:api_client/api_client.dart';
 import 'package:api_client_interceptors/api_client_interceptors.dart';
+import 'package:configuration/configuration.dart';
 import 'package:di/di.dart';
 import 'package:miniclient/src/di/di_initializer.dart';
 import 'package:monitoring/monitoring.dart';
@@ -15,6 +16,7 @@ final initializer = DIInitializer.combined([
 ]);
 
 List<DIInitializer> _appInitializers = [
+  ConfigurationDIInitializer(),
   NavigationDIInitializer(),
   MiniclientDIInitializer(),
 ];

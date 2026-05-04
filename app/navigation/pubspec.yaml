@@ -14,6 +14,8 @@ dependencies:
   injectable:
   auto_route:
   monitoring:
+  sandbox:
+  questionnaire:
   rick_and_morty_characters:
   flutter:
     sdk: flutter
