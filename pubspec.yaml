@@ -70,10 +70,13 @@ melos:
     test:diff:
       run: |
         melos exec -c 1 --fail-fast --diff="origin/main" --include-dependents -- \
-        "if [[ \"\$MELOS_PACKAGE_PATH\" == *\"/feature/\"* ]] && [ ! -d \"test\" ]; then \
-          echo \"❌ ERROR: Feature package \$MELOS_PACKAGE_NAME is missing a test directory.\"; \
-          exit 1; \
-        fi; \
+        "case \"\$MELOS_PACKAGE_PATH\" in \
+          *\"/feature/\"*) \
+            if [ ! -d \"test\" ]; then \
+              echo \"❌ ERROR: Feature package \$MELOS_PACKAGE_NAME is missing a test directory.\"; \
+              exit 1; \
+            fi ;; \
+        esac; \
         if [ -d \"test\" ]; then \
           flutter test --no-pub; \
         else \
