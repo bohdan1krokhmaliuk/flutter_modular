@@ -11,8 +11,8 @@ class CharactersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(context.translations.title)),
+    return PlatformScaffold(
+      appBar: PlatformAppBar(title: context.translations.title),
       body: BlocProvider(
         create: (_) => diContainer<CharactersBloc>(),
         child: BlocBuilder<CharactersBloc, CharactersState>(
