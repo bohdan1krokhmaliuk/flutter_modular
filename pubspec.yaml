@@ -36,6 +36,7 @@ dev_dependencies:
 workspace:
   - app/miniclient
   - app/navigation
+  - app/configuration
   - utility/analysis
   - utility/prelude
   - utility/di
@@ -48,11 +49,12 @@ workspace:
   - core/api_client
   - core/api_client_interceptors
   - core/design_system
+  - core/presenter
   - core/localizations
   - qa/bdd_steps
   - qa/mocked_be
   - feature/rick_and_morty_characters
-  - core/presenter
+  - feature/sandbox
 
 melos:
   ignore:
