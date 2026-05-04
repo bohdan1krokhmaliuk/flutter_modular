@@ -3,29 +3,121 @@ name: PR Checks
 on:
   pull_request:
     branches: [ main ]
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  melos-diff-check:
+  check-draft:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        melos-script:
-          - "analyze:diff"
-          - "validate_dependency:diff"
-          - "validate_barrel_file_imports:diff"
-          - "metrics:metric_unused_files:diff"
-          - "metrics:metric_unused_code:diff"
-          - "test:diff"
-
+    outputs:
+      is_ready: ${{ github.event.pull_request.draft == false }}
     steps:
-      - name: Checkout Code
+      - run: echo "Checking if PR is ready for review..."
+
+  analyze:
+    name: "🔍 Analyze"
+    needs: check-draft
+    if: needs.check-draft.outputs.is_ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🚚 Checkout Code"
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
+          filter: blob:none
+      - name: "🏗️ Prepare Environment"
+        uses: ./.github/actions/init.yaml
+      - name: "🧪 Run Analyze"
+        run: melos run analyze:diff
 
-      - name: Initialize Environment
-        uses: ./.github/actions/melos-setup
+  validate-dependencies:
+    name: "📦 Dependency Check"
+    needs: check-draft
+    if: needs.check-draft.outputs.is_ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🚚 Checkout Code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          filter: blob:none
+      - name: "🏗️ Prepare Environment"
+        uses: ./.github/actions/init.yaml
+      - name: "🕵️ Validate Dependencies"
+        run: melos run validate_dependency:diff
 
-      - name: "Check: ${{ matrix.melos-script }}"
-        run: melos run ${{ matrix.melos-script }}
+  validate-barrel-files:
+    name: "🛢️ Barrel Check"
+    needs: check-draft
+    if: needs.check-draft.outputs.is_ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🚚 Checkout Code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          filter: blob:none
+      - name: "🏗️ Prepare Environment"
+        uses: ./.github/actions/init.yaml
+      - name: "🚧 Validate Barrels"
+        run: melos run validate_barrel_file_imports:diff
+
+  unused-files:
+    name: "📂 Unused Files"
+    needs: check-draft
+    if: needs.check-draft.outputs.is_ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🚚 Checkout Code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          filter: blob:none
+      - name: "🏗️ Prepare Environment"
+        uses: ./.github/actions/init.yaml
+      - name: "🧹 Hunt Unused Files"
+        run: melos run metrics:metric_unused_files:diff
+
+  unused-code:
+    name: "✂️ Unused Code"
+    needs: check-draft
+    if: needs.check-draft.outputs.is_ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🚚 Checkout Code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          filter: blob:none
+      - name: "🏗️ Prepare Environment"
+        uses: ./.github/actions/init.yaml
+      - name: "🪓 Hunt Unused Code"
+        run: melos run metrics:metric_unused_code:diff
+
+  unit-tests:
+    name: "🚦 Unit Tests"
+    needs: check-draft
+    if: needs.check-draft.outputs.is_ready == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: "🚚 Checkout Code"
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          filter: blob:none
+      - name: "🏗️ Prepare Environment"
+        uses: ./.github/actions/init.yaml
+      - name: "🏎️ Run Tests"
+        run: melos run test:diff

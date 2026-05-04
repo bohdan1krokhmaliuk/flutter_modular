@@ -1,0 +1,23 @@
+name: "Environment Setup"
+description: "Installs Flutter, Melos, and required global Dart tools"
+runs:
+  using: "composite"
+  steps:
+    - name: "🐦 Setup Flutter"
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version-file: pubspec.yaml
+        channel: "stable"
+        cache: true
+
+    - name: "🤫 Disable flutter analytics"
+      shell: bash
+      run: flutter config --no-analytics
+
+    - name: "⚒️ Install Global Tools"
+      shell: bash
+      run: |
+        dart pub global activate melos
+        dart pub global activate dependency_validator
+        dart pub global activate dart_code_metrics
+        echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
