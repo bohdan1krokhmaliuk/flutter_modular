@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:di/di.dart';
 import 'package:entrypoint/entrypoint.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ void main() {
 class MiniclientEntrypoint extends StatelessWidget {
   const MiniclientEntrypoint({super.key});
 
-  // This widget is the root of your application.
+  // [HINT] This widget is the root of your application.
   // Registration of all top level dependencies happens in [Entrypoint.widget]
   // Initialization is happening via modules/preResolve or other Injectable handlers
   //
@@ -24,7 +25,7 @@ class MiniclientEntrypoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Entrypoint.widget(
     initializer: initializer,
-    placeholder: Center(child: CircularProgressIndicator()),
+    placeholder: LoadingView(),
     child: const _Router(),
   );
 }
@@ -36,14 +37,14 @@ class _Router extends StatelessWidget {
   Widget build(BuildContext context) {
     final router = diContainer<MiniclientRouter>();
     return MaterialApp.router(
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       locale: SupportedLocale.enUS.locale,
       supportedLocales: SupportedLocale.locales,
       localizationsDelegates: localizationDelegates,
-      routerConfig: router.appConfig(
-        placeholder: (context) => Center(child: CircularProgressIndicator()),
-      ),
+      routerConfig: router.appConfig(placeholder: (context) => LoadingView()),
       title: 'Flutter Modular Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
     );
   }
 }

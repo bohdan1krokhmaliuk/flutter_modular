@@ -15,6 +15,7 @@ dependencies:
   entrypoint:
   navigation:
   configuration:
+  design_system:
   api_client:
   presenter:
   preferences:
