@@ -34,4 +34,4 @@ runs:
         fi
 
         # 3. Get dependencies
-        flutter pub get --supress-analytics
+        flutter pub get
