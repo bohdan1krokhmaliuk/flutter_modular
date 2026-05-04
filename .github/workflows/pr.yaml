@@ -1,18 +1,31 @@
-name: PR Verification
+name: PR Checks
 
 on:
   pull_request:
     branches: [ main ]
 
 jobs:
-  display-check:
+  melos-diff-check:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    strategy:
+      fail-fast: false
+      matrix:
+        melos-script:
+          - "analyze:diff"
+          - "validate_dependency:diff"
+          - "validate_barrel_file_imports:diff"
+          - "metrics:metric_unused_files:diff"
+          - "metrics:metric_unused_code:diff"
+          - "test:diff"
 
-      - name: Print Hello
-        run: |
-          echo "--------------------------------------------------"
-          echo "ACTION SUCCESSFUL: Test text printed successfully!"
-          echo "--------------------------------------------------"
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Initialize Environment
+        uses: ./.github/actions/melos-setup
+
+      - name: "Check: ${{ matrix.melos-script }}"
+        run: melos run ${{ matrix.melos-script }}
