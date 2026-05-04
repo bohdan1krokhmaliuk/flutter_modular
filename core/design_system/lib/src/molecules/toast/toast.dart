@@ -14,6 +14,7 @@ class Toast {
 
   void show(
     String message, {
+    Color? color,
     bool hideCurrent = true,
     Duration duration = const Duration(seconds: 2),
   }) {
@@ -30,6 +31,7 @@ class Toast {
       SnackBar(
         duration: duration,
         content: Text(message),
+        backgroundColor: color,
         padding: dimen.x.xs + dimen.y.xxs,
       ),
     );

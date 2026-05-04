@@ -1,8 +1,15 @@
 export 'package:design_system/src/atoms/dimension.dart';
+export 'package:design_system/src/atoms/illustrations/illustrations.dart';
 export 'package:design_system/src/atoms/radius.dart';
 export 'package:design_system/src/atoms/size.dart';
+export 'package:design_system/src/layouts/submit_page.dart';
+export 'package:design_system/src/molecules/base/app_bar.dart';
+export 'package:design_system/src/molecules/base/back_button.dart';
+export 'package:design_system/src/molecules/base/card.dart';
+export 'package:design_system/src/molecules/base/scaffold.dart';
 export 'package:design_system/src/molecules/list/paginated_list_view.dart';
 export 'package:design_system/src/molecules/placeholders/error_view.dart';
 export 'package:design_system/src/molecules/placeholders/loading_view.dart';
 export 'package:design_system/src/molecules/test_facade.dart';
 export 'package:design_system/src/molecules/toast/toast.dart';
+export 'package:design_system/src/theme/theme.dart';
