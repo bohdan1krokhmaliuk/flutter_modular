@@ -3,6 +3,7 @@ import 'package:di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_confetti/flutter_confetti.dart';
 import 'package:localizations/localizations.dart';
 import 'package:presenter/src/presentation/bloc/presenter_bloc.dart';
 import 'package:presenter/src/presentation/models/presentation.dart';
@@ -38,20 +39,12 @@ class Presenter<
       child: child,
     );
 
-    return TestFacade(
-      child: BlocProvider(
-        lazy: false,
-        child: presenter,
-        create: (context) => diContainer<PresenterBloc>(),
-      ),
-      testBuilder: (context) => diContainer.isRegistered<PresenterBloc>()
-          ? BlocProvider(
-              lazy: false,
-              child: presenter,
-              create: (context) => diContainer<PresenterBloc>(),
-            )
-          : presenter,
-    );
+    return diContainer.isRegistered<PresenterBloc>()
+        ? BlocProvider.value(
+            child: presenter,
+            value: diContainer<PresenterBloc>(),
+          )
+        : presenter;
   }
 
   bool _listenWhen(S previous, S current) =>
@@ -68,10 +61,39 @@ class Presenter<
 
     // [HINT] you can handle custom app wide presentations/exceptions here, for example:
     switch (state.presentation) {
-      // case ToastPresentation(test: final text):
-      //   Toast.of(context).show(text);
       // case ExceptionPresentation(exception: final e) when e is TermsNotAcceptedException:
-      //   context.read<PresenterBloc>().add(PresenterEvent.openAcceptTerms());
+      //   context.read<PresenterBloc?>()?.add(PresenterEvent.openAcceptTerms());
+      case ConfettiPresentation(duration: final duration):
+        // [HINT] This is direct usage of 3rd party package inside Presenter
+        // you should avoid it and move most 3rd party implementations into some
+        // kind of utility wrapper
+        final ticks = duration.inMilliseconds ~/ 16;
+        Confetti.launch(
+          context,
+          options: ConfettiOptions(
+            particleCount: 200,
+            spread: 60,
+            ticks: ticks,
+            gravity: .5,
+            y: 1.3,
+            x: 0.1,
+            angle: 70,
+            startVelocity: 90,
+          ),
+        );
+        Confetti.launch(
+          context,
+          options: ConfettiOptions(
+            particleCount: 200,
+            spread: 60,
+            ticks: ticks,
+            gravity: .5,
+            y: 1.3,
+            x: .9,
+            angle: 110,
+            startVelocity: 90,
+          ),
+        );
       case ExceptionPresentation():
         Toast.of(context).show(context.commonTranslations.error.smthWentWrong);
       default:

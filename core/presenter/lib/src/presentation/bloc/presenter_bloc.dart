@@ -5,7 +5,7 @@ import 'package:state_management/state_management.dart';
 part 'presenter_bloc.freezed.dart';
 part 'presenter_event.dart';
 
-@injectable
+@lazySingleton
 class PresenterBloc extends Bloc<PresenterEvent, void> {
   PresenterBloc() : super(null) {
     on<PresenterEvent>((event, emit) {});

@@ -13,10 +13,20 @@ interface class Presentation {
 
   factory Presentation.error(FailureException exception) =
       ExceptionPresentation._;
+
+  factory Presentation.confetti({
+    Duration duration = const Duration(seconds: 5),
+  }) => ConfettiPresentation._(duration: duration);
 }
 
 final class ExceptionPresentation extends Presentation {
   const ExceptionPresentation._(this.exception);
 
   final FailureException exception;
+}
+
+final class ConfettiPresentation extends Presentation {
+  const ConfettiPresentation._({this.duration = const Duration(seconds: 5)});
+
+  final Duration duration;
 }

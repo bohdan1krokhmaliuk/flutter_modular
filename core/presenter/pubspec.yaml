@@ -22,6 +22,7 @@ dependencies:
   injectable:
   localizations:
   state_management:
+  flutter_confetti:
 
 dev_dependencies:
   bdd_steps:
