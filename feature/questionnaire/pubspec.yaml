@@ -1,0 +1,47 @@
+name: questionnaire
+description: Flow example implementation
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  dio:
+  api_client:
+  di:
+  design_system:
+  flutter:
+    sdk: flutter
+  flutter_bloc:
+  freezed_annotation:
+  get_it:
+  injectable:
+  prelude:
+  domain:
+  retrofit:
+  entrypoint:
+  i69n:
+  presenter:
+  localizations:
+  state_management:
+
+dev_dependencies:
+  bdd_steps:
+  bdd_widget_test:
+  mocked_be:
+  mocktail:
+  flutter_test:
+    sdk: flutter
+  build_runner:
+  freezed:
+  injectable_generator:
+  json_serializable:
+  retrofit_generator:
+  analysis:
+
+flutter:
+  uses-material-design: true

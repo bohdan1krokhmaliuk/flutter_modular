@@ -1,0 +1,17 @@
+wellcome:
+  pageTitle: Check your knowledge
+  button: Start quiz
+  title: Ready to test your knowledge?
+  description: "Welcome to the quiz! These questions are designed to help you
+    reinforce what you've learned and discover new insights. Take your time and
+    focus on the details. Good luck"
+
+completed:
+  title(bool isSuccess): "${isSuccess? 'Fantastic Job! 🎉' : 'Not Quite There Yet ✨'}"
+  description(bool isSuccess): "${isSuccess? '$_descriptionSuccess' : '$_descriptionFailure'}"
+  _descriptionSuccess: "You've successfully completed the quiz! You've shown great
+    dedication and a solid grasp of the material. Take a moment to celebrate
+    your progress—you've earned it!"
+  _descriptionFailure: "Good effort! You've completed the session, but there's
+    still room to grow. Review your results below and give it another shot
+    whenever you're ready."
