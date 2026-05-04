@@ -1,4 +1,4 @@
-name: PR Checks
+name: PR
 
 on:
   pull_request:
@@ -13,17 +13,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check-draft:
-    runs-on: ubuntu-latest
-    outputs:
-      is_ready: ${{ github.event.pull_request.draft == false }}
-    steps:
-      - run: echo "Checking if PR is ready for review..."
-
   analyze:
     name: "🔍 Analyze"
     needs: check-draft
-    if: needs.check-draft.outputs.is_ready == 'true'
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: "🚚 Checkout Code"
@@ -37,10 +30,9 @@ jobs:
       - name: "🧪 Run Analyze"
         run: melos run analyze:diff
 
-  validate-dependencies:
-    name: "📦 Dependency Check"
-    needs: check-draft
-    if: needs.check-draft.outputs.is_ready == 'true'
+  unused-dependencies:
+    name: "📦 Unused Dependencies"
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: "🚚 Checkout Code"
@@ -52,12 +44,25 @@ jobs:
       - name: "🏗️ Prepare Environment"
         uses: ./.github/actions/init.yaml
       - name: "🕵️ Validate Dependencies"
-        run: melos run validate_dependency:diff
+        run: melos run unused_dependencies:diff
 
-  validate-barrel-files:
-    name: "🛢️ Barrel Check"
-    needs: check-draft
-    if: needs.check-draft.outputs.is_ready == 'true'
+  circular-dependencies:
+    name: "🔄 Circular Dependencies"
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          filter: blob:none
+      - uses: ./.github/actions/init.yaml
+      - name: "🕵️ Run"
+        run: melos run circular_dependencies:diff
+
+  barrel-files-imports:
+    name: "🛢️ Barrel files check"
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: "🚚 Checkout Code"
@@ -73,8 +78,7 @@ jobs:
 
   unused-files:
     name: "📂 Unused Files"
-    needs: check-draft
-    if: needs.check-draft.outputs.is_ready == 'true'
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: "🚚 Checkout Code"
@@ -86,12 +90,11 @@ jobs:
       - name: "🏗️ Prepare Environment"
         uses: ./.github/actions/init.yaml
       - name: "🧹 Hunt Unused Files"
-        run: melos run metrics:metric_unused_files:diff
+        run: melos run unused_files:diff
 
   unused-code:
     name: "✂️ Unused Code"
-    needs: check-draft
-    if: needs.check-draft.outputs.is_ready == 'true'
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: "🚚 Checkout Code"
@@ -103,12 +106,11 @@ jobs:
       - name: "🏗️ Prepare Environment"
         uses: ./.github/actions/init.yaml
       - name: "🪓 Hunt Unused Code"
-        run: melos run metrics:metric_unused_code:diff
+        run: melos run unused_code:diff
 
   unit-tests:
     name: "🚦 Unit Tests"
-    needs: check-draft
-    if: needs.check-draft.outputs.is_ready == 'true'
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: "🚚 Checkout Code"

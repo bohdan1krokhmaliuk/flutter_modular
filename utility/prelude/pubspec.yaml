@@ -8,6 +8,7 @@ resolution: workspace
 
 dependencies:
   meta:
+  rick_and_morty_characters:
 
 dev_dependencies:
   analysis:

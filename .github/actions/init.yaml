@@ -1,5 +1,5 @@
 name: "Environment Setup"
-description: "Installs Flutter, Melos, and required global Dart tools"
+description: "Installs Flutter & Prep Workspace"
 runs:
   using: "composite"
   steps:
@@ -7,17 +7,31 @@ runs:
       uses: subosito/flutter-action@v2
       with:
         flutter-version-file: pubspec.yaml
-        channel: "stable"
         cache: true
 
-    - name: "🤫 Disable flutter analytics"
-      shell: bash
-      run: flutter config --no-analytics
+    - name: "⚡ Cache Global Pub Tools"
+      uses: actions/cache@v4
+      with:
+        path: ~/.pub-cache
+        key: ${{ runner.os }}-pub-cache-${{ hashFiles('**/pubspec.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pub-cache-
 
-    - name: "⚒️ Install Global Tools"
+    - name: "⚒️ Install Tools & Resolve Workspace"
       shell: bash
       run: |
-        dart pub global activate melos
-        dart pub global activate dependency_validator
-        dart pub global activate dart_code_metrics
+        flutter config --no-analytics
+
+        # 1. Add Pub Cache to Path immediately
         echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
+        export PATH="$PATH:$HOME/.pub-cache/bin"
+
+        # 2. Activate tools only if missing
+        if ! command -v melos &> /dev/null; then
+          dart pub global activate melos
+          dart pub global activate dependency_validator
+          dart pub global activate dart_code_metrics
+        fi
+
+        # 3. Get dependencies
+        flutter pub get --supress-analytics

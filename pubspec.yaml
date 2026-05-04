@@ -116,48 +116,44 @@ melos:
         \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.sh
       description: Runs barrel file imports check for all changed packages
 
-    validate_dependency:
+    unused_dependencies:
       run: |
         melos exec -c 1 -- "dart pub global run dependency_validator" 
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
-    validate_dependency:diff:
+    unused_dependencies:diff:
       run: |
         melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator" 
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
-    metrics:
-      steps:
-        - melos run metrics:metric_unused_files
-        - melos run metrics:metric_unused_code
-      description: Run unused files & code metrics in all packages
+    circular_dependencies:
+      run: melos list --cycles
+      description: Checks if there is no circular dependencies
 
-    metrics:diff:
-      steps:
-        - melos run metrics:metric_unused_files
-        - melos run metrics:metric_unused_code
-      description: Run unused files & code metrics in all changed packages
+    circular_dependencies:diff:
+      run: melos list --cycles --diff=origin/main...HEAD
+      description: Checks if there is no circular dependencies
 
-    metrics:metric_unused_files:
+    unused_files:
       run: >
         melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-files lib
         --no-congratulate --disable-sunset-warning"
       description: Run `metrics --check-unused-files` in all packages
 
-    metrics:metric_unused_files:diff:
+    unused_files:diff:
       run: >
         melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
         "metrics check-unused-files lib --no-congratulate
         --disable-sunset-warning"
       description: Run `metrics --check-unused-files` in all changed packages
 
-    metrics:metric_unused_code:
+    unused_code:
       run: >
         melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-code lib
         --no-congratulate --disable-sunset-warning"
       description: Run `metrics --check-unused-code` in all packages
 
-    metrics:metric_unused_code:diff:
+    unused_code:diff:
       run: >
         melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
         "metrics check-unused-code lib --no-congratulate
@@ -167,20 +163,22 @@ melos:
     code_checks:
       steps:
         - melos run analyze
-        - melos run validate_dependency
+        - melos run unused_dependencies
+        - melos run circular_dependencies
         - melos run validate_barrel_file_imports
-        - melos run metrics:metric_unused_files
-        - melos run metrics:metric_unused_code
+        - melos run unused_files
+        - melos run unused_code
         - melos run test
       description: Runs code checks on the project
 
     code_checks:diff:
       steps:
         - melos run analyze:diff
-        - melos run validate_dependency:diff
+        - melos run unused_dependencies:diff
+        - melos run circular_dependencies:diff
         - melos run validate_barrel_file_imports:diff
-        - melos run metrics:metric_unused_files:diff
-        - melos run metrics:metric_unused_code:diff
+        - melos run unused_files:diff
+        - melos run unused_code:diff
         - melos run test:diff
       description: Runs code checks on the project diff
 
