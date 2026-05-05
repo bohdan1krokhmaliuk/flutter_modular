@@ -126,10 +126,9 @@ jobs:
   coverage:
     name: "📊 Coverage Report"
     if: github.event.pull_request.draft == false
-    needs: [ unit-tests ] # Run only if unit tests pass
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: write # Required to post comments
+      pull-requests: write
     steps:
       - name: "🚚 Checkout Code"
         uses: actions/checkout@v4
