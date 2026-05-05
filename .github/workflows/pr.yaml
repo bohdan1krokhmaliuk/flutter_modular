@@ -147,13 +147,9 @@ jobs:
         run: |
           dart .tools/scripts/calculate_coverage.dart > coverage_summary.md
           cat coverage_summary.md >> $GITHUB_STEP_SUMMARY
-
-          # Pass multiline string to environment
-          echo "REPORT_BODY<<EOF" >> $GITHUB_ENV
-          cat coverage_summary.md >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
       - name: "💬 Post/Update Coverage Comment"
+        if: failure()
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: coverage-report
-          message: ${{ env.REPORT_BODY }}
+          path: coverage_summary.md
