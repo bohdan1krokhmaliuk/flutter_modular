@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:presenter/presenter.dart';
+import 'package:presenter/src/presentation/models/presentation.dart';
+import 'package:presenter/src/presentation/models/presenting_state.dart';
 
 class FakeState implements PresentingState {
   const FakeState(this.presentation);

@@ -6,7 +6,6 @@ import 'package:localizations/localizations.dart';
 import 'package:presenter/presenter.dart';
 import 'package:questionnaire/src/domain/model/answer.dart';
 import 'package:questionnaire/src/domain/model/question.dart';
-import 'package:questionnaire/src/presentation/localization/translations_extension.dart';
 import 'package:questionnaire/src/presentation/questions/bloc/question_bloc.dart';
 
 class QuestionPage extends StatelessWidget {

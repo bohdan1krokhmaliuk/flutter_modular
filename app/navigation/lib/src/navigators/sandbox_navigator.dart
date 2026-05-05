@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:navigation/navigation.dart';
+import 'package:navigation/src/router/router.dart';
 import 'package:sandbox/sandbox.dart';
 
 @Injectable(as: SandboxNavigator)

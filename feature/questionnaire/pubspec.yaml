@@ -10,8 +10,6 @@ environment:
 resolution: workspace
 
 dependencies:
-  dio:
-  api_client:
   di:
   design_system:
   flutter:
@@ -21,8 +19,6 @@ dependencies:
   get_it:
   injectable:
   prelude:
-  domain:
-  retrofit:
   entrypoint:
   i69n:
   presenter:
@@ -32,7 +28,6 @@ dependencies:
 dev_dependencies:
   bdd_steps:
   bdd_widget_test:
-  mocked_be:
   mocktail:
   flutter_test:
     sdk: flutter
@@ -40,7 +35,6 @@ dev_dependencies:
   freezed:
   injectable_generator:
   json_serializable:
-  retrofit_generator:
   analysis:
 
 flutter:

@@ -127,14 +127,14 @@ melos:
       description: Clean and generate code for all packages diff with main
 
     validate_barrel_file_imports:
-      run: melos exec --
-        \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.sh
+      run: melos exec -- dart
+        \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
       description: Runs barrel file imports check (if barrel file was imported inside
         package instead of its file import)
 
     validate_barrel_file_imports:diff:
-      run: melos exec -c 1 --diff=origin/main...HEAD --
-        \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.sh
+      run: melos exec -c 1 --diff=origin/main...HEAD -- dart
+        \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
       description: Runs barrel file imports check for all changed packages
 
     unused_dependencies:

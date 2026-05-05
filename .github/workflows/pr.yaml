@@ -148,7 +148,7 @@ jobs:
           dart .tools/scripts/calculate_coverage.dart > coverage_summary.md
           cat coverage_summary.md >> $GITHUB_STEP_SUMMARY
       - name: "💬 Post/Update Coverage Comment"
-        if: failure()
+        if: always()
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: coverage-report
