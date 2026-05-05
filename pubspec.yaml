@@ -69,21 +69,29 @@ melos:
 
     test:diff:
       run: |
-        melos exec -c 1 --fail-fast --diff="origin/main" --include-dependents -- \
-        "case \"\$MELOS_PACKAGE_PATH\" in \
-          *\"/feature/\"*) \
-            if [ ! -d \"test\" ]; then \
-              echo \"❌ ERROR: Feature package \$MELOS_PACKAGE_NAME is missing a test directory.\"; \
-              exit 1; \
-            fi ;; \
-        esac; \
-        if [ -d \"test\" ]; then \
-          flutter test --no-pub; \
-        else \
-          echo \"⏭️ Skipping \$MELOS_PACKAGE_NAME\"; \
-        fi"
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD --include-dependents -- \$MELOS_ROOT_PATH/.tools/scripts/run_tests.sh
       description: Runs tests in all changed packages which have tests, enforcing
         tests for features
+
+    coverage:
+      run: |
+        melos exec -c 1 --dir-exists="test" -- flutter test --coverage --no-pub
+      description: Generate coverage data
+
+    coverage:diff:
+      run: |
+        melos exec -c 1 --dir-exists="test" --diff=origin/main...HEAD -- flutter test --coverage --no-pub
+      description: Generate coverage data for changes
+
+    coverage:report:
+      run: dart \$MELOS_ROOT_PATH/.tools/scripts/calculate_coverage.dart
+      description: Calculate and print report for packages
+
+    coverage:clean:
+      run: |
+        rm -rf coverage/
+        melos exec -- "rm -rf coverage/"
+      description: Removes all coverage folders and lcov.info files.
 
     analyze:
       run: melos exec -c 1 -- flutter analyze . --no-congratulate --no-pub
