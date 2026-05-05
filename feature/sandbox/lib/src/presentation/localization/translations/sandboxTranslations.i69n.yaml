@@ -1,11 +1,11 @@
 main:
   title: Home
   makeCall: Make Call
-  customException: Make failure call
+  customException: Make custom failure api call
   customExceptionDescription: This card onTap logic makes an api call which always
     fails but is processed emmitting custom exception and Presenter handlign
     that exception
-  defaultException: Make failure call
+  defaultException: Make failure api call
   defaultExceptionDescription: This card onTap logic makes an api call which
     always fails - and it demostrates how Presenter handles default exceptions
   rickAndMorty: Check out our new rick and morty list!

@@ -61,10 +61,10 @@ class MainSandboxTranslations implements i69n.I69nMessageBundle {
   const MainSandboxTranslations(this._parent);
   String get title => "Home";
   String get makeCall => "Make Call";
-  String get customException => "Make failure call";
+  String get customException => "Make custom failure api call";
   String get customExceptionDescription =>
       "This card onTap logic makes an api call which always fails but is processed emmitting custom exception and Presenter handlign that exception";
-  String get defaultException => "Make failure call";
+  String get defaultException => "Make failure api call";
   String get defaultExceptionDescription =>
       "This card onTap logic makes an api call which always fails - and it demostrates how Presenter handles default exceptions";
   String get rickAndMorty => "Check out our new rick and morty list!";
