@@ -150,8 +150,8 @@ jobs:
           echo "REPORT_BODY<<EOF" >> $GITHUB_ENV
           cat coverage_summary.md >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-      - name: "💬 Post Comment"
-        uses: maroonchino/sticky-pull-request-comment@v2
+      - name: "💬 Post/Update Coverage Comment"
+        uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: coverage-report
           message: ${{ env.REPORT_BODY }}
