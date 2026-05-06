@@ -29,6 +29,18 @@ _Character _$CharacterFromJson(Map<String, dynamic> json) => _Character(
   location: ShortLocation.fromJson(json['location'] as Map<String, dynamic>),
 );
 
+Map<String, dynamic> _$CharacterToJson(_Character instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+      'status': _$StatusEnumMap[instance.status]!,
+      'species': instance.species,
+      'gender': _$GenderEnumMap[instance.gender]!,
+      'image': instance.image,
+      'origin': instance.origin.toJson(),
+      'location': instance.location.toJson(),
+    };
+
 const _$StatusEnumMap = {
   Status.alive: 'Alive',
   Status.dead: 'Dead',
@@ -50,6 +62,12 @@ _ShortLocation _$ShortLocationFromJson(Map<String, dynamic> json) =>
         const UriToIdConverter().fromJson,
       ),
     );
+
+Map<String, dynamic> _$ShortLocationToJson(_ShortLocation instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'url': ?const UriToIdConverter().toJson(instance.id),
+    };
 
 Value? _$JsonConverterFromJson<Json, Value>(
   Object? json,

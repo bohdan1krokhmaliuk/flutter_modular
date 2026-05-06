@@ -40,14 +40,11 @@ RequestAction sendException(Exception exception) =>
     (_) => Future.value(failure(ResponseErrorWithException(exception)));
 
 List<int> _requestsCount = [];
-RequestAction sendMultiple(
-  List<Result<String, ResponseError>> responses, {
-  Duration? delay,
-}) {
+RequestAction sendMultiple(List<RequestAction> responses, {Duration? delay}) {
   final uniqueId = _requestsCount.length;
   _requestsCount.add(0);
-  return (_) => Future<void>.delayed(delay ?? Duration.zero).then((_) {
+  return (r) => Future<void>.delayed(delay ?? Duration.zero).then((_) async {
     final times = _requestsCount[uniqueId]++;
-    return responses.elementAtOrNull(times) ?? responses.last;
+    return responses.elementAtOrNull(times)?.call(r) ?? responses.last(r);
   });
 }

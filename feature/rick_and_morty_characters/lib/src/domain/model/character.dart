@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'character.freezed.dart';
 part 'character.g.dart';
 
-@Freezed(toJson: false)
+@freezed
 abstract class Character with _$Character {
   const factory Character({
     required int id,
@@ -22,7 +22,7 @@ abstract class Character with _$Character {
       _$CharacterFromJson(json);
 }
 
-@Freezed(toJson: false)
+@freezed
 abstract class ShortLocation with _$ShortLocation {
   const factory ShortLocation({
     required String name,

@@ -9,6 +9,8 @@ class PaginationData {
   factory PaginationData.fromJson(Map<String, dynamic> json) =>
       _$PaginationDataFromJson(json);
 
+  Map<String, dynamic> toJson() => _$PaginationDataToJson(this);
+
   final int count;
   final int pages;
 }

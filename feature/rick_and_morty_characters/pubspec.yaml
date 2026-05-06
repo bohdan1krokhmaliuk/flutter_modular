@@ -6,6 +6,9 @@ environment:
   sdk: ^3.11.5
   flutter: ^3.41.7
 
+flutter:
+  uses-material-design: true
+
 resolution: workspace
 
 dependencies:
@@ -28,6 +31,10 @@ dependencies:
   state_management:
 
 dev_dependencies:
+  bdd_steps:
+  bdd_widget_test:
+  mocked_be:
+  mocktail:
   build_runner:
   freezed:
   injectable_generator:

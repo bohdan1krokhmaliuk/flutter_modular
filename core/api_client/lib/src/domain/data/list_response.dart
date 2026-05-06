@@ -12,6 +12,9 @@ class ListResponse<T> {
     T Function(Object? json) fromJsonT,
   ) => _$ListResponseFromJson(json, fromJsonT);
 
+  Map<String, dynamic> toJson(Object? Function(T) toJsonT) =>
+      _$ListResponseToJson(this, toJsonT);
+
   @JsonKey(name: 'info')
   final PaginationData meta;
   @JsonKey(name: 'results')

@@ -22,6 +22,8 @@ mixin _$Character {
 @pragma('vm:prefer-inline')
 $CharacterCopyWith<Character> get copyWith => _$CharacterCopyWithImpl<Character>(this as Character, _$identity);
 
+  /// Serializes this Character to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -229,7 +231,7 @@ return $default(_that.id,_that.name,_that.status,_that.species,_that.gender,_tha
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 
 class _Character implements Character {
   const _Character({required this.id, required this.name, @JsonKey(defaultValue: Status.unknown, unknownEnumValue: Status.unknown) required this.status, required this.species, @JsonKey(defaultValue: Gender.unknown, unknownEnumValue: Gender.unknown) required this.gender, required this.image, required this.origin, required this.location});
@@ -250,7 +252,10 @@ class _Character implements Character {
 @pragma('vm:prefer-inline')
 _$CharacterCopyWith<_Character> get copyWith => __$CharacterCopyWithImpl<_Character>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$CharacterToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
@@ -337,6 +342,8 @@ mixin _$ShortLocation {
 @pragma('vm:prefer-inline')
 $ShortLocationCopyWith<ShortLocation> get copyWith => _$ShortLocationCopyWithImpl<ShortLocation>(this as ShortLocation, _$identity);
 
+  /// Serializes this ShortLocation to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -520,7 +527,7 @@ return $default(_that.name,_that.id);case _:
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 
 class _ShortLocation implements ShortLocation {
   const _ShortLocation({required this.name, @UriToIdConverter()@JsonKey(name: 'url') this.id});
@@ -535,7 +542,10 @@ class _ShortLocation implements ShortLocation {
 @pragma('vm:prefer-inline')
 _$ShortLocationCopyWith<_ShortLocation> get copyWith => __$ShortLocationCopyWithImpl<_ShortLocation>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$ShortLocationToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
