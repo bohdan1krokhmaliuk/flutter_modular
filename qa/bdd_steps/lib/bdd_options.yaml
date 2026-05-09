@@ -36,6 +36,8 @@ externalSteps:
   - package:bdd_steps/step/widget/i_see_multiple_widgets.dart
   - package:bdd_steps/step/widget/i_tap_icon.dart
   - package:bdd_steps/step/widget/i_tap_widget.dart
+  - package:bdd_steps/step/widget/i_see_button_with_text.dart
   - package:bdd_steps/step/widget/i_wait_for_widget_to_appear.dart
   - package:bdd_steps/step/widget/i_wait_for_widget_to_disappear.dart
   - package:bdd_steps/step/be/the_be_is_mocked_with_scenario.dart
+  - package:bdd_steps/step/design_system/i_see_illustration.dart

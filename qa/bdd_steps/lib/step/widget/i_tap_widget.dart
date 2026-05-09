@@ -1,3 +1,4 @@
+import 'package:bdd_steps/step/interactions/i_wait.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 /// Example: When I tap {'some'} widget
@@ -10,5 +11,5 @@ Future<void> iTapWidget(
       ? find.byType(widget).at(index)
       : find.byType(widget);
   await tester.tap(finder);
-  await tester.pump();
+  await iWait(tester);
 }
