@@ -25,7 +25,7 @@ SandboxConfigurator buildConfigurator({
 SandboxNavigator buildNavigator({bool? passedQuestionnaire}) {
   final mock = SandboxNavigatorMock();
 
-  when(mock.openRickAndMorty).thenAnswer((_) async => null);
+  when(mock.openRickAndMorty).thenAnswer((_) async {});
   when(mock.openQuestionnaire).thenAnswer((_) async => passedQuestionnaire);
 
   return mock;

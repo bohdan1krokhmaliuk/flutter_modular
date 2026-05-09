@@ -72,7 +72,7 @@ class MiniclientRouter extends RootStackRouter {
   );
 
   @override
-  void popUntilRoot() async {
+  Future<void> popUntilRoot() async {
     await _delayNavigationAndSetupForNext();
     super.popUntilRoot();
   }

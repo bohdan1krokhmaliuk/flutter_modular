@@ -18,7 +18,7 @@ class MockedBeInterceptor extends Interceptor {
   final Monitoring _monitoring;
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
