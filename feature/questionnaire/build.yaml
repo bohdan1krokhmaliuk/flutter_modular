@@ -10,6 +10,7 @@ targets:
       freezed|freezed:
         generate_for:
           - lib/src/entrypoint**/*_state.dart
+          - lib/src/domain/api/model**/*.dart
           - lib/src/domain/model**/*.dart
           - lib/src/presentation**/*_bloc.dart
           - lib/src/presentation**/model**/*_bloc.dart
