@@ -9,6 +9,8 @@ ScenarioRepository setupScenarioRepository() {
   final mock = MockScenarioRepository();
   when(mock.clearActiveScenario).thenAnswer((_) => Future.value());
   when(() => mock.setActiveScenario(any())).thenAnswer((_) => Future.value());
-  when(mock.getActiveScenario).thenReturn(null);
+  when(
+    () => mock.getActiveScenario(fallback: any(named: 'fallback')),
+  ).thenReturn(null);
   return mock;
 }

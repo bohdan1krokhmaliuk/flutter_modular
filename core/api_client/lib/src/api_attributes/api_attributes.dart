@@ -5,6 +5,14 @@ class _ApiAttributes extends Extra {
   const _ApiAttributes(Map<String, Object> data) : super(data);
 }
 
+/// Looks for predefined scenario by [scenarioName], if found - overrides api call
+class MockedWithScenario extends TypedExtras {
+  const MockedWithScenario(this.scenarioName);
+
+  final String scenarioName;
+}
+
+/// Appends authentication to api request
 const authenticatedApiRequest = _ApiAttributes(<String, Object>{
   ApiAttributesKeys.appendApiKey: true,
 });

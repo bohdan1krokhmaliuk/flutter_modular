@@ -20,6 +20,7 @@ dependencies:
   localizations:
   preferences:
   bdd_widget_test:
+  api_client_interceptors:
   flutter:
     sdk: flutter
   flutter_test:

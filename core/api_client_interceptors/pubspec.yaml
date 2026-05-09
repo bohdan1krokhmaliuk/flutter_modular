@@ -12,7 +12,10 @@ dependencies:
   get_it:
   injectable:
   di:
+  mocked_be:
   monitoring:
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
   build_runner:

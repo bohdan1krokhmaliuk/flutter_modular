@@ -18,6 +18,7 @@ dependencies:
   design_system:
   api_client:
   presenter:
+  mocked_be:
   preferences:
   localizations:
   state_management:

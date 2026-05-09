@@ -18,9 +18,15 @@ class ScenarioRepository {
 
   Future<void> clearActiveScenario() => _preferences.remove(_activeScenarioKey);
 
-  Scenario? getActiveScenario() => _preferences.containsKey(_activeScenarioKey)
-      ? _findByName(scenarios, _preferences.getString(_activeScenarioKey) ?? '')
-      : null;
+  Scenario? getActiveScenario({String? fallback}) {
+    final name = _preferences.getString(_activeScenarioKey) ?? fallback;
+
+    if (name == null) {
+      return null;
+    }
+
+    return _findByName(scenarios, name);
+  }
 
   Scenario? _findByName(List<ScenarioEntry> entries, String name) {
     for (final entry in entries) {

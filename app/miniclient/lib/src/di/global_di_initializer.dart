@@ -3,6 +3,7 @@ import 'package:api_client_interceptors/api_client_interceptors.dart';
 import 'package:configuration/configuration.dart';
 import 'package:di/di.dart';
 import 'package:miniclient/src/di/di_initializer.dart';
+import 'package:mocked_be/mocked_be.dart';
 import 'package:monitoring/monitoring.dart';
 import 'package:navigation/navigation.dart';
 import 'package:preferences/preferences.dart';
@@ -21,6 +22,7 @@ List<DIInitializer> _appInitializers = [
   MiniclientDIInitializer(),
 ];
 List<DIInitializer> _utilityInitializers = [
+  MockedBeDIInitializer(),
   MonitoringDIInitializer(),
   PreferencesDIInitializer(),
   StateManagementDIInitializer(),

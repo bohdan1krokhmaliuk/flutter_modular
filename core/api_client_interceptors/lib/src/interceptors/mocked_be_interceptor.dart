@@ -1,30 +1,30 @@
 import 'dart:async';
-import 'dart:convert' show jsonDecode, jsonEncode;
-import 'dart:io';
+import 'dart:convert' show jsonDecode;
 
+import 'package:api_client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mocked_be/src/core/request.dart';
 import 'package:mocked_be/src/core/response_error.dart';
 import 'package:mocked_be/src/core/scenario.dart';
 import 'package:mocked_be/src/repository/scenario_repository.dart';
+import 'package:monitoring/monitoring.dart';
 
-// [HINT] Though this interceptor mainly serve purpose for bdd setup
-// it can also be implemented in app for mocking real requests for demo purposes
-@injectable
+@lazySingleton
 class MockedBeInterceptor extends Interceptor {
-  MockedBeInterceptor(this._scenarioRepository);
+  MockedBeInterceptor(this._scenarioRepository, this._monitoring);
 
   final ScenarioRepository _scenarioRepository;
-
-  final _jsonRegex = RegExp(r'application/.*json');
+  final Monitoring _monitoring;
 
   @override
   void onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final scenario = _scenarioRepository.getActiveScenario();
+    final scenario = _scenarioRepository.getActiveScenario(
+      fallback: options.extra[ApiAttributesKeys.useMockScenario] as String?,
+    );
     if (scenario != null) {
       await _handleMockedRequest(options, handler, scenario);
     }
@@ -38,10 +38,10 @@ class MockedBeInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
     Scenario scenario,
   ) async {
-    if (Platform.environment.containsKey('FLUTTER_TEST') ||
-        Platform.environment.containsKey('FLUTTER_INTEGRATION_TEST')) {
-      _requestEncodabilityCheck(options);
-    }
+    _monitoring.debug(
+      'Resolving with ${scenario.name} scenario',
+      name: 'mocked_be',
+    );
 
     final request = Request.fromOptions(options);
 
@@ -90,15 +90,4 @@ class MockedBeInterceptor extends Interceptor {
     ResponseType.json || ResponseType.bytes => jsonDecode(data),
     _ => data,
   };
-
-  /// Fails test if json request can not be encoded
-  void _requestEncodabilityCheck(RequestOptions request) {
-    if (request.data == null) {
-      return;
-    }
-
-    if (request.contentType case final type? when _jsonRegex.hasMatch(type)) {
-      jsonEncode(request.data);
-    }
-  }
 }
