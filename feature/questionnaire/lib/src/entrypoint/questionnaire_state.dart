@@ -19,10 +19,13 @@ extension QuestionarrieStateX on QuestionarrieState {
       copyWith(selected: [], next: questions.firstOrNull, isCorrect: null);
 
   QuestionarrieState saveAnswer(Answer answer) {
-    final currentAnswerIds = next?.answers.map((a) => a.id);
+    final currentAnswerIds = questions
+        .map((q) => [...q.answers.map((a) => a.id)])
+        .firstWhere((ids) => ids.contains(answer.id));
+
     final newSelected = selected.toList();
     newSelected
-      ..removeWhere((a) => currentAnswerIds?.contains(a.id) ?? false)
+      ..removeWhere((a) => currentAnswerIds.contains(a.id))
       ..add(answer);
 
     return copyWith(

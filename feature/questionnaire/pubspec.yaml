@@ -30,6 +30,7 @@ dependencies:
 
 dev_dependencies:
   bdd_steps:
+  mocked_be:
   bdd_widget_test:
   mocktail:
   flutter_test:
