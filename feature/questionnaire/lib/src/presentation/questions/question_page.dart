@@ -17,7 +17,7 @@ class QuestionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(),
+      appBar: const PlatformAppBar(),
       body: BlocProvider(
         create: (_) => diContainer<QuestionBloc>(
           parameter: QuesstionBlocParams(question, preselected),
@@ -31,8 +31,8 @@ class QuestionPage extends StatelessWidget {
                   onPressed: state.selected != null
                       ? () => bloc.add(
                           state.selected?.nextQuestion != null
-                              ? QuestionEvent.next()
-                              : QuestionEvent.submit(),
+                              ? const QuestionEvent.next()
+                              : const QuestionEvent.submit(),
                         )
                       : null,
                   child: Text(
@@ -51,11 +51,11 @@ class QuestionPage extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.titleMedium,
                       ),
-                      SizedBox(height: sm),
+                      const SizedBox(height: sm),
                       ListView.separated(
                         shrinkWrap: true,
                         itemCount: state.question.answers.length,
-                        separatorBuilder: (_, _) => SizedBox(height: xxs),
+                        separatorBuilder: (_, _) => const SizedBox(height: xxs),
                         itemBuilder: (context, i) {
                           final option = state.question.answers[i];
                           return PlatformCard(

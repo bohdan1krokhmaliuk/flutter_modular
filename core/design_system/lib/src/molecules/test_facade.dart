@@ -11,6 +11,8 @@ class TestFacade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isInTests = Platform.environment.containsKey('FLUTTER_TEST');
-    return isInTests ? testBuilder?.call(context) ?? SizedBox.shrink() : child;
+    return isInTests
+        ? testBuilder?.call(context) ?? const SizedBox.shrink()
+        : child;
   }
 }

@@ -105,7 +105,7 @@ class _NetworkIllustration extends Illustration {
           ? ColorFilter.mode(color!, BlendMode.srcIn)
           : null,
       placeholderBuilder: placeholder != null ? (_) => placeholder! : null,
-      errorBuilder: (_, _, _) => error ?? SizedBox.shrink(),
+      errorBuilder: (_, _, _) => error ?? const SizedBox.shrink(),
     );
   }
 }

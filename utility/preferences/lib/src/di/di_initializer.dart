@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:preferences/src/di/di_initializer.config.dart';
 
 class PreferencesDIInitializer extends DIInitializer {
-  PreferencesDIInitializer() : super(_init);
+  const PreferencesDIInitializer() : super(_init);
 }
 
 @injectableInit

@@ -23,7 +23,7 @@ class CompletedBloc extends Bloc<CompletedEvent, CompletedState> {
     );
 
     if (state.isCorrect) {
-      add(CompletedEvent.congrats());
+      add(const CompletedEvent.congrats());
     }
   }
 

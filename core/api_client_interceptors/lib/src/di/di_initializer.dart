@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 class InterceptorsDIInitializer extends DIInitializer {
-  InterceptorsDIInitializer() : super(_init);
+  const InterceptorsDIInitializer() : super(_init);
 }
 
 @injectableInit

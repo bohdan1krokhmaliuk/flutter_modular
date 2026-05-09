@@ -19,9 +19,10 @@ class CharactersPage extends StatelessWidget {
           builder: (context, state) {
             final bloc = context.read<CharactersBloc>();
             return state.map(
-              loading: (_) => LoadingView(),
-              error: (_) =>
-                  ErrorView(onRetry: () => bloc.add(CharactersEvent.load())),
+              loading: (_) => const LoadingView(),
+              error: (_) => ErrorView(
+                onRetry: () => bloc.add(const CharactersEvent.load()),
+              ),
               content: (content) => PaginatedListView(
                 padding: dimen.x.xs,
                 itemCount: content.characters.length,
@@ -29,7 +30,7 @@ class CharactersPage extends StatelessWidget {
                 isLoadingNextPage: content.isLoadingNextPage,
                 failedToLoadNextPage: content.hasNextPageError,
                 onLoadNextPage: () => context.read<CharactersBloc>().add(
-                  CharactersEvent.loadMore(),
+                  const CharactersEvent.loadMore(),
                 ),
                 itemBuilder: (_, i) {
                   final character = content.characters[i];

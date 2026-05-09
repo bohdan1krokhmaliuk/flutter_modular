@@ -21,9 +21,9 @@ class SandboxPage extends StatelessWidget {
           child: BlocBuilder<SandboxBloc, SandboxState>(
             builder: (context, state) {
               return AnimatedSwitcher(
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: state.map(
-                  loading: (_) => LoadingView(),
+                  loading: (_) => const LoadingView(),
                   content: (state) {
                     final bloc = context.read<SandboxBloc>();
                     final translations = context.translations.main;
@@ -40,16 +40,18 @@ class SandboxPage extends StatelessWidget {
                                   .translations
                                   .main
                                   .rickAndMortyDescription,
-                              onTap: () =>
-                                  bloc.add(SandboxEvent.openRickAndMory()),
+                              onTap: () => bloc.add(
+                                const SandboxEvent.openRickAndMory(),
+                              ),
                             ),
                           if (state.isQuestionnaireAvailable)
                             PlatformCard(
                               trailing: Icons.chevron_right,
                               title: translations.quest,
                               description: translations.questDescription,
-                              onTap: () =>
-                                  bloc.add(SandboxEvent.openQuestionnaire()),
+                              onTap: () => bloc.add(
+                                const SandboxEvent.openQuestionnaire(),
+                              ),
                             ),
                           PlatformCard(
                             trailing: Icons.link,
@@ -57,7 +59,7 @@ class SandboxPage extends StatelessWidget {
                             description:
                                 translations.defaultExceptionDescription,
                             onTap: () => bloc.add(
-                              SandboxEvent.tirggerDefaultExceptionPresentation(),
+                              const SandboxEvent.tirggerDefaultExceptionPresentation(),
                             ),
                           ),
                           PlatformCard(
@@ -66,7 +68,7 @@ class SandboxPage extends StatelessWidget {
                             description:
                                 translations.customExceptionDescription,
                             onTap: () => bloc.add(
-                              SandboxEvent.tirggerCustomExceptionPresentation(),
+                              const SandboxEvent.tirggerCustomExceptionPresentation(),
                             ),
                           ),
                         ],

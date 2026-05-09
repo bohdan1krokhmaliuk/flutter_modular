@@ -9,9 +9,9 @@ class SandboxNavigatorImplementation implements SandboxNavigator {
   final MiniclientRouter _router;
 
   @override
-  Future<void> openRickAndMorty() => _router.push(CharactersRoute());
+  Future<void> openRickAndMorty() => _router.push(const CharactersRoute());
 
   @override
   Future<bool?> openQuestionnaire() =>
-      _router.push<bool?>(QuestionnaireRoute());
+      _router.push<bool?>(const QuestionnaireRoute());
 }

@@ -3,6 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Usage: I scroll up
 Future<void> iScrollUp(WidgetTester tester) async {
-  await tester.dragFrom(Offset(250, 300), const Offset(0, 10000));
+  await tester.dragFrom(const Offset(250, 300), const Offset(0, 10000));
   await iWait(tester);
 }

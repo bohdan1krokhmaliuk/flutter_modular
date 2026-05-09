@@ -17,18 +17,18 @@ final initializer = DIInitializer.combined([
 ]);
 
 List<DIInitializer> _appInitializers = [
-  ConfigurationDIInitializer(),
-  NavigationDIInitializer(),
-  MiniclientDIInitializer(),
+  const ConfigurationDIInitializer(),
+  const NavigationDIInitializer(),
+  const MiniclientDIInitializer(),
 ];
 List<DIInitializer> _utilityInitializers = [
-  MockedBeDIInitializer(),
-  MonitoringDIInitializer(),
-  PreferencesDIInitializer(),
-  StateManagementDIInitializer(),
+  const MockedBeDIInitializer(),
+  const MonitoringDIInitializer(),
+  const PreferencesDIInitializer(),
+  const StateManagementDIInitializer(),
 ];
 List<DIInitializer> _coreInitializers = [
-  ApiClientDIInitializer(),
-  InterceptorsDIInitializer(),
-  PresenterDIInitializer(),
+  const ApiClientDIInitializer(),
+  const InterceptorsDIInitializer(),
+  const PresenterDIInitializer(),
 ];

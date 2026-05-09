@@ -12,7 +12,7 @@ part 'characters_state.dart';
 
 @injectable
 class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
-  CharactersBloc(this._repository) : super(CharactersState.loading()) {
+  CharactersBloc(this._repository) : super(const CharactersState.loading()) {
     on<CharactersEvent>((event, emit) async {
       await event.map(
         load: (_) => _onLoad(emit),
@@ -20,20 +20,20 @@ class CharactersBloc extends Bloc<CharactersEvent, CharactersState> {
       );
     });
 
-    add(CharactersEvent.load());
+    add(const CharactersEvent.load());
   }
 
   final CharactersRepository _repository;
   int _page = 1;
 
   Future<void> _onLoad(Emitter<CharactersState> emit) async {
-    emit(CharactersState.loading());
+    emit(const CharactersState.loading());
 
     _page = 1;
     final result = await _repository.getCharacters(_page++);
     result.fold(
       (characters) => emit(CharactersState.content(characters: characters)),
-      (_) => emit(CharactersState.error()),
+      (_) => emit(const CharactersState.error()),
     );
   }
 

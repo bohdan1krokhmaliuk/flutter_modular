@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:get_it/get_it.dart';
+import 'package:meta/meta.dart';
 
 typedef GetItInitializer =
     FutureOr<void> Function(GetIt getIt, String? environment);
 
+@immutable
 class DIInitializer {
   const DIInitializer(this._initializer);
   factory DIInitializer.combined(List<DIInitializer> initializers) =>

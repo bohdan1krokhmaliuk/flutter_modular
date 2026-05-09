@@ -25,7 +25,7 @@ class ErrorView extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: [
-            Icon(Icons.help_outline, color: Colors.grey),
+            const Icon(Icons.help_outline, color: Colors.grey),
             if (title != null) ...[
               const SizedBox(height: xs),
               Center(child: Text(title!, textAlign: TextAlign.center)),
@@ -38,7 +38,7 @@ class ErrorView extends StatelessWidget {
               ),
             ),
             if (onRetry != null) ...[
-              SizedBox(height: xs),
+              const SizedBox(height: xs),
               TextButton(
                 onPressed: onRetry,
                 child: Text(

@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:mocked_be/src/di/di_initializer.config.dart';
 
 class MockedBeDIInitializer extends DIInitializer {
-  MockedBeDIInitializer() : super(_init);
+  const MockedBeDIInitializer() : super(_init);
 }
 
 @injectableInit

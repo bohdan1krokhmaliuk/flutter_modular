@@ -26,7 +26,7 @@ class SandboxBloc extends Bloc<SandboxEvent, SandboxState> {
       ),
     );
 
-    add(SandboxEvent.load());
+    add(const SandboxEvent.load());
   }
 
   final SandboxNavigator _navigator;

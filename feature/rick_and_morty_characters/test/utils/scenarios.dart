@@ -40,7 +40,7 @@ Scenario successContentScenario = Scenario('successScenario', [
             _character.copyWith(name: 'Alien', gender: Gender.genderless),
             _character.copyWith(name: 'Unknown', gender: Gender.unknown),
           ],
-          meta: PaginationData(count: 10, pages: 1),
+          meta: const PaginationData(count: 10, pages: 1),
         ).toJson((c) => c.toJson()),
       ),
     ),

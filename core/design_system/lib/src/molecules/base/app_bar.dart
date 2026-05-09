@@ -25,7 +25,8 @@ class PlatformAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: isCenterTitle,
       scrolledUnderElevation: micro,
       title: title != null ? Text(title!) : null,
-      leading: leading ?? (_canPop(context) ? PlatformBackButton() : null),
+      leading:
+          leading ?? (_canPop(context) ? const PlatformBackButton() : null),
       bottom: bottom,
     );
   }

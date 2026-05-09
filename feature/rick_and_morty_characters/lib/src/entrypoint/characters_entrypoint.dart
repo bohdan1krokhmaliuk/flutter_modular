@@ -10,7 +10,7 @@ class CharactersEntrypoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Entrypoint.page(
     page: const CharactersPage(),
-    initializer: RickAndMortyCharactersDIInitializer(),
+    initializer: const RickAndMortyCharactersDIInitializer(),
     localizationsDelegate: CharactersLocalizationsDelegate(),
   );
 }

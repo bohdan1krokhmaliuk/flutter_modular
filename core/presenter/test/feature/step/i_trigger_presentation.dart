@@ -17,7 +17,7 @@ Future<void> iTriggerPresentation(
     bloc.add(MockEvent(Presentation.error(FailureException('unknown'))));
   }
   if (custom) {
-    bloc.add(MockEvent(FakePresentation()));
+    bloc.add(const MockEvent(FakePresentation()));
   }
   await iWait(tester);
 }

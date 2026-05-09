@@ -15,6 +15,6 @@ part 'mocks_initializer.dart';
 
 final testAppInitializer = DIInitializer.combined([
   _MocksInitializer(),
-  ApiClientDIInitializer(),
-  InterceptorsDIInitializer(),
+  const ApiClientDIInitializer(),
+  const InterceptorsDIInitializer(),
 ]);

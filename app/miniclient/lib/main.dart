@@ -25,7 +25,7 @@ class MiniclientEntrypoint extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Entrypoint.widget(
     initializer: initializer,
-    placeholder: LoadingView(),
+    placeholder: const LoadingView(),
     child: const _Router(),
   );
 }
@@ -39,11 +39,12 @@ class _Router extends StatelessWidget {
     return MaterialApp.router(
       theme: lightTheme,
       darkTheme: darkTheme,
-      themeMode: ThemeMode.system,
       locale: SupportedLocale.enUS.locale,
       supportedLocales: SupportedLocale.locales,
       localizationsDelegates: localizationDelegates,
-      routerConfig: router.appConfig(placeholder: (context) => LoadingView()),
+      routerConfig: router.appConfig(
+        placeholder: (context) => const LoadingView(),
+      ),
       title: 'Flutter Modular Demo',
     );
   }

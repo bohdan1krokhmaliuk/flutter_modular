@@ -130,7 +130,7 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
       future: initialization,
       builder: (context, snapshot) => switch (snapshot.connectionState) {
         .done || .none => child,
-        _ => widget.placeholder ?? SizedBox.shrink(),
+        _ => widget.placeholder ?? const SizedBox.shrink(),
       },
     );
 

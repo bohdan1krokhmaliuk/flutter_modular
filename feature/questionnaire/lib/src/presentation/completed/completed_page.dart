@@ -25,7 +25,7 @@ class CompletedPage extends StatelessWidget {
             return PlatformScaffold(
               appBar: PlatformAppBar(
                 leading: BackButton(
-                  onPressed: () => bloc.add(CompletedEvent.close()),
+                  onPressed: () => bloc.add(const CompletedEvent.close()),
                 ),
               ),
               body: SubmitPage(
@@ -34,13 +34,13 @@ class CompletedPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     FilledButton(
-                      onPressed: () => bloc.add(CompletedEvent.close()),
+                      onPressed: () => bloc.add(const CompletedEvent.close()),
                       child: Text(context.commonTranslations.button.close),
                     ),
                     if (!state.isCorrect) ...[
-                      SizedBox(height: xxs),
+                      const SizedBox(height: xxs),
                       OutlinedButton(
-                        onPressed: () => bloc.add(CompletedEvent.retry()),
+                        onPressed: () => bloc.add(const CompletedEvent.retry()),
                         child: Text(context.commonTranslations.button.tryAgain),
                       ),
                     ],
@@ -51,17 +51,17 @@ class CompletedPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(height: xs),
+                      const SizedBox(height: xs),
                       state.isCorrect
                           ? Illustrations.feedback.success(width: halfScreen)
                           : Illustrations.feedback.failure(width: halfScreen),
-                      SizedBox(height: sm),
+                      const SizedBox(height: sm),
                       Text(
                         translations.title(state.isCorrect),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                      SizedBox(height: xxs),
+                      const SizedBox(height: xxs),
                       Text(
                         translations.description(state.isCorrect),
                         textAlign: TextAlign.center,

@@ -25,24 +25,24 @@ class WellcomePage extends StatelessWidget {
                   child: Text(translations.button),
                   onPressed: state.isLoading
                       ? null
-                      : () => bloc.add(WellcomeEvent.proceed()),
+                      : () => bloc.add(const WellcomeEvent.proceed()),
                 ),
                 child: Padding(
                   padding: dimen.all.xs,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      SizedBox(height: xs),
+                      const SizedBox(height: xs),
                       Illustrations.custom.questionnaire(
                         width: MediaQuery.widthOf(context) / 2,
                       ),
-                      SizedBox(height: md),
+                      const SizedBox(height: md),
                       Text(
                         translations.title,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                      SizedBox(height: xxs),
+                      const SizedBox(height: xxs),
                       Text(
                         translations.description,
                         textAlign: TextAlign.center,

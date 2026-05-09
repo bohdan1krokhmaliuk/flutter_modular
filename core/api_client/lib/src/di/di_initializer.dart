@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
 class ApiClientDIInitializer extends DIInitializer {
-  ApiClientDIInitializer() : super(_init);
+  const ApiClientDIInitializer() : super(_init);
 }
 
 @injectableInit

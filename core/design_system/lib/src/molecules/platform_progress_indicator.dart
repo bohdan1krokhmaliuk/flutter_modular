@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 class PlatformProgressIndicator extends PaltformWidget {
   @override
   Widget buildCupertinoWidget(BuildContext context) {
-    return CupertinoActivityIndicator(radius: xs);
+    return const CupertinoActivityIndicator(radius: xs);
   }
 
   @override
   Widget buildMaterialWidget(BuildContext context) {
-    return CircularProgressIndicator(strokeCap: StrokeCap.round);
+    return const CircularProgressIndicator(strokeCap: StrokeCap.round);
   }
 }

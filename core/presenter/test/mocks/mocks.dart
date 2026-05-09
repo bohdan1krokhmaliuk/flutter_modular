@@ -16,7 +16,7 @@ class MockEvent {
 }
 
 class FakeFeatureBloc extends Bloc<MockEvent, FakeState> {
-  FakeFeatureBloc() : super(FakeState(null)) {
+  FakeFeatureBloc() : super(const FakeState(null)) {
     on<MockEvent>((event, emit) => emit(FakeState(event.presentation)));
   }
 }

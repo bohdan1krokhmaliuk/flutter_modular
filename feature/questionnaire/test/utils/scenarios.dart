@@ -11,7 +11,10 @@ final successScenario = Scenario('successScenario', [
     multiMatcherAnd([hasMethod('GET'), hasPath('/questions')]),
     sendSuccess(
       jsonEncode(
-        ListResponse(data: _questions, meta: null).toJson((q) => q.toJson()),
+        const ListResponse(
+          data: _questions,
+          meta: null,
+        ).toJson((q) => q.toJson()),
       ),
     ),
   ),
@@ -23,11 +26,11 @@ final successScenario = Scenario('successScenario', [
         'answers': ['a1', 'a3'].toString(),
       }),
     ]),
-    sendSuccess(jsonEncode(Validation(isCorrect: true).toJson())),
+    sendSuccess(jsonEncode(const Validation(isCorrect: true).toJson())),
   ),
   RequestHandler(
     multiMatcherAnd([hasMethod('POST'), hasPath('/questions')]),
-    sendSuccess(jsonEncode(Validation(isCorrect: false).toJson())),
+    sendSuccess(jsonEncode(const Validation(isCorrect: false).toJson())),
   ),
 ]);
 
