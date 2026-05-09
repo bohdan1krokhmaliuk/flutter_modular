@@ -1,4 +1,4 @@
-import 'package:design_system/src/atoms/illustrations/illustration/Illustration.dart';
+import 'package:design_system/src/atoms/illustrations/illustration/illustration.dart';
 
 part 'feedback.dart';
 part 'custom.dart';

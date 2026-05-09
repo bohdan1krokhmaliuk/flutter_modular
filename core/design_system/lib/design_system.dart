@@ -1,4 +1,5 @@
 export 'package:design_system/src/atoms/dimension.dart';
+export 'package:design_system/src/atoms/illustrations/illustration/illustration.dart';
 export 'package:design_system/src/atoms/illustrations/illustrations.dart';
 export 'package:design_system/src/atoms/radius.dart';
 export 'package:design_system/src/atoms/size.dart';

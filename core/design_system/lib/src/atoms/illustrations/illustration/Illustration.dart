@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-abstract class Illustration extends Widget {
+sealed class Illustration extends StatelessWidget {
+  const Illustration({super.key});
+
   const factory Illustration.asset(
     String asset, {
     Key? key,
@@ -31,9 +33,11 @@ abstract class Illustration extends Widget {
     height: height,
     placeholder: placeholder,
   );
+
+  String get asset;
 }
 
-class _AssetIllustration extends StatelessWidget implements Illustration {
+class _AssetIllustration extends Illustration {
   const _AssetIllustration(
     this.asset, {
     super.key,
@@ -44,6 +48,7 @@ class _AssetIllustration extends StatelessWidget implements Illustration {
     this.placeholder,
   });
 
+  @override
   final String asset;
   final Color? color;
   final double? width;
@@ -66,7 +71,7 @@ class _AssetIllustration extends StatelessWidget implements Illustration {
   }
 }
 
-class _NetworkIllustration extends StatelessWidget implements Illustration {
+class _NetworkIllustration extends Illustration {
   const _NetworkIllustration(
     this.url, {
     super.key,
@@ -85,6 +90,9 @@ class _NetworkIllustration extends StatelessWidget implements Illustration {
   final Widget? error;
   final double? height;
   final Widget? placeholder;
+
+  @override
+  String get asset => url;
 
   @override
   Widget build(BuildContext context) {
