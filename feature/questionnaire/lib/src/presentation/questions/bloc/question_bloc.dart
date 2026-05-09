@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:presenter/presenter.dart';
 import 'package:questionnaire/src/domain/model/answer.dart';
-import 'package:questionnaire/src/domain/model/exception_ext.dart';
 import 'package:questionnaire/src/domain/model/question.dart';
 import 'package:questionnaire/src/domain/repository/questions_repository.dart';
 import 'package:questionnaire/src/entrypoint/questionnaire_state.dart';
@@ -64,11 +63,9 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     final result = await _repository.submit(navState.answerIds);
 
     result.fold(
-      (_) => _flow.update((_) => navState.copyWith(isCorrect: true)),
-      (e) => switch (e.isIncorrect) {
-        true => _flow.update((_) => navState.copyWith(isCorrect: false)),
-        false => emit(state.copyWith(presentation: Presentation.error(e))),
-      },
+      (isCorrect) =>
+          _flow.update((_) => navState.copyWith(isCorrect: isCorrect)),
+      (e) => emit(state.copyWith(presentation: Presentation.error(e))),
     );
   }
 }

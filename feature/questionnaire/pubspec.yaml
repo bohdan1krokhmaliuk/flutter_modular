@@ -17,6 +17,9 @@ dependencies:
   flutter_bloc:
   freezed_annotation:
   get_it:
+  retrofit:
+  dio:
+  api_client:
   injectable:
   prelude:
   entrypoint:
@@ -33,6 +36,7 @@ dev_dependencies:
     sdk: flutter
   build_runner:
   freezed:
+  retrofit_generator:
   injectable_generator:
   json_serializable:
   analysis:

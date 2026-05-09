@@ -280,7 +280,7 @@ $Res call({
 });
 
 
-
+$QuestionCopyWith<$Res> get question;$AnswerCopyWith<$Res>? get selected;
 
 }
 /// @nodoc
@@ -301,7 +301,28 @@ as Answer?,presentation: freezed == presentation ? _self.presentation : presenta
 as Presentation?,
   ));
 }
+/// Create a copy of QuestionState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$QuestionCopyWith<$Res> get question {
+  
+  return $QuestionCopyWith<$Res>(_self.question, (value) {
+    return _then(_self.copyWith(question: value));
+  });
+}/// Create a copy of QuestionState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AnswerCopyWith<$Res>? get selected {
+    if (_self.selected == null) {
+    return null;
+  }
 
+  return $AnswerCopyWith<$Res>(_self.selected!, (value) {
+    return _then(_self.copyWith(selected: value));
+  });
+}
 }
 
 
@@ -474,7 +495,7 @@ $Res call({
 });
 
 
-
+@override $QuestionCopyWith<$Res> get question;@override $AnswerCopyWith<$Res>? get selected;
 
 }
 /// @nodoc
@@ -496,7 +517,28 @@ as Presentation?,
   ));
 }
 
+/// Create a copy of QuestionState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$QuestionCopyWith<$Res> get question {
+  
+  return $QuestionCopyWith<$Res>(_self.question, (value) {
+    return _then(_self.copyWith(question: value));
+  });
+}/// Create a copy of QuestionState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AnswerCopyWith<$Res>? get selected {
+    if (_self.selected == null) {
+    return null;
+  }
 
+  return $AnswerCopyWith<$Res>(_self.selected!, (value) {
+    return _then(_self.copyWith(selected: value));
+  });
+}
 }
 
 // dart format on

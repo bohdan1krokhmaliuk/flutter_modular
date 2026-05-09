@@ -49,7 +49,7 @@ $Res call({
 });
 
 
-
+$QuestionCopyWith<$Res>? get next;
 
 }
 /// @nodoc
@@ -71,7 +71,19 @@ as Question?,isCorrect: freezed == isCorrect ? _self.isCorrect : isCorrect // ig
 as bool?,
   ));
 }
+/// Create a copy of QuestionarrieState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$QuestionCopyWith<$Res>? get next {
+    if (_self.next == null) {
+    return null;
+  }
 
+  return $QuestionCopyWith<$Res>(_self.next!, (value) {
+    return _then(_self.copyWith(next: value));
+  });
+}
 }
 
 
@@ -257,7 +269,7 @@ $Res call({
 });
 
 
-
+@override $QuestionCopyWith<$Res>? get next;
 
 }
 /// @nodoc
@@ -280,7 +292,19 @@ as bool?,
   ));
 }
 
+/// Create a copy of QuestionarrieState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$QuestionCopyWith<$Res>? get next {
+    if (_self.next == null) {
+    return null;
+  }
 
+  return $QuestionCopyWith<$Res>(_self.next!, (value) {
+    return _then(_self.copyWith(next: value));
+  });
+}
 }
 
 // dart format on
