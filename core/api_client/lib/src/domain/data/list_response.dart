@@ -16,7 +16,7 @@ class ListResponse<T> {
       _$ListResponseToJson(this, toJsonT);
 
   @JsonKey(name: 'info')
-  final PaginationData meta;
+  final PaginationData? meta;
   @JsonKey(name: 'results')
   final List<T> data;
 }

@@ -11,7 +11,9 @@ ListResponse<T> _$ListResponseFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) => ListResponse<T>(
   data: (json['results'] as List<dynamic>).map(fromJsonT).toList(),
-  meta: PaginationData.fromJson(json['info'] as Map<String, dynamic>),
+  meta: json['info'] == null
+      ? null
+      : PaginationData.fromJson(json['info'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$ListResponseToJson<T>(
