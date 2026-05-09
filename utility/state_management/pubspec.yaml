@@ -9,15 +9,15 @@ resolution: workspace
 
 dependencies:
   di:
+  flutter:
+    sdk: flutter
   flutter_bloc:
   freezed_annotation:
   get_it:
   injectable:
   monitoring:
-  flutter:
-    sdk: flutter
 
 dev_dependencies:
+  analysis:
   build_runner:
   injectable_generator:
-  analysis:
