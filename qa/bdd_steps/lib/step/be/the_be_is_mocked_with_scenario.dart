@@ -10,5 +10,7 @@ Future<void> theBeIsMockedWithScenario(
   Scenario? scenario,
 ) async {
   final mock = diContainer<ScenarioRepository>();
-  when(mock.getActiveScenario).thenReturn(scenario);
+  when(
+    () => mock.getActiveScenario(fallback: any(named: 'fallback')),
+  ).thenReturn(scenario);
 }

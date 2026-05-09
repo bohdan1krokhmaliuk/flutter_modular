@@ -9,6 +9,7 @@ externalSteps:
   - package:bdd_steps/step/interactions/i_wait_for_finder_to_appear.dart
   - package:bdd_steps/step/interactions/i_wait_for_finder_to_disappear.dart
   - package:bdd_steps/step/interactions/i_wait_for_seconds.dart
+  - package:bdd_steps/step/interactions/page_closes_with_result.dart
   - package:bdd_steps/step/text/i_dont_see_rich_text.dart
   - package:bdd_steps/step/text/i_dont_see_text.dart
   - package:bdd_steps/step/text/i_dont_see_text_containing.dart

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bdd_steps/src/di/test_app_initializer.dart';
+import 'package:bdd_steps/src/mocks/test_page_completer.dart';
 import 'package:bdd_steps/src/test_app.dart';
 import 'package:bdd_steps/step/be/the_be_is_mocked_with_scenario.dart';
 import 'package:bdd_steps/step/interactions/i_wait.dart';
@@ -26,7 +27,15 @@ Future<void> testInit<T>(
 
   await postDi?.call();
 
-  await tester.pumpWidget(TestApp<T>(builder: builder, onComplete: onComplete));
+  await tester.pumpWidget(
+    TestApp<T>(
+      builder: builder,
+      onComplete: (value) {
+        onComplete?.call(value);
+        diContainer<TestPageCompleter>().call(value);
+      },
+    ),
+  );
 
   if (waitForSettle) {
     await iWait(tester);
