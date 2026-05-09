@@ -206,16 +206,14 @@ melos:
     format:
       run: |
         find . \
-          -name "*.dart" \
+          \( -path "./.tools" -o -path "*/build" -o -path "*/.dart_tool" -o -path "*/__brick__" \) -prune \
+          -o -name "*.dart" \
           -not -name "*.freezed.dart" \
           -not -name "*.g.dart" \
           -not -name "*.config.dart" \
           -not -name "*.gr.dart" \
           -not -name "*.gen.dart" \
           -not -name "*.i69n.dart" \
-          -not -name "*/build/*" \
-          -not -name "*/.dart_tool/*" \
-          -not -name "*/__brick__/*.dart" \
-          -not -name "*/test/feature/*_test.dart" \
-            | xargs dart format > /dev/null
+          -not -path "*/test/feature/*_test.dart" \
+          -print | xargs dart format > /dev/null
       description: Format all non generated dart files
