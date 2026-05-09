@@ -10,11 +10,11 @@ resolution: workspace
 
 dependencies:
   di:
-  get_it:
-  prelude:
   dio:
-  preferences:
+  get_it:
   injectable:
+  preferences:
+  prelude:
 
 dev_dependencies:
   analysis:

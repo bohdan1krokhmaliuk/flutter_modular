@@ -11,29 +11,29 @@ environment:
 resolution: workspace
 
 dependencies:
-  di:
   design_system:
+  di:
   flutter:
     sdk: flutter
   flutter_bloc:
+  flutter_confetti:
   freezed_annotation:
   get_it:
-  prelude:
   injectable:
   localizations:
+  prelude:
   state_management:
-  flutter_confetti:
 
 dev_dependencies:
+  analysis:
   bdd_steps:
   bdd_widget_test:
+  build_runner:
   flutter_test:
     sdk: flutter
-  build_runner:
   freezed:
   injectable_generator:
   json_serializable:
-  analysis:
 
 flutter:
   uses-material-design: true

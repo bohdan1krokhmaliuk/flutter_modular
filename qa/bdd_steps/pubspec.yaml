@@ -9,22 +9,22 @@ environment:
 resolution: workspace
 
 dependencies:
+  api_client:
+  api_client_interceptors:
+  bdd_widget_test:
+  design_system:
   di:
   dio:
-  api_client:
-  monitoring:
-  mocktail:
-  mocked_be:
-  flutter_svg:
-  design_system:
-  localizations:
-  preferences:
-  bdd_widget_test:
-  api_client_interceptors:
   flutter:
     sdk: flutter
+  flutter_svg:
   flutter_test:
     sdk: flutter
+  localizations:
+  mocked_be:
+  mocktail:
+  monitoring:
+  preferences:
 
 dev_dependencies:
   analysis:

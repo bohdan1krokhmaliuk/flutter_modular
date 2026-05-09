@@ -10,23 +10,23 @@ resolution: workspace
 
 dependencies:
   di:
-  get_it:
-  injectable:
-  prelude:
-  freezed_annotation:
-  json_annotation:
   flutter:
     sdk: flutter
+  freezed_annotation:
+  get_it:
+  injectable:
+  json_annotation:
+  prelude:
 
 dev_dependencies:
+  analysis:
   build_runner:
   flutter_test:
     sdk: flutter
+  freezed:
   injectable_generator:
   json_serializable:
-  freezed:
   mocktail:
-  analysis:
 
 flutter:
   uses-material-design: true

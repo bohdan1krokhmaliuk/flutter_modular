@@ -9,19 +9,19 @@ environment:
 resolution: workspace
 
 dependencies:
-  di:
-  get_it:
-  injectable:
   auto_route:
-  monitoring:
-  sandbox:
-  questionnaire:
-  rick_and_morty_characters:
+  di:
   flutter:
     sdk: flutter
+  get_it:
+  injectable:
+  monitoring:
+  questionnaire:
+  rick_and_morty_characters:
+  sandbox:
 
 dev_dependencies:
-  auto_route_generator:
-  injectable_generator:
-  build_runner:
   analysis:
+  auto_route_generator:
+  build_runner:
+  injectable_generator:

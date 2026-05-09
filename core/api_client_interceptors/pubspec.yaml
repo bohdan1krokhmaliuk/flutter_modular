@@ -8,16 +8,16 @@ resolution: workspace
 
 dependencies:
   api_client:
-  dio:
-  get_it:
-  injectable:
   di:
-  mocked_be:
-  monitoring:
+  dio:
   flutter:
     sdk: flutter
+  get_it:
+  injectable:
+  mocked_be:
+  monitoring:
 
 dev_dependencies:
+  analysis:
   build_runner:
   injectable_generator:
-  analysis:

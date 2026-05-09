@@ -9,25 +9,25 @@ environment:
 resolution: workspace
 
 dependencies:
-  di:
-  get_it:
-  injectable:
-  entrypoint:
-  navigation:
+  api_client:
+  api_client_interceptors:
   configuration:
   design_system:
-  api_client:
-  presenter:
-  mocked_be:
-  preferences:
-  localizations:
-  state_management:
-  api_client_interceptors:
-  monitoring:
+  di:
+  entrypoint:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  get_it:
+  injectable:
+  localizations:
+  mocked_be:
+  monitoring:
+  navigation:
+  preferences:
+  presenter:
+  state_management:
 
 dev_dependencies:
   analysis:

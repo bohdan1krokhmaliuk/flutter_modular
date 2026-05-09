@@ -11,10 +11,10 @@ resolution: workspace
 
 dependencies:
   di:
-  monitoring:
   flow_builder:
   flutter:
     sdk: flutter
+  monitoring:
 
 dev_dependencies:
   analysis:

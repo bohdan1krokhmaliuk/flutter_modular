@@ -13,31 +13,33 @@ resolution: workspace
 
 dependencies:
   api_client:
-  dio:
-  di:
   design_system:
+  di:
+  dio:
+  domain:
+  entrypoint:
   flutter:
     sdk: flutter
   flutter_bloc:
   freezed_annotation:
   get_it:
-  injectable:
-  prelude:
-  domain:
-  retrofit:
-  entrypoint:
   i69n:
+  injectable:
   localizations:
+  prelude:
+  retrofit:
   state_management:
 
 dev_dependencies:
+  analysis:
   bdd_steps:
   bdd_widget_test:
-  mocked_be:
-  mocktail:
   build_runner:
+  flutter_test:
+    sdk: flutter
   freezed:
   injectable_generator:
   json_serializable:
+  mocked_be:
+  mocktail:
   retrofit_generator:
-  analysis:

@@ -10,37 +10,37 @@ environment:
 resolution: workspace
 
 dependencies:
-  di:
+  api_client:
   design_system:
+  di:
+  dio:
+  entrypoint:
   flutter:
     sdk: flutter
   flutter_bloc:
   freezed_annotation:
   get_it:
-  retrofit:
-  dio:
-  api_client:
-  injectable:
-  prelude:
-  entrypoint:
   i69n:
-  presenter:
+  injectable:
   localizations:
+  prelude:
+  presenter:
+  retrofit:
   state_management:
 
 dev_dependencies:
+  analysis:
   bdd_steps:
-  mocked_be:
   bdd_widget_test:
-  mocktail:
+  build_runner:
   flutter_test:
     sdk: flutter
-  build_runner:
   freezed:
-  retrofit_generator:
   injectable_generator:
   json_serializable:
-  analysis:
+  mocked_be:
+  mocktail:
+  retrofit_generator:
 
 flutter:
   uses-material-design: true

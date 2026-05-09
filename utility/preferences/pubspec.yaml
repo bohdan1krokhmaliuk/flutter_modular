@@ -15,6 +15,6 @@ dependencies:
   shared_preferences:
 
 dev_dependencies:
+  analysis:
   build_runner:
   injectable_generator:
-  analysis:
