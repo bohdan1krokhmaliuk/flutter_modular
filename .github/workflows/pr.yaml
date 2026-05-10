@@ -2,7 +2,7 @@ name: PR
 
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
     types:
       - opened
       - synchronize
@@ -145,7 +145,7 @@ jobs:
       - name: "📝 Prepare Report"
         id: coverage_report
         run: |
-          dart .tools/scripts/calculate_coverage.dart > coverage_summary.md
+          dart .tools/scripts/coverage/calculate.dart > coverage_summary.md
           cat coverage_summary.md >> $GITHUB_STEP_SUMMARY
       - name: "💬 Post/Update Coverage Comment"
         if: always()

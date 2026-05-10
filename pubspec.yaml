@@ -70,21 +70,31 @@ melos:
     test:diff:
       run: |
         melos exec -c 1 --fail-fast --diff=origin/main...HEAD --include-dependents -- \$MELOS_ROOT_PATH/.tools/scripts/run_tests.sh
-      description: Runs tests in all changed packages which have tests, enforcing
+      description:
+        Runs tests in all changed packages which have tests, enforcing
         tests for features
 
     coverage:
       run: |
-        melos exec -c 1 --dir-exists="test" -- flutter test --coverage --no-pub
-      description: Generate coverage data
+        melos exec -c 1 --dir-exists="test" -- \
+        "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
+      description: Generate and filter coverage data
 
     coverage:diff:
       run: |
-        melos exec -c 1 --dir-exists="test" --diff=origin/main...HEAD -- flutter test --coverage --no-pub
-      description: Generate coverage data for changes
+        melos exec -c 1 --dir-exists="test" --diff=origin/main...HEAD -- \
+        "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
+      description: Generate and filter coverage data for changes
 
     coverage:report:
-      run: dart \$MELOS_ROOT_PATH/.tools/scripts/calculate_coverage.dart
+      run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart
+      description: Calculate and print report for packages
+
+    coverage:html_report:
+      run: |
+        dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/merge.dart
+        genhtml coverage/lcov.info -o coverage/html --hierarchical --legend --title "Flutter Monorepo Coverage"
+        open coverage/html/index.html
       description: Calculate and print report for packages
 
     coverage:clean:
@@ -129,7 +139,8 @@ melos:
     validate_barrel_file_imports:
       run: melos exec -- dart
         \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
-      description: Runs barrel file imports check (if barrel file was imported inside
+      description:
+        Runs barrel file imports check (if barrel file was imported inside
         package instead of its file import)
 
     validate_barrel_file_imports:diff:
@@ -139,12 +150,12 @@ melos:
 
     unused_dependencies:
       run: |
-        melos exec -c 1 -- "dart pub global run dependency_validator" 
+        melos exec -c 1 -- "dart pub global run dependency_validator"
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
     unused_dependencies:diff:
       run: |
-        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator" 
+        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator"
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
     circular_dependencies:

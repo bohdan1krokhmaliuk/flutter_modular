@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'ignore_files.dart';
 
 void main() {
   final lcovFiles = Directory('.')
@@ -7,6 +8,8 @@ void main() {
       .where(
         (f) => f.path.endsWith('lcov.info') && !f.path.contains('.dart_tool'),
       )
+      // Exclude root coverage if present
+      .where((f) => f.uri.pathSegments.length > 3)
       .toList();
 
   if (lcovFiles.isEmpty) {
@@ -27,8 +30,8 @@ void main() {
 
     // Determine package name from directory structure
     final segments = file.uri.pathSegments;
-    final pkgName =
-        segments[segments.length - 3]; // .../[pkgName]/coverage/lcov.info
+    // .../[pkgName]/coverage/lcov.info
+    final pkgName = segments[segments.length - 3];
 
     int pkgLF = 0;
     int pkgLH = 0;
@@ -37,7 +40,7 @@ void main() {
     for (var line in lines) {
       switch (line.substring(0, 3)) {
         case 'SF:':
-          skipFile = _shouldSkip(line);
+          skipFile = ignoreFiles.any(line.endsWith);
         case 'LF:' when !skipFile:
           pkgLF += int.parse(line.split(':').last);
         case 'LH:' when !skipFile:
@@ -72,12 +75,3 @@ void main() {
     exit(1);
   }
 }
-
-bool _shouldSkip(String path) =>
-    path.endsWith('.g.dart') ||
-    path.endsWith('.freezed.dart') ||
-    path.endsWith('.gr.dart') ||
-    path.endsWith('.i69n.dart') ||
-    path.endsWith('di_module.dart') ||
-    path.endsWith('di_initializer.dart') ||
-    path.endsWith('.config.dart');
