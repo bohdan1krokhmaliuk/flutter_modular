@@ -11,13 +11,19 @@ Future<void> iTriggerPresentation(
   WidgetTester tester, {
   bool unknownError = false,
   bool custom = false,
+  bool confetti = false,
 }) async {
   final bloc = diContainer<FakeFeatureBloc>();
   if (unknownError) {
     bloc.add(MockEvent(Presentation.error(FailureException('unknown'))));
+    await iWait(tester);
+  }
+  if (confetti) {
+    bloc.add(MockEvent(Presentation.confetti()));
+    await tester.pump(const Duration(milliseconds: 50));
   }
   if (custom) {
-    bloc.add(const MockEvent(FakePresentation()));
+    bloc.add(MockEvent(FakePresentation()));
+    await iWait(tester);
   }
-  await iWait(tester);
 }

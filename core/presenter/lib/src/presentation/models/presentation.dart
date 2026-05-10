@@ -8,8 +8,8 @@ const presentingModel = Freezed(
   copyWith: false,
 );
 
-interface class Presentation {
-  const Presentation();
+abstract class Presentation {
+  Presentation();
 
   factory Presentation.error(FailureException exception) =
       ExceptionPresentation._;
@@ -20,13 +20,13 @@ interface class Presentation {
 }
 
 final class ExceptionPresentation extends Presentation {
-  const ExceptionPresentation._(this.exception);
+  ExceptionPresentation._(this.exception);
 
   final FailureException exception;
 }
 
 final class ConfettiPresentation extends Presentation {
-  const ConfettiPresentation._({this.duration = const Duration(seconds: 5)});
+  ConfettiPresentation._({this.duration = const Duration(seconds: 5)});
 
   final Duration duration;
 }

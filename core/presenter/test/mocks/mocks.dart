@@ -21,6 +21,6 @@ class FakeFeatureBloc extends Bloc<MockEvent, FakeState> {
   }
 }
 
-class FakePresentation implements Presentation {
-  const FakePresentation();
+class FakePresentation extends Presentation {
+  FakePresentation();
 }
