@@ -41,5 +41,4 @@ dev_dependencies:
   injectable_generator:
   json_serializable:
   mocked_be:
-  mocktail:
   retrofit_generator:

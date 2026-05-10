@@ -14,7 +14,6 @@ dependencies:
   bdd_widget_test:
   design_system:
   di:
-  dio:
   flutter:
     sdk: flutter
   flutter_svg:
