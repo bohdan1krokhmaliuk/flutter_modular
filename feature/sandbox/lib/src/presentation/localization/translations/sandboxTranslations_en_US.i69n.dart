@@ -39,16 +39,7 @@ class SandboxTranslations_en_US extends SandboxTranslations {
   const SandboxTranslations_en_US();
   String get stub => "Stub";
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'stub':
-        return stub;
-      default:
-        return super[key];
-    }
+    throw Exception(
+        '[] operator is disabled in en, see _i69n: nomap, notraverse flag.');
   }
 }

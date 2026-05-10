@@ -19,7 +19,7 @@ import 'package:api_client_interceptors/src/interceptors/mocked_be_interceptor.d
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:mocked_be/src/repository/scenario_repository.dart' as _i367;
+import 'package:mocked_be/mocked_be.dart' as _i842;
 import 'package:monitoring/monitoring.dart' as _i472;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -32,7 +32,7 @@ extension GetItInjectableX on _i174.GetIt {
     final interceptorsModule = _$InterceptorsModule();
     gh.lazySingleton<_i953.MockedBeInterceptor>(
       () => _i953.MockedBeInterceptor(
-        gh<_i367.ScenarioRepository>(),
+        gh<_i842.ScenarioRepository>(),
         gh<_i472.Monitoring>(),
       ),
     );

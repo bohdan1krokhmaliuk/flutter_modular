@@ -38,16 +38,7 @@ class CharactersTranslations implements i69n.I69nMessageBundle {
   const CharactersTranslations();
   String get title => "Explore characters of R&M";
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'title':
-        return title;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en, see _i69n: nomap, notraverse flag.');
   }
 }

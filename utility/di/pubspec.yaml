@@ -8,6 +8,7 @@ resolution: workspace
 
 dependencies:
   get_it:
+  injectable:
   meta:
 
 dev_dependencies:

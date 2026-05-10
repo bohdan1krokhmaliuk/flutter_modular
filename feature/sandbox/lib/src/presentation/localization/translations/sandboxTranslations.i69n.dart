@@ -40,19 +40,8 @@ class SandboxTranslations implements i69n.I69nMessageBundle {
   PresentationSandboxTranslations get presentation =>
       PresentationSandboxTranslations(this);
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'main':
-        return main;
-      case 'presentation':
-        return presentation;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en, see _i69n: nomap, notraverse flag.');
   }
 }
 
@@ -75,37 +64,8 @@ class MainSandboxTranslations implements i69n.I69nMessageBundle {
       "This quiz feature demonstrates internal navigation (flow), and global custom presentation (confetti) if u finish it succesfully";
   String get takeALook => "Take a look";
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'title':
-        return title;
-      case 'makeCall':
-        return makeCall;
-      case 'customException':
-        return customException;
-      case 'customExceptionDescription':
-        return customExceptionDescription;
-      case 'defaultException':
-        return defaultException;
-      case 'defaultExceptionDescription':
-        return defaultExceptionDescription;
-      case 'rickAndMorty':
-        return rickAndMorty;
-      case 'rickAndMortyDescription':
-        return rickAndMortyDescription;
-      case 'quest':
-        return quest;
-      case 'questDescription':
-        return questDescription;
-      case 'takeALook':
-        return takeALook;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en.main, see _i69n: nomap, notraverse flag.');
   }
 }
 
@@ -116,20 +76,7 @@ class PresentationSandboxTranslations implements i69n.I69nMessageBundle {
   String get congrats => "Good Job!";
   String get custom => "We intercepted custom exception here :)";
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'oops':
-        return oops;
-      case 'congrats':
-        return congrats;
-      case 'custom':
-        return custom;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en.presentation, see _i69n: nomap, notraverse flag.');
   }
 }

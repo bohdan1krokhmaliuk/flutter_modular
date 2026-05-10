@@ -1,28 +1,41 @@
 targets:
   $default:
     builders:
-      injectable_generator|injectable_config_generator:
+      injectable_generator:injectable_config_builder:
         generate_for:
           - lib/src/di/di_initializer.dart
-      freezed|freezed:
+
+      freezed:freezed:
         generate_for:
-          - lib/src/flow**/*_state.dart
+          - lib/src/entrypoint**/*_state.dart
+          - lib/src/domain/api/model**/*.dart
           - lib/src/domain/model**/*.dart
           - lib/src/presentation**/*_bloc.dart
           - lib/src/presentation**/model**/*_bloc.dart
-      json_serializable:
+
+      json_serializable:json_serializable:
         generate_for:
           - lib/src/domain/api/model**/*.dart
           - lib/src/domain/model**/*.dart
         options:
           include_if_null: false
           explicit_to_json: true
-      bdd_widget_test|featureBuilder:
-        options:
-          include: package:bdd_steps/bdd_options.yaml
+
+      bdd_widget_test:featureBuilder:
         generate_for:
           - test/feature**/*.feature
+        options:
+          include: package:bdd_steps/bdd_options.yaml
+
+      i69n:yamlBasedBuilder:
+        generate_for:
+          - lib/src/presentation**/localization/translations/*.yaml
+        options:
+          nomap: true
+          notraverse: true
+
 global_options:
-  freezed:
+  freezed:freezed:
     runs_before:
-      - json_serializable
+      - json_serializable:json_serializable
+      - injectable_generator:injectable_builder

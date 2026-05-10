@@ -41,19 +41,8 @@ class QuestionnaireTranslations implements i69n.I69nMessageBundle {
   CompletedQuestionnaireTranslations get completed =>
       CompletedQuestionnaireTranslations(this);
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'wellcome':
-        return wellcome;
-      case 'completed':
-        return completed;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en, see _i69n: nomap, notraverse flag.');
   }
 }
 
@@ -66,23 +55,8 @@ class WellcomeQuestionnaireTranslations implements i69n.I69nMessageBundle {
   String get description =>
       "Welcome to the quiz! These questions are designed to help you reinforce what you've learned and discover new insights. Take your time and focus on the details. Good luck";
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'pageTitle':
-        return pageTitle;
-      case 'button':
-        return button;
-      case 'title':
-        return title;
-      case 'description':
-        return description;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en.wellcome, see _i69n: nomap, notraverse flag.');
   }
 }
 
@@ -98,22 +72,7 @@ class CompletedQuestionnaireTranslations implements i69n.I69nMessageBundle {
   String get _descriptionFailure =>
       "Good effort! You've completed the session, but there's still room to grow. Review your results below and give it another shot whenever you're ready.";
   Object operator [](String key) {
-    var index = key.indexOf('.');
-    if (index > 0) {
-      return (this[key.substring(0, index)]
-          as i69n.I69nMessageBundle)[key.substring(index + 1)];
-    }
-    switch (key) {
-      case 'title':
-        return title;
-      case 'description':
-        return description;
-      case '_descriptionSuccess':
-        return _descriptionSuccess;
-      case '_descriptionFailure':
-        return _descriptionFailure;
-      default:
-        return key;
-    }
+    throw Exception(
+        '[] operator is disabled in en.completed, see _i69n: nomap, notraverse flag.');
   }
 }
