@@ -25,6 +25,7 @@ externalSteps:
   - package:bdd_steps/step/text/i_wait_for_text_to_appear.dart
   - package:bdd_steps/step/text/i_wait_for_text_to_disappear.dart
   - package:bdd_steps/step/utilities/verify_log_reported.dart
+  - package:bdd_steps/step/widget/i_see_widget.dart
   - package:bdd_steps/step/widget/i_dont_see_icon.dart
   - package:bdd_steps/step/widget/i_dont_see_widget.dart
   - package:bdd_steps/step/widget/i_enter_into_input_field.dart
