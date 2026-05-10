@@ -75,7 +75,7 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
   @override
   DIInitializer get initializer => DIInitializer.combined([
     widget.initializer,
-    if (controller case FeatureFlowController<T> controller?)
+    if (controller case final controller?)
       DIInitializer(
         (getIt, _) =>
             getIt.registerSingleton<FeatureFlowController<T>>(controller),
@@ -89,14 +89,14 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
     /// Fixes the back button behaviour by rebuilding the widget in the end of the frame
     /// Doing this give time to the navigator to remove the disposed routes from the stack
     /// and the internal FeatureFlow won't add internal WillPopScope that prevents the back navigation.
-    if (controller case MultipageFlowController<T> controller?) {
+    if (controller case final MultipageFlowController<T> controller?) {
       controller.addListener(_refresh);
     }
   }
 
   @override
   void dispose() {
-    if (controller case MultipageFlowController<T> controller?) {
+    if (controller case final MultipageFlowController<T> controller?) {
       controller.removeListener(_refresh);
       controller.dispose();
     }
@@ -105,12 +105,12 @@ class _EntrypointState<T> extends ScopeState<Entrypoint<T>> {
 
   @override
   Widget build(BuildContext context) {
-    Widget child =
+    var child =
         widget.child ??
         FlowBuilder(
           onGeneratePages: widget.onGeneratePages!,
           rootRouter: diContainer<GlobalKey<NavigatorState>>(),
-          controller: (controller as MultipageFlowController<T>)._controller,
+          controller: (controller as MultipageFlowController<T>?)?._controller,
           observers: [
             diContainer<NavigatorMonitoringObserver>(),
             ...?widget.observers,

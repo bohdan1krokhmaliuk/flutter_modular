@@ -5,7 +5,7 @@ Future<void> iWaitForFinderToDisappear(
   WidgetTester tester,
   Finder finder,
 ) async {
-  int attempts = 100;
+  var attempts = 100;
   while (attempts > 0 && finder.evaluate().isNotEmpty) {
     await tester.pump(const Duration(milliseconds: 50));
     attempts -= 1;

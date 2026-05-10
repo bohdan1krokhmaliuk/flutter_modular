@@ -16,7 +16,7 @@ class BlurContainer extends StatelessWidget {
     return ClipRRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-        child: Container(
+        child: ColoredBox(
           color: Theme.of(context).scaffoldBackgroundColor.withAlpha(77),
           child: child,
         ),

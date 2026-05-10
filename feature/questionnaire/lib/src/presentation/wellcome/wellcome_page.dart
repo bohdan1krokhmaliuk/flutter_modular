@@ -22,10 +22,10 @@ class WellcomePage extends StatelessWidget {
               final bloc = context.read<WellcomeBloc>();
               return SubmitPage(
                 bottom: FilledButton(
-                  child: Text(translations.button),
                   onPressed: state.isLoading
                       ? null
                       : () => bloc.add(const WellcomeEvent.proceed()),
+                  child: Text(translations.button),
                 ),
                 child: Padding(
                   padding: dimen.all.xs,

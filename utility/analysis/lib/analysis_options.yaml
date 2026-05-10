@@ -22,7 +22,6 @@ linter:
     - always_declare_return_types
     - always_use_package_imports
     - annotate_overrides
-    - avoid_annotating_with_dynamic
     - avoid_bool_literals_in_conditional_expressions
     - avoid_catching_errors
     - avoid_dynamic_calls
@@ -61,7 +60,6 @@ linter:
     - depend_on_referenced_packages
     - deprecated_consistency
     - directives_ordering
-    - do_not_use_environment
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
@@ -90,7 +88,6 @@ linter:
     - null_closures
     - omit_local_variable_types
     - only_throw_errors
-    - omit_obvious_local_variable_types
     - overridden_fields
     - package_names
     - package_prefixed_library_names
@@ -151,7 +148,6 @@ linter:
     - unnecessary_const
     - unnecessary_constructor_name
     - unnecessary_getters_setters
-    - unnecessary_lambdas
     - unnecessary_late
     - unnecessary_library_directive
     - unnecessary_new
@@ -190,4 +186,5 @@ linter:
     - use_truncating_division
     - valid_regexps
     - void_checks
+    # - do_not_use_environment - nice to have, though we wanna be able to use it for injection as a dependency
     # - var_with_no_type_annotation

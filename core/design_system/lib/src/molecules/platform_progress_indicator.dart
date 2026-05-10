@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlatformProgressIndicator extends PaltformWidget {
+  const PlatformProgressIndicator({super.key});
+
   @override
   Widget buildCupertinoWidget(BuildContext context) {
     return const CupertinoActivityIndicator(radius: xs);

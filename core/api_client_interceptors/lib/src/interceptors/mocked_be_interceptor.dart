@@ -4,10 +4,8 @@ import 'dart:convert' show jsonDecode;
 import 'package:api_client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mocked_be/src/core/request.dart';
-import 'package:mocked_be/src/core/response_error.dart';
-import 'package:mocked_be/src/core/scenario.dart';
-import 'package:mocked_be/src/repository/scenario_repository.dart';
+import 'package:mocked_be/core.dart';
+import 'package:mocked_be/mocked_be.dart';
 import 'package:monitoring/monitoring.dart';
 
 @lazySingleton

@@ -17,7 +17,7 @@ Future<void> theSandboxIsRunning(
   SandboxEntrypoint.new,
   scenario: alwaysFailureScenario,
   initializer: DIInitializer((_getIt, _) {
-    return _getIt
+    _getIt
       ..registerSingleton(
         buildConfigurator(
           isQuestionnaireAvailable: isQuestionnaireAvailable,

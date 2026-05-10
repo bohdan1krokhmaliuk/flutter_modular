@@ -430,7 +430,7 @@ abstract class _SystemNavigationObserver implements WidgetsBinding {
     return WidgetsBinding.instance.handlePopRoute();
   }
 
-  static Future<dynamic> _pushRoute(dynamic arguments) async {
+  static Future<dynamic> _pushRoute(arguments) async {
     if (arguments is String) {
       return WidgetsBinding.instance.handlePushRoute(arguments);
     } else {

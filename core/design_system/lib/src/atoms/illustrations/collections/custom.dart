@@ -1,7 +1,7 @@
-part of 'illustrations.dart';
+part of '../illustrations.dart';
 
-class _CustomImages {
-  const _CustomImages();
+class CustomImages {
+  const CustomImages._();
 
   Illustration questionnaire({double? width, double? height}) =>
       Illustration.asset(

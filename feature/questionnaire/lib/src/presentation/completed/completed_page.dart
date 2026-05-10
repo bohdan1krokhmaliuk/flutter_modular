@@ -52,9 +52,10 @@ class CompletedPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: xs),
-                      state.isCorrect
-                          ? Illustrations.feedback.success(width: halfScreen)
-                          : Illustrations.feedback.failure(width: halfScreen),
+                      if (state.isCorrect)
+                        Illustrations.feedback.success(width: halfScreen)
+                      else
+                        Illustrations.feedback.failure(width: halfScreen),
                       const SizedBox(height: sm),
                       Text(
                         translations.title(state.isCorrect),

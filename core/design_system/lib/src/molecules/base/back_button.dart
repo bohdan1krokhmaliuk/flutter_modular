@@ -15,7 +15,12 @@ class PlatformBackButton extends StatelessWidget {
       if (navigator.canPop() && await navigator.maybePop()) {
         return;
       }
-      navigator = navigator.context.findAncestorStateOfType<NavigatorState>();
+      navigator = navigator.parent;
     }
   }
+}
+
+extension on NavigatorState {
+  NavigatorState? get parent =>
+      context.findAncestorStateOfType<NavigatorState>();
 }

@@ -10,7 +10,7 @@ class QuestionsRepository {
   final QuestionnaireApi _api;
 
   Future<Result<List<Question>, FailureException>> load() async {
-    final result = await Result.fromAsync(() => _api.getQuestions());
+    final result = await Result.fromAsync(_api.getQuestions);
     return result.map((s) => s.data);
   }
 

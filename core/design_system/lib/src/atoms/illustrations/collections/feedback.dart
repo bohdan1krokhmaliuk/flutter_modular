@@ -1,7 +1,7 @@
-part of 'illustrations.dart';
+part of '../illustrations.dart';
 
-class _FeedbackImages {
-  const _FeedbackImages();
+class FeedbackImages {
+  const FeedbackImages._();
 
   Illustration success({double? width, double? height}) => Illustration.asset(
     'assets/success.svg',

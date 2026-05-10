@@ -3,11 +3,14 @@ import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:prelude/src/exception.dart';
 
-typedef _SyncGetter<T> = T Function();
-typedef _AsyncGetter<T> = Future<T> Function();
-typedef _GetterCallback<T> = T Function(T1 Function<T1>(Result<T1, Object>));
-typedef _AsyncGetterCallback<T> =
-    Future<T> Function(FutureOr<T1> Function<T1>(FutureOr<Result<T1, Object>>));
+typedef SyncGetter<T> = T Function();
+typedef AsyncGetter<T> = Future<T> Function();
+typedef GetterCallback<T> =
+    T Function(T1 Function<T1>(Result<T1, FailureException>));
+typedef AsyncGetterCallback<T> =
+    Future<T> Function(
+      FutureOr<T1> Function<T1>(FutureOr<Result<T1, FailureException>>),
+    );
 
 @immutable
 sealed class Result<S, F> {
@@ -31,7 +34,7 @@ sealed class Result<S, F> {
   S getOrElse(S Function() f) => fold((s) => s, (_) => f());
   S? getOrNull() => fold((s) => s, (_) => null);
 
-  static Result<T, FailureException> fromAction<T>(_SyncGetter<T> f) {
+  static Result<T, FailureException> fromAction<T>(SyncGetter<T> f) {
     try {
       return success(f());
     } catch (e, stackTrace) {
@@ -43,7 +46,7 @@ sealed class Result<S, F> {
   }
 
   static Future<Result<T, FailureException>> fromAsync<T>(
-    _AsyncGetter<T> f,
+    AsyncGetter<T> f,
   ) async {
     try {
       return success(await f());
@@ -56,12 +59,12 @@ sealed class Result<S, F> {
   }
 
   static Stream<Result<T, FailureException>> fromPeriodic<T>(
-    _AsyncGetter<T> f, {
+    AsyncGetter<T> f, {
     required Duration Function(int iteration) interval,
     required bool Function(Result<T, FailureException> result, int iteration)
     stopWhen,
   }) async* {
-    int i = 0;
+    var i = 0;
     while (true) {
       final result = await Result.fromAsync(f);
       yield result;
@@ -73,15 +76,15 @@ sealed class Result<S, F> {
     }
   }
 
-  static Result<T, FailureException> doSync<T>(_GetterCallback<T> f) =>
+  static Result<T, FailureException> doSync<T>(GetterCallback<T> f) =>
       Result.fromAction(() => f(_get));
 
   static Future<Result<T, FailureException>> doAsync<T>(
-    _AsyncGetterCallback<T> f,
+    AsyncGetterCallback<T> f,
   ) => Result.fromAsync(() => f(_getAsync));
 
   static Stream<Result<T, FailureException>> doPeriodic<T>(
-    _AsyncGetterCallback<T> f, {
+    AsyncGetterCallback<T> f, {
     required Duration Function(int iteration) interval,
     required bool Function(Result<T, FailureException> result, int iteration)
     stopWhen,
@@ -91,11 +94,12 @@ sealed class Result<S, F> {
     stopWhen: stopWhen,
   );
 
-  static T _get<T>(Result<T, Object> result) =>
+  static T _get<T>(Result<T, FailureException> result) =>
       result.fold((s) => s, (f) => throw f);
 
-  static FutureOr<T> _getAsync<T>(FutureOr<Result<T, Object>> result) async =>
-      _get(await result);
+  static FutureOr<T> _getAsync<T>(
+    FutureOr<Result<T, FailureException>> result,
+  ) async => _get(await result);
 }
 
 class Failure<S, F> extends Result<S, F> {

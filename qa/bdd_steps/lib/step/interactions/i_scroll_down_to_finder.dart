@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 /// Usage: I scroll down to {finder} finder
 Future<void> iScrollDownToFinder(WidgetTester tester, Finder finder) async {
   final scrollable = find.byType(Scrollable);
-  int attempts = 100;
+  var attempts = 100;
   while (attempts > 0 && finder.evaluate().isEmpty) {
     await tester.drag(scrollable, const Offset(0, -50));
     await tester.pump(const Duration(milliseconds: 50));

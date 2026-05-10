@@ -41,8 +41,8 @@ class Presenter<
 
     return diContainer.isRegistered<PresenterBloc>()
         ? BlocProvider.value(
-            child: presenter,
             value: diContainer<PresenterBloc>(),
+            child: presenter,
           )
         : presenter;
   }
@@ -63,7 +63,7 @@ class Presenter<
     switch (state.presentation) {
       // case ExceptionPresentation(exception: final e) when e is TermsNotAcceptedException:
       //   context.read<PresenterBloc?>()?.add(PresenterEvent.openAcceptTerms());
-      case ConfettiPresentation(duration: final duration):
+      case ConfettiPresentation(:final duration):
         // [HINT] This is direct usage of 3rd party package inside Presenter
         // you should avoid it and move most 3rd party implementations into some
         // kind of utility wrapper
@@ -98,6 +98,5 @@ class Presenter<
         Toast.of(context).show(context.commonTranslations.error.smthWentWrong);
       default:
     }
-    ;
   }
 }

@@ -12,7 +12,7 @@ class DIInitializer {
       DIInitializer((getIt, _) {
         List<Future<void>>? futures;
 
-        for (int i = 0; i < initializers.length; i++) {
+        for (var i = 0; i < initializers.length; i++) {
           final res = initializers[i].init(getIt);
 
           if (res is Future) {
@@ -20,7 +20,7 @@ class DIInitializer {
           }
         }
 
-        return futures == null ? null : Future.wait(futures);
+        return futures == null ? null : Future.wait(futures) as Future<void>;
       });
 
   final GetItInitializer _initializer;

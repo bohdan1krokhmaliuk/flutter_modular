@@ -31,7 +31,7 @@ class ScenarioRepository {
   Scenario? _findByName(List<ScenarioEntry> entries, String name) {
     for (final entry in entries) {
       final scenario = switch (entry) {
-        Scenario(name: String entryName) => name == entryName ? entry : null,
+        Scenario(name: final entryName) => name == entryName ? entry : null,
         ScenarioGroup() => _findByName(entry.entries, name),
         _ => null,
       };

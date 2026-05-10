@@ -8,9 +8,7 @@ void main() {
     group('constructor', () {
       test('throws when state is null and controller is null', () async {
         expect(
-          () => FlowBuilder(
-            onGeneratePages: (dynamic _, List<Page<dynamic>> __) => [],
-          ),
+          () => FlowBuilder(onGeneratePages: (_, _) => []),
           throwsAssertionError,
         );
       });
@@ -18,7 +16,7 @@ void main() {
       test('throws when state and controller are both provided', () async {
         expect(
           () => FlowBuilder(
-            onGeneratePages: (dynamic _, List<Page<dynamic>> __) => [],
+            onGeneratePages: (_, _) => [],
             state: '',
             controller: FlowController(''),
           ),
@@ -31,7 +29,7 @@ void main() {
         () async {
           expect(
             () => FlowBuilder(
-              onGeneratePages: (dynamic _, List<Page<dynamic>> __) => [],
+              onGeneratePages: (_, _) => [],
               controller: FlowController(''),
             ),
             isNot(throwsAssertionError),
@@ -43,10 +41,7 @@ void main() {
         'does not throw when controller is null if state is present',
         () async {
           expect(
-            () => FlowBuilder(
-              state: 0,
-              onGeneratePages: (dynamic _, List<Page<dynamic>> __) => [],
-            ),
+            () => FlowBuilder(state: 0, onGeneratePages: (_, _) => []),
             isNot(throwsAssertionError),
           );
         },
