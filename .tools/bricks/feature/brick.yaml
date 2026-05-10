@@ -1,0 +1,13 @@
+name: feature
+description: A feature package with modular architecture
+version: 1.0.0
+vars:
+  name:
+    type: string
+    description: Name of a new feature
+    prompt: What is your feature name?
+  hasDomain:
+    type: boolean
+    default: true
+    description: Does your feature contains domain layer
+    prompt: What you want to generate domain?

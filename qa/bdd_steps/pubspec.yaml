@@ -1,0 +1,29 @@
+name: bdd_steps
+description: Custom bdd steps
+version: 0.0.1
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  api_client:
+  api_client_interceptors:
+  bdd_widget_test:
+  design_system:
+  di:
+  flutter:
+    sdk: flutter
+  flutter_svg:
+  flutter_test:
+    sdk: flutter
+  localizations:
+  mocked_be:
+  mocktail:
+  monitoring:
+  preferences:
+
+dev_dependencies:
+  analysis:

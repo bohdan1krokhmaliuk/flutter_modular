@@ -1,0 +1,22 @@
+main:
+  title: Home
+  makeCall: Make Call
+  customException: Make custom failure api call
+  customExceptionDescription: This card onTap logic makes an api call which always
+    fails but is processed emmitting custom exception and Presenter handlign
+    that exception
+  defaultException: Make failure api call
+  defaultExceptionDescription: This card onTap logic makes an api call which
+    always fails - and it demostrates how Presenter handles default exceptions
+  rickAndMorty: Check out our new rick and morty list!
+  rickAndMortyDescription: This characters feature demonstrates work with API,
+    fetching paginated list of Rick and morty characters
+  quest: Pass your knowledge quiz!
+  questDescription: This quiz feature demonstrates internal navigation (flow), and
+    global custom presentation (confetti) if u finish it succesfully
+  takeALook: Take a look
+
+presentation:
+  oops: Good luck next time!
+  congrats: Good Job!
+  custom: We intercepted custom exception here :)

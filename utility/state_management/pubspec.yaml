@@ -1,0 +1,23 @@
+name: state_management
+description: Monitoring package for analytics/crashlitics/logs
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  di:
+  flutter:
+    sdk: flutter
+  flutter_bloc:
+  freezed_annotation:
+  get_it:
+  injectable:
+  monitoring:
+
+dev_dependencies:
+  analysis:
+  build_runner:
+  injectable_generator:

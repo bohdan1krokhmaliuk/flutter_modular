@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "flutter_modular",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/miniclient/lib/main.dart",
+            "type": "dart",
+            "toolArgs": [
+                "--dart-define-from-file",
+                "${workspaceFolder}/.secrets/dart_defines.json"
+            ]
+        },
+    ]
+}

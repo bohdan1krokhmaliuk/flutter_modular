@@ -1,0 +1,27 @@
+name: design_system
+description: "Package which contains designs system elements: constants, base
+  widgets implementations, fucntional ui templates"
+version: 0.0.1
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg:
+  localizations:
+
+dev_dependencies:
+  analysis:
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/issue.svg
+    - assets/success.svg
+    - assets/questionnaire.svg

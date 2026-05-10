@@ -1,0 +1,1 @@
+abstract interface class {{#pascalCase}}{{name}}{{/pascalCase}}Configurator {}

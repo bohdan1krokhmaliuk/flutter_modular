@@ -1,0 +1,13 @@
+name: prelude
+description: Foundation components
+version: 0.0.1
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dependencies:
+  meta:
+
+dev_dependencies:
+  analysis:

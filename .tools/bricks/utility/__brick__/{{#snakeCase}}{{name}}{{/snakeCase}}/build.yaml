@@ -1,0 +1,21 @@
+targets:
+  $default:
+    builders:
+      injectable_generator:injectable_config_builder:
+        generate_for:
+          - lib/src/di/di_initializer.dart
+
+      json_serializable:json_serializable:
+        options:
+          include_if_null: false
+          explicit_to_json: true
+
+      bdd_widget_test:featureBuilder:
+        options:
+          include: package:bdd_steps/bdd_options.yaml
+
+global_options:
+  freezed:freezed:
+    runs_before:
+      - json_serializable:json_serializable
+      - injectable_generator:injectable_builder

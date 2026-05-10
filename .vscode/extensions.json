@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "Dart-Code.dart-code",
+        "Dart-Code.flutter",
+        "localizely.flutter-intl",
+        "Nash.awesome-flutter-snippets",
+        "alexkrechik.cucumberautocomplete",
+        "stevejpurves.cucumber",
+        "Blodwynn.featurehighlight",
+        "AravindKumar.gherkin-indent",
+        "ryanluker.vscode-coverage-gutters",
+        "kisstkondoros.vscode-gutter-preview",
+        "FelixAngelov.mason"
+    ]
+}

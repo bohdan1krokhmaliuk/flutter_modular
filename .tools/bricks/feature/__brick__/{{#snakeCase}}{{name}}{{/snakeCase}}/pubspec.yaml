@@ -1,0 +1,46 @@
+name: {{#snakeCase}}{{name}}{{/snakeCase}}
+description: {{#titleCase}}{{name}}{{/titleCase}} feature
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+  flutter: ^3.41.7
+
+resolution: workspace
+
+dependencies:
+  api_client:
+  design_system:
+  di:
+  dio:
+  domain:
+  entrypoint:
+  flutter:
+    sdk: flutter
+  flutter_bloc:
+  freezed_annotation:
+  get_it:
+  i69n:
+  injectable:
+  localizations:
+  prelude:
+  retrofit:
+  state_management:
+
+dev_dependencies:
+  analysis:
+  bdd_steps:
+  bdd_widget_test:
+  build_runner:
+  flutter_test:
+    sdk: flutter
+  freezed:
+  injectable_generator:
+  json_serializable:
+  mocked_be:
+  mocktail:
+  retrofit_generator:
+
+flutter:
+  uses-material-design: true

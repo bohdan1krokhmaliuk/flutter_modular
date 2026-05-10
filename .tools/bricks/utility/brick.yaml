@@ -1,0 +1,8 @@
+name: utility
+description: Creation of utility (or core/qa) package with modular architecture
+version: 1.0.0
+vars:
+  name:
+    type: string
+    description: Name of the new utility package
+    prompt: What is package name?

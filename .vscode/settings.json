@@ -1,0 +1,22 @@
+// Prefferably update you user settings json with these settings
+{
+    "dart.lineLength": 80,
+    "dart.debugExternalPackageLibraries": true,
+    "dart.onlyAnalyzeProjectsWithOpenFiles": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        80
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "files.readonlyInclude": {
+        "**/feature/**/*_test.dart": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true,
+        "**/*.config.dart": true,
+        "**/*.gr.dart": true,
+        "**/*.gen.dart": true,
+        "**/*.i69n.dart": true
+    }
+}

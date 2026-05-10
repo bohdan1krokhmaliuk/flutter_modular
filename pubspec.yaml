@@ -1,0 +1,230 @@
+name: miniclient_workspace
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+  flutter: 3.41.7
+
+flutter:
+  uses-material-design: true
+
+dependencies:
+  meta: 1.17.0
+  get_it: 9.2.1
+  dio: 5.9.2
+  i69n: 3.6.0
+  auto_route: 11.1.0
+  injectable: 2.7.1+4
+  json_annotation: 4.11.0
+  retrofit: 4.9.2
+  flutter_bloc: 9.1.1
+  freezed_annotation: 3.1.0
+  mocktail: 1.0.5
+  flutter_svg: 2.2.4
+  flutter_confetti: 0.5.1
+  shared_preferences: 2.5.5
+
+dev_dependencies:
+  melos: 7.5.1
+  build_runner: 2.13.1
+  bdd_widget_test: 2.1.3
+  freezed: 3.2.5
+  injectable_generator: 2.12.1
+  json_serializable: 6.13.1
+  retrofit_generator: 10.2.5
+  auto_route_generator: 10.5.0
+
+workspace:
+  - app/miniclient
+  - app/navigation
+  - app/configuration
+  - utility/analysis
+  - utility/prelude
+  - utility/di
+  - utility/flow_builder
+  - utility/entrypoint
+  - utility/monitoring
+  - utility/state_management
+  - utility/preferences
+  - core/domain
+  - core/api_client
+  - core/api_client_interceptors
+  - core/design_system
+  - core/presenter
+  - core/localizations
+  - qa/bdd_steps
+  - qa/mocked_be
+  - feature/rick_and_morty_characters
+  - feature/sandbox
+  - feature/questionnaire
+
+melos:
+  ignore:
+    - "**/build/**"
+
+  scripts:
+    test:
+      run: melos exec -c 1 --dir-exists="test" --fail-fast -- flutter test --no-pub
+      description: Runs tests in all packages which have tests
+
+    test:diff:
+      run: |
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD --include-dependents -- \$MELOS_ROOT_PATH/.tools/scripts/run_tests.sh
+      description:
+        Runs tests in all changed packages which have tests, enforcing
+        tests for features
+
+    coverage:
+      run: |
+        melos exec -c 1 --dir-exists="test" -- \
+        "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
+      description: Generate and filter coverage data
+
+    coverage:diff:
+      run: |
+        melos exec -c 1 --dir-exists="test" --diff=origin/main...HEAD -- \
+        "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
+      description: Generate and filter coverage data for changes
+
+    coverage:report:
+      run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart
+      description: Calculate and print report for packages
+
+    coverage:html_report:
+      run: |
+        dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/merge.dart
+        genhtml coverage/lcov.info -o coverage/html --hierarchical --legend --title "Flutter Monorepo Coverage"
+        open coverage/html/index.html
+      description: Calculate and print report for packages
+
+    coverage:clean:
+      run: |
+        rm -rf coverage/
+        melos exec -- "rm -rf coverage/"
+      description: Removes all coverage folders and lcov.info files.
+
+    analyze:
+      run: melos exec -c 1 -- flutter analyze . --no-congratulate --no-pub
+      description: Run analyzer in all packages
+
+    analyze:diff:
+      run: >
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD
+        --include-dependents -- flutter analyze . --no-congratulate --no-pub
+      description: Run analyzer in changed packages
+
+    generate:
+      run: >
+        melos exec -c 1 --depends-on="build_runner" -- "dart run build_runner
+        build --delete-conflicting-outputs --build-filter=\"lib/**\"
+        --build-filter=\"test/**\""
+      description: Generate code for all packages
+
+    generate:clean:
+      run: >
+        melos exec -c 1 --depends-on="build_runner" -- "flutter clean && flutter
+        pub get && dart run build_runner clean && dart run build_runner build
+        --delete-conflicting-outputs --build-filter=\"lib/**\"
+        --build-filter=\"test/**\""
+      description: Clean and generate code for all packages
+
+    generate:diff:
+      run: >
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD
+        --depends-on="build_runner" -- "dart run build_runner build
+        --delete-conflicting-outputs --build-filter=\"lib/**\"
+        --build-filter=\"test/**\""
+      description: Clean and generate code for all packages diff with main
+
+    validate_barrel_file_imports:
+      run: melos exec -- dart
+        \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
+      description:
+        Runs barrel file imports check (if barrel file was imported inside
+        package instead of its file import)
+
+    validate_barrel_file_imports:diff:
+      run: melos exec -c 1 --diff=origin/main...HEAD -- dart
+        \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
+      description: Runs barrel file imports check for all changed packages
+
+    unused_dependencies:
+      run: |
+        melos exec -c 1 -- "dart pub global run dependency_validator"
+      description: Runs `dependency_validator` in all packages (finds unused dependencies)
+
+    unused_dependencies:diff:
+      run: |
+        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator"
+      description: Runs `dependency_validator` in all packages (finds unused dependencies)
+
+    circular_dependencies:
+      run: melos list --cycles
+      description: Checks if there is no circular dependencies
+
+    circular_dependencies:diff:
+      run: melos list --cycles --diff=origin/main...HEAD
+      description: Checks if there is no circular dependencies
+
+    unused_files:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-files lib
+        --no-congratulate --disable-sunset-warning"
+      description: Run `metrics --check-unused-files` in all packages
+
+    unused_files:diff:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
+        "metrics check-unused-files lib --no-congratulate
+        --disable-sunset-warning"
+      description: Run `metrics --check-unused-files` in all changed packages
+
+    unused_code:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-code lib
+        --no-congratulate --disable-sunset-warning"
+      description: Run `metrics --check-unused-code` in all packages
+
+    unused_code:diff:
+      run: >
+        melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
+        "metrics check-unused-code lib --no-congratulate
+        --disable-sunset-warning"
+      description: Run `metrics --check-unused-code` in all changed packages
+
+    code_checks:
+      steps:
+        - melos run analyze
+        - melos run unused_dependencies
+        - melos run circular_dependencies
+        - melos run validate_barrel_file_imports
+        - melos run unused_files
+        - melos run unused_code
+        - melos run test
+      description: Runs code checks on the project
+
+    code_checks:diff:
+      steps:
+        - melos run analyze:diff
+        - melos run unused_dependencies:diff
+        - melos run circular_dependencies:diff
+        - melos run validate_barrel_file_imports:diff
+        - melos run unused_files:diff
+        - melos run unused_code:diff
+        - melos run test:diff
+      description: Runs code checks on the project diff
+
+    format:
+      run: |
+        find . \
+          \( -path "./.tools" -o -path "*/build" -o -path "*/.dart_tool" -o -path "*/__brick__" \) -prune \
+          -o -name "*.dart" \
+          -not -name "*.freezed.dart" \
+          -not -name "*.g.dart" \
+          -not -name "*.config.dart" \
+          -not -name "*.gr.dart" \
+          -not -name "*.gen.dart" \
+          -not -name "*.i69n.dart" \
+          -not -path "*/test/feature/*_test.dart" \
+          -print | xargs dart format > /dev/null
+      description: Format all non generated dart files
