@@ -88,14 +88,14 @@ melos:
 
     coverage:report:
       run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart
-      description: Calculate and print report for packages
+      description: Calculate and print report for packages including .lcov files
 
     coverage:html_report:
       run: |
         dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/merge.dart
         genhtml coverage/lcov.info -o coverage/html --hierarchical --legend --title "Flutter Monorepo Coverage"
         open coverage/html/index.html
-      description: Calculate and print report for packages
+      description: Calculate and generate html report for packages including .lcov files
 
     coverage:clean:
       run: |
