@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:platform_info/platform_info.dart';
 import 'package:prelude/prelude.dart';
 
 extension FailureExceptionX on FailureException {

@@ -16,6 +16,7 @@ dependencies:
   injectable:
   mocked_be:
   monitoring:
+  platform_info:
 
 dev_dependencies:
   analysis:
