@@ -136,6 +136,12 @@ melos:
         --build-filter=\"test/**\""
       description: Clean and generate code for all packages diff with main
 
+    generate:local_diff:
+      run: >
+        melos exec -c 1 --fail-fast --depends-on="build_runner" --
+        $MELOS_ROOT_PATH/.tools/scripts/generate_if_local_changes.sh
+      description: Generate code for packages with local uncommitted changes
+
     validate_barrel_file_imports:
       run: melos exec -- dart
         \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart

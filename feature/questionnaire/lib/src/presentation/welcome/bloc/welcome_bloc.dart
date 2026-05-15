@@ -7,19 +7,19 @@ import 'package:questionnaire/src/domain/repository/questions_repository.dart';
 import 'package:questionnaire/src/entrypoint/questionnaire_state.dart';
 import 'package:state_management/state_management.dart';
 
-part 'wellcome_bloc.freezed.dart';
-part 'wellcome_event.dart';
-part 'wellcome_state.dart';
+part 'welcome_bloc.freezed.dart';
+part 'welcome_event.dart';
+part 'welcome_state.dart';
 
 @injectable
-class WellcomeBloc extends Bloc<WellcomeEvent, WellcomeState> {
-  WellcomeBloc(this._flow, this._repository) : super(const WellcomeState()) {
-    on<WellcomeEvent>(
+class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
+  WelcomeBloc(this._flow, this._repository) : super(const WelcomeState()) {
+    on<WelcomeEvent>(
       (event, emit) => event.map(proceed: (_) => _onProceed(emit)),
     );
   }
 
-  final FeatureFlowController<QuestionarrieState> _flow;
+  final FeatureFlowController<QuestionnaireState> _flow;
   final QuestionsRepository _repository;
 
   Future<void> _onProceed(Emitter<void> emit) async {

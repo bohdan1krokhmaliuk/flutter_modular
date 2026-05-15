@@ -79,11 +79,13 @@ class _PaginatedListViewState extends State<PaginatedListView> {
     return widget.itemCount + (hasAdditionalItem ? 1 : 0);
   }
 
+  static const _paginationThreshold = 300.0;
+
   void _pageScrollListener() {
     if (widget.hasNextPage &&
         !widget.isLoadingNextPage &&
         !widget.failedToLoadNextPage &&
-        _scrollController.position.extentAfter < 300) {
+        _scrollController.position.extentAfter < _paginationThreshold) {
       widget.onLoadNextPage();
     }
   }

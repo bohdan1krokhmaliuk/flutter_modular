@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-abstract class PaltformWidget<I extends Widget, M extends Widget>
+abstract class PlatformWidget<I extends Widget, M extends Widget>
     extends StatelessWidget {
-  const PaltformWidget({Key? key}) : super(key: key);
+  const PlatformWidget({Key? key}) : super(key: key);
 
   I buildCupertinoWidget(BuildContext context);
   M buildMaterialWidget(BuildContext context);

@@ -45,15 +45,15 @@ extension SandboxEventPatterns on SandboxEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadEvent value)?  load,TResult Function( _OpenRickAndMortyEvent value)?  openRickAndMory,TResult Function( _OpenQuestionnaireEvent value)?  openQuestionnaire,TResult Function( _DefaultExceptionEvent value)?  tirggerDefaultExceptionPresentation,TResult Function( _CustomExceptionEvent value)?  tirggerCustomExceptionPresentation,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadEvent value)?  load,TResult Function( _OpenRickAndMortyEvent value)?  openRickAndMorty,TResult Function( _OpenQuestionnaireEvent value)?  openQuestionnaire,TResult Function( _DefaultExceptionEvent value)?  triggerDefaultExceptionPresentation,TResult Function( _CustomExceptionEvent value)?  triggerCustomExceptionPresentation,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadEvent() when load != null:
-return load(_that);case _OpenRickAndMortyEvent() when openRickAndMory != null:
-return openRickAndMory(_that);case _OpenQuestionnaireEvent() when openQuestionnaire != null:
-return openQuestionnaire(_that);case _DefaultExceptionEvent() when tirggerDefaultExceptionPresentation != null:
-return tirggerDefaultExceptionPresentation(_that);case _CustomExceptionEvent() when tirggerCustomExceptionPresentation != null:
-return tirggerCustomExceptionPresentation(_that);case _:
+return load(_that);case _OpenRickAndMortyEvent() when openRickAndMorty != null:
+return openRickAndMorty(_that);case _OpenQuestionnaireEvent() when openQuestionnaire != null:
+return openQuestionnaire(_that);case _DefaultExceptionEvent() when triggerDefaultExceptionPresentation != null:
+return triggerDefaultExceptionPresentation(_that);case _CustomExceptionEvent() when triggerCustomExceptionPresentation != null:
+return triggerCustomExceptionPresentation(_that);case _:
   return orElse();
 
 }
@@ -71,15 +71,15 @@ return tirggerCustomExceptionPresentation(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadEvent value)  load,required TResult Function( _OpenRickAndMortyEvent value)  openRickAndMory,required TResult Function( _OpenQuestionnaireEvent value)  openQuestionnaire,required TResult Function( _DefaultExceptionEvent value)  tirggerDefaultExceptionPresentation,required TResult Function( _CustomExceptionEvent value)  tirggerCustomExceptionPresentation,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadEvent value)  load,required TResult Function( _OpenRickAndMortyEvent value)  openRickAndMorty,required TResult Function( _OpenQuestionnaireEvent value)  openQuestionnaire,required TResult Function( _DefaultExceptionEvent value)  triggerDefaultExceptionPresentation,required TResult Function( _CustomExceptionEvent value)  triggerCustomExceptionPresentation,}){
 final _that = this;
 switch (_that) {
 case _LoadEvent():
 return load(_that);case _OpenRickAndMortyEvent():
-return openRickAndMory(_that);case _OpenQuestionnaireEvent():
+return openRickAndMorty(_that);case _OpenQuestionnaireEvent():
 return openQuestionnaire(_that);case _DefaultExceptionEvent():
-return tirggerDefaultExceptionPresentation(_that);case _CustomExceptionEvent():
-return tirggerCustomExceptionPresentation(_that);}
+return triggerDefaultExceptionPresentation(_that);case _CustomExceptionEvent():
+return triggerCustomExceptionPresentation(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -93,15 +93,15 @@ return tirggerCustomExceptionPresentation(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadEvent value)?  load,TResult? Function( _OpenRickAndMortyEvent value)?  openRickAndMory,TResult? Function( _OpenQuestionnaireEvent value)?  openQuestionnaire,TResult? Function( _DefaultExceptionEvent value)?  tirggerDefaultExceptionPresentation,TResult? Function( _CustomExceptionEvent value)?  tirggerCustomExceptionPresentation,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadEvent value)?  load,TResult? Function( _OpenRickAndMortyEvent value)?  openRickAndMorty,TResult? Function( _OpenQuestionnaireEvent value)?  openQuestionnaire,TResult? Function( _DefaultExceptionEvent value)?  triggerDefaultExceptionPresentation,TResult? Function( _CustomExceptionEvent value)?  triggerCustomExceptionPresentation,}){
 final _that = this;
 switch (_that) {
 case _LoadEvent() when load != null:
-return load(_that);case _OpenRickAndMortyEvent() when openRickAndMory != null:
-return openRickAndMory(_that);case _OpenQuestionnaireEvent() when openQuestionnaire != null:
-return openQuestionnaire(_that);case _DefaultExceptionEvent() when tirggerDefaultExceptionPresentation != null:
-return tirggerDefaultExceptionPresentation(_that);case _CustomExceptionEvent() when tirggerCustomExceptionPresentation != null:
-return tirggerCustomExceptionPresentation(_that);case _:
+return load(_that);case _OpenRickAndMortyEvent() when openRickAndMorty != null:
+return openRickAndMorty(_that);case _OpenQuestionnaireEvent() when openQuestionnaire != null:
+return openQuestionnaire(_that);case _DefaultExceptionEvent() when triggerDefaultExceptionPresentation != null:
+return triggerDefaultExceptionPresentation(_that);case _CustomExceptionEvent() when triggerCustomExceptionPresentation != null:
+return triggerCustomExceptionPresentation(_that);case _:
   return null;
 
 }
@@ -118,14 +118,14 @@ return tirggerCustomExceptionPresentation(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  load,TResult Function()?  openRickAndMory,TResult Function()?  openQuestionnaire,TResult Function()?  tirggerDefaultExceptionPresentation,TResult Function()?  tirggerCustomExceptionPresentation,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  load,TResult Function()?  openRickAndMorty,TResult Function()?  openQuestionnaire,TResult Function()?  triggerDefaultExceptionPresentation,TResult Function()?  triggerCustomExceptionPresentation,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadEvent() when load != null:
-return load();case _OpenRickAndMortyEvent() when openRickAndMory != null:
-return openRickAndMory();case _OpenQuestionnaireEvent() when openQuestionnaire != null:
-return openQuestionnaire();case _DefaultExceptionEvent() when tirggerDefaultExceptionPresentation != null:
-return tirggerDefaultExceptionPresentation();case _CustomExceptionEvent() when tirggerCustomExceptionPresentation != null:
-return tirggerCustomExceptionPresentation();case _:
+return load();case _OpenRickAndMortyEvent() when openRickAndMorty != null:
+return openRickAndMorty();case _OpenQuestionnaireEvent() when openQuestionnaire != null:
+return openQuestionnaire();case _DefaultExceptionEvent() when triggerDefaultExceptionPresentation != null:
+return triggerDefaultExceptionPresentation();case _CustomExceptionEvent() when triggerCustomExceptionPresentation != null:
+return triggerCustomExceptionPresentation();case _:
   return orElse();
 
 }
@@ -143,14 +143,14 @@ return tirggerCustomExceptionPresentation();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  load,required TResult Function()  openRickAndMory,required TResult Function()  openQuestionnaire,required TResult Function()  tirggerDefaultExceptionPresentation,required TResult Function()  tirggerCustomExceptionPresentation,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  load,required TResult Function()  openRickAndMorty,required TResult Function()  openQuestionnaire,required TResult Function()  triggerDefaultExceptionPresentation,required TResult Function()  triggerCustomExceptionPresentation,}) {final _that = this;
 switch (_that) {
 case _LoadEvent():
 return load();case _OpenRickAndMortyEvent():
-return openRickAndMory();case _OpenQuestionnaireEvent():
+return openRickAndMorty();case _OpenQuestionnaireEvent():
 return openQuestionnaire();case _DefaultExceptionEvent():
-return tirggerDefaultExceptionPresentation();case _CustomExceptionEvent():
-return tirggerCustomExceptionPresentation();}
+return triggerDefaultExceptionPresentation();case _CustomExceptionEvent():
+return triggerCustomExceptionPresentation();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -164,14 +164,14 @@ return tirggerCustomExceptionPresentation();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  load,TResult? Function()?  openRickAndMory,TResult? Function()?  openQuestionnaire,TResult? Function()?  tirggerDefaultExceptionPresentation,TResult? Function()?  tirggerCustomExceptionPresentation,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  load,TResult? Function()?  openRickAndMorty,TResult? Function()?  openQuestionnaire,TResult? Function()?  triggerDefaultExceptionPresentation,TResult? Function()?  triggerCustomExceptionPresentation,}) {final _that = this;
 switch (_that) {
 case _LoadEvent() when load != null:
-return load();case _OpenRickAndMortyEvent() when openRickAndMory != null:
-return openRickAndMory();case _OpenQuestionnaireEvent() when openQuestionnaire != null:
-return openQuestionnaire();case _DefaultExceptionEvent() when tirggerDefaultExceptionPresentation != null:
-return tirggerDefaultExceptionPresentation();case _CustomExceptionEvent() when tirggerCustomExceptionPresentation != null:
-return tirggerCustomExceptionPresentation();case _:
+return load();case _OpenRickAndMortyEvent() when openRickAndMorty != null:
+return openRickAndMorty();case _OpenQuestionnaireEvent() when openQuestionnaire != null:
+return openQuestionnaire();case _DefaultExceptionEvent() when triggerDefaultExceptionPresentation != null:
+return triggerDefaultExceptionPresentation();case _CustomExceptionEvent() when triggerCustomExceptionPresentation != null:
+return triggerCustomExceptionPresentation();case _:
   return null;
 
 }
@@ -220,7 +220,7 @@ class _OpenRickAndMortyEvent implements SandboxEvent {
 
 @override
 String toString() {
-  return 'SandboxEvent.openRickAndMory()';
+  return 'SandboxEvent.openRickAndMorty()';
 }
 
 
@@ -270,7 +270,7 @@ class _DefaultExceptionEvent implements SandboxEvent {
 
 @override
 String toString() {
-  return 'SandboxEvent.tirggerDefaultExceptionPresentation()';
+  return 'SandboxEvent.triggerDefaultExceptionPresentation()';
 }
 
 
@@ -295,7 +295,7 @@ class _CustomExceptionEvent implements SandboxEvent {
 
 @override
 String toString() {
-  return 'SandboxEvent.tirggerCustomExceptionPresentation()';
+  return 'SandboxEvent.triggerCustomExceptionPresentation()';
 }
 
 

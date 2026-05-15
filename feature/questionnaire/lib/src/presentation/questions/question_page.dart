@@ -20,7 +20,7 @@ class QuestionPage extends StatelessWidget {
       appBar: const PlatformAppBar(),
       body: BlocProvider(
         create: (_) => diContainer<QuestionBloc>(
-          parameter: QuesstionBlocParams(question, preselected),
+          parameter: QuestionBlocParams(question, preselected),
         ),
         child: DefaultPresenter<QuestionBloc, QuestionState>(
           child: BlocBuilder<QuestionBloc, QuestionState>(

@@ -13,11 +13,6 @@ enum SupportedLocale {
 
   static bool contains(Locale locale) => locales.contains(locale);
 
-  static SupportedLocale? from(Locale locale) {
-    try {
-      return values.firstWhere((s) => s.locale == locale);
-    } catch (e) {
-      return null;
-    }
-  }
+  static SupportedLocale? from(Locale locale) =>
+      values.where((s) => s.locale == locale).firstOrNull;
 }

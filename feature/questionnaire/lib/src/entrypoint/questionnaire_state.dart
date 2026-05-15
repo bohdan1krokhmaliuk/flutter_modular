@@ -5,8 +5,8 @@ import 'package:questionnaire/src/domain/model/question.dart';
 part 'questionnaire_state.freezed.dart';
 
 @freezed
-sealed class QuestionarrieState with _$QuestionarrieState {
-  const factory QuestionarrieState({
+sealed class QuestionnaireState with _$QuestionnaireState {
+  const factory QuestionnaireState({
     @Default([]) List<Question> questions,
     @Default([]) List<Answer> selected,
     Question? next,
@@ -14,14 +14,14 @@ sealed class QuestionarrieState with _$QuestionarrieState {
   }) = _State;
 }
 
-extension QuestionarrieStateX on QuestionarrieState {
-  QuestionarrieState reset() =>
+extension QuestionnaireStateX on QuestionnaireState {
+  QuestionnaireState reset() =>
       copyWith(selected: [], next: questions.firstOrNull, isCorrect: null);
 
-  QuestionarrieState saveAnswer(Answer answer) {
+  QuestionnaireState saveAnswer(Answer answer) {
     final currentAnswerIds = questions
         .map((q) => [...q.answers.map((a) => a.id)])
-        .firstWhere((ids) => ids.contains(answer.id));
+        .firstWhere((ids) => ids.contains(answer.id), orElse: () => []);
 
     final newSelected = selected.toList();
     newSelected
@@ -34,8 +34,8 @@ extension QuestionarrieStateX on QuestionarrieState {
     );
   }
 
-  QuestionarrieState setQuestions(List<Question> questions) {
-    return copyWith(questions: questions, next: questions.first);
+  QuestionnaireState setQuestions(List<Question> questions) {
+    return copyWith(questions: questions, next: questions.firstOrNull);
   }
 
   Answer? get preselected {

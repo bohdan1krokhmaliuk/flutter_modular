@@ -27,7 +27,7 @@ class CompletedBloc extends Bloc<CompletedEvent, CompletedState> {
     }
   }
 
-  final FeatureFlowController<QuestionarrieState> _flow;
+  final FeatureFlowController<QuestionnaireState> _flow;
 
   void _onRetry() => _flow.update((s) => s.reset());
   void _onClose() => _flow.complete(state.isCorrect);

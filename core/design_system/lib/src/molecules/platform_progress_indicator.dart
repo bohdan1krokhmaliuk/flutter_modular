@@ -1,9 +1,9 @@
 import 'package:design_system/src/atoms/size.dart';
-import 'package:design_system/src/molecules/paltform_widget.dart';
+import 'package:design_system/src/molecules/platform_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class PlatformProgressIndicator extends PaltformWidget {
+class PlatformProgressIndicator extends PlatformWidget {
   const PlatformProgressIndicator({super.key});
 
   @override

@@ -13,8 +13,8 @@ part 'question_bloc.freezed.dart';
 part 'question_event.dart';
 part 'question_state.dart';
 
-class QuesstionBlocParams {
-  const QuesstionBlocParams(this.question, this.preselectedAnswer);
+class QuestionBlocParams {
+  const QuestionBlocParams(this.question, this.preselectedAnswer);
 
   final Question question;
   final Answer? preselectedAnswer;
@@ -25,7 +25,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
   QuestionBloc(
     this._flow,
     this._repository,
-    @factoryParam QuesstionBlocParams params,
+    @factoryParam QuestionBlocParams params,
   ) : super(
         QuestionState(
           question: params.question,
@@ -41,7 +41,7 @@ class QuestionBloc extends Bloc<QuestionEvent, QuestionState> {
     );
   }
 
-  final FeatureFlowController<QuestionarrieState> _flow;
+  final FeatureFlowController<QuestionnaireState> _flow;
   final QuestionsRepository _repository;
 
   void _onSelect(Emitter<QuestionState> emit, Answer answer) =>

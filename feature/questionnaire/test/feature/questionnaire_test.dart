@@ -18,7 +18,7 @@ import 'package:bdd_steps/step/interactions/page_closes_with_result.dart';
 
 void main() {
   group('''Questionarrie feature''', () {
-    testWidgets('''User can see wellcome page''', (tester) async {
+    testWidgets('''User can see welcome page''', (tester) async {
       await theFlowIsRunning(tester);
       await iSeeText(tester, 'Ready to test your knowledge?');
       await iSeeText(tester,
