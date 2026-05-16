@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'ignore_files.dart';
 
-void main() {
+void main(List<String> args) {
+  final bool noFail = args.contains('--no-fail');
+
   final lcovFiles = Directory('.')
       .listSync(recursive: true)
       .whereType<File>()
@@ -28,9 +30,7 @@ void main() {
   for (var file in lcovFiles) {
     final lines = file.readAsLinesSync();
 
-    // Determine package name from directory structure
     final segments = file.uri.pathSegments;
-    // .../[pkgName]/coverage/lcov.info
     final pkgName = segments[segments.length - 3];
 
     int pkgLF = 0;
@@ -48,8 +48,7 @@ void main() {
       }
     }
 
-    if (pkgLF == 0)
-      continue; // Skip packages that ended up with 0 lines after filtering
+    if (pkgLF == 0) continue;
 
     totalLF += pkgLF;
     totalLH += pkgLH;
@@ -62,7 +61,6 @@ void main() {
     );
   }
 
-  // Add a Grand Total row
   final totalPercent = (totalLH / totalLF * 100);
   buffer.writeln(
     '| **TOTAL** | **${totalPercent.toStringAsFixed(1)}%** | **$totalLH/$totalLF** | ${totalPercent >= 80 ? '✅' : '❌'} |',
@@ -70,8 +68,14 @@ void main() {
 
   print(buffer.toString());
 
-  // Exit with error if any package (or the total) is below 80%
   if (buffer.toString().contains('❌')) {
-    exit(1);
+    if (noFail) {
+      print(
+        '⚠️ Didn\'t satisfy coverage bounds, but continuing execution because --no-fail was passed.',
+      );
+      exit(0);
+    } else {
+      exit(1);
+    }
   }
 }

@@ -88,22 +88,60 @@ melos:
         "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
       description: Generate and filter coverage data for changes
 
-    coverage:report:
-      run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart
-      description: Calculate and print report for packages including .lcov files
+    coverage:gen_report:
+      run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart "$@"
+      description: Calculate and print report for existing lcov files in project
 
-    coverage:html_report:
+    coverage:gen_html_report:
       run: |
         dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/merge.dart
         genhtml coverage/lcov.info -o coverage/html --hierarchical --legend --title "Flutter Monorepo Coverage"
         open coverage/html/index.html
-      description: Calculate and generate html report for packages including .lcov files
+      description: Calculate and generagte html report for existing lcov files in project
 
     coverage:clean:
       run: |
-        rm -rf coverage/
+        |
+        if [ "$1" = "--only-packages" ]; then
+          echo "Skipping root coverage folder cleanup..."
+        else
+          rm -rf coverage/
+        fi
+
         melos exec -- "rm -rf coverage/"
       description: Removes all coverage folders and lcov.info files.
+
+    coverage:report:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage > /dev/null 2>&1
+        - melos run coverage:gen_report -- --no-fail
+        - melos run coverage:clean > /dev/null 2>&1
+      description: Cleans old coverage, runs coverage tests and generates report
+
+    coverage:report:diff:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage:diff > /dev/null 2>&1
+        - melos run coverage:gen_report -- --no-fail
+        - melos run coverage:clean > /dev/null 2>&1
+      description: Cleans old coverage, runs coverage:diff tests and generates report
+
+    coverage:html_report:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage > /dev/null 2>&1
+        - melos run coverage:gen_html_report > /dev/null 2>&1
+        - melos run coverage:clean -- --only-packages
+      description: Cleans old coverage, runs coverage tests and generates html report
+
+    coverage:html_report:diff:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage:diff > /dev/null 2>&1
+        - melos run coverage:gen_html_report > /dev/null 2>&1
+        - melos run coverage:clean -- --only-packages
+      description: Cleans old coverage, runs coverage:diff tests and generates html report
 
     analyze:
       run: melos exec -c 1 -- flutter analyze . --no-congratulate --no-pub
