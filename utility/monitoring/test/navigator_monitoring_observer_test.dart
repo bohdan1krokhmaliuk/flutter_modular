@@ -1,4 +1,3 @@
-import 'package:checks/checks.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -101,7 +100,7 @@ void main() {
     });
 
     test('skips when both routes are null', () {
-      observer.didReplace(newRoute: null, oldRoute: null);
+      observer.didReplace();
 
       verifyNever(() => monitoring.debug(any(), name: any(named: 'name')));
     });

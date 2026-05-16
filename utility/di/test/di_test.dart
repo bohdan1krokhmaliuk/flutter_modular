@@ -32,9 +32,9 @@ void main() {
       var callCount = 0;
 
       final combined = DIInitializer.combined([
-        DIInitializer((_, __) => callCount++),
-        DIInitializer((_, __) => callCount++),
-        DIInitializer((_, __) => callCount++),
+        DIInitializer((_, _) => callCount++),
+        DIInitializer((_, _) => callCount++),
+        DIInitializer((_, _) => callCount++),
       ]);
       combined.init(getIt);
 
@@ -43,8 +43,8 @@ void main() {
 
     test('returns null when all initializers are synchronous', () {
       final combined = DIInitializer.combined([
-        DIInitializer((_, __) {}),
-        DIInitializer((_, __) {}),
+        DIInitializer((_, _) {}),
+        DIInitializer((_, _) {}),
       ]);
 
       final result = combined.init(GetIt.asNewInstance());
@@ -54,8 +54,8 @@ void main() {
 
     test('returns Future when any initializer is async', () {
       final combined = DIInitializer.combined([
-        DIInitializer((_, __) {}),
-        DIInitializer((_, __) async {}),
+        DIInitializer((_, _) {}),
+        DIInitializer((_, _) async {}),
       ]);
 
       final result = combined.init(GetIt.asNewInstance());
@@ -67,7 +67,7 @@ void main() {
       var asyncDone = false;
 
       final combined = DIInitializer.combined([
-        DIInitializer((_, __) async {
+        DIInitializer((_, _) async {
           await Future.delayed(Duration.zero);
           asyncDone = true;
         }),
@@ -79,7 +79,9 @@ void main() {
     });
 
     test('returns null for empty list', () {
-      final result = DIInitializer.combined([]).init(GetIt.asNewInstance());
+      final result = DIInitializer.combined(
+        const [],
+      ).init(GetIt.asNewInstance());
 
       check(result).isNull();
     });
@@ -94,30 +96,32 @@ void main() {
 
       await initializeDIContainer(
         DIInitializer((g, _) => g.registerSingleton<int>(1)),
-        shouldReset: true,
       );
 
       check(GetIt.instance.isRegistered<String>()).isFalse();
       check(GetIt.instance.isRegistered<int>()).isTrue();
     });
 
-    test('preserves existing registrations when shouldReset is false', () async {
-      GetIt.instance.registerSingleton<String>('before');
+    test(
+      'preserves existing registrations when shouldReset is false',
+      () async {
+        GetIt.instance.registerSingleton<String>('before');
 
-      await initializeDIContainer(
-        DIInitializer((g, _) => g.registerSingleton<int>(1)),
-        shouldReset: false,
-      );
+        await initializeDIContainer(
+          DIInitializer((g, _) => g.registerSingleton<int>(1)),
+          shouldReset: false,
+        );
 
-      check(GetIt.instance.isRegistered<String>()).isTrue();
-      check(GetIt.instance.isRegistered<int>()).isTrue();
-    });
+        check(GetIt.instance.isRegistered<String>()).isTrue();
+        check(GetIt.instance.isRegistered<int>()).isTrue();
+      },
+    );
 
     test('awaits async initializer before returning', () async {
       var asyncDone = false;
 
       await initializeDIContainer(
-        DIInitializer((_, __) async {
+        DIInitializer((_, _) async {
           await Future.delayed(Duration.zero);
           asyncDone = true;
         }),

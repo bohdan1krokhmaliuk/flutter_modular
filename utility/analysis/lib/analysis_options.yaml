@@ -3,7 +3,7 @@ analyzer:
     - "**/*.g.dart" # common generated files
     - "**/*.freezed.dart" # generated freezed models
     - "**/*.config.dart" # DI configuration files
-    - "**/feature**/*_test.dart" # BDD tests
+    - "**/test/feature**/*_test.dart" # generated BDD tests
     - "**/*.i69n.dart" # Localization 
     - "build/**"
 

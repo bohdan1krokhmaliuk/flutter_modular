@@ -80,7 +80,7 @@ void main() {
     tearDown(() => Bloc.observer = originalObserver);
 
     test('sets Bloc.observer to itself when isDebug is true', () {
-      observer.init(isDebug: true);
+      observer.init();
 
       check(Bloc.observer).identicalTo(observer);
     });
