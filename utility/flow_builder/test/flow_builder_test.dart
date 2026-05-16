@@ -1475,6 +1475,50 @@ void main() {
       expect(find.byKey(targetKey), findsNothing);
     });
 
+    testWidgets('onPop callback is invoked with current and previous state', (
+      tester,
+    ) async {
+      const buttonKey = Key('__button__');
+      final onPopArgs = <(int, int)>[];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlowBuilder<int>(
+            state: 0,
+            onPop: (current, previous) => onPopArgs.add((current, previous)),
+            onGeneratePages: (state, pages) {
+              return <Page<dynamic>>[
+                MaterialPage<void>(
+                  child: Builder(
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(),
+                      body: TextButton(
+                        key: buttonKey,
+                        child: const Text('Button'),
+                        onPressed: () =>
+                            context.flow<int>().update((s) => s + 1),
+                      ),
+                    ),
+                  ),
+                ),
+                if (state == 1)
+                  MaterialPage<void>(
+                    child: Scaffold(appBar: AppBar()),
+                  ),
+              ];
+            },
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(buttonKey));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byType(BackButton));
+      await tester.pumpAndSettle();
+
+      expect(onPopArgs, equals([(1, 0)]));
+    });
+
     testWidgets('updates do not trigger rebuilds of existing pages by value', (
       tester,
     ) async {
@@ -1525,6 +1569,29 @@ void main() {
       expect(numBuildsB, 1);
       expect(find.byKey(buttonKey), findsNothing);
       expect(find.byKey(boxKey), findsOneWidget);
+    });
+  });
+
+  group('TestSystemNavigationObserver', () {
+    testWidgets('handleSystemNavigation returns normally for unknown methods', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: FlowBuilder<int>(
+            state: 0,
+            onGeneratePages: (_, pages) => const [
+              MaterialPage<void>(child: Scaffold()),
+            ],
+          ),
+        ),
+      );
+
+      final result = await TestSystemNavigationObserver.handleSystemNavigation(
+        const MethodCall('unknownMethod'),
+      );
+
+      expect(result, isNull);
     });
   });
 }

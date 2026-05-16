@@ -35,8 +35,8 @@ class NavigatorMonitoringObserver extends NavigatorObserver {
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) =>
       _recordNavigation(
-        to: route,
-        from: previousRoute,
+        from: route,
+        to: previousRoute,
         log: (from, to) => 'Remove $from, revealed $to',
       );
 

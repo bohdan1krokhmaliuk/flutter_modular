@@ -14,5 +14,6 @@ dependencies:
 
 dev_dependencies:
   analysis:
+  checks:
   flutter_test:
     sdk: flutter

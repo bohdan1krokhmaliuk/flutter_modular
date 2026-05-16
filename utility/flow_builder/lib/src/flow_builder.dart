@@ -104,7 +104,6 @@ class _FlowBuilderState<T> extends State<FlowBuilder<T>> {
 
   final _history = ListQueue<T>();
   var _pages = <Page<dynamic>>[];
-  var _didPop = false;
   var _isInternalStackUpdate = false;
   late final GlobalObjectKey<NavigatorState> _navigatorKey;
   NavigatorState? get _navigator => _navigatorKey.currentState;
@@ -194,11 +193,6 @@ class _FlowBuilderState<T> extends State<FlowBuilder<T>> {
       }
     }
 
-    if (_didPop) {
-      _didPop = false;
-      return;
-    }
-
     _isInternalStackUpdate = true;
     setState(() {
       _pages = widget.onGeneratePages(_state, List.of(_pages));
@@ -234,7 +228,7 @@ class _FlowBuilderState<T> extends State<FlowBuilder<T>> {
               widget.onPop?.call(currentState, previousState);
             }
 
-            // Only keep _pages in sync do NOT emit onPop or modify _history her
+            // Only keep _pages in sync — do not emit onPop or modify _history here
             WidgetsBinding.instance.addPostFrameCallback((_) {
               if (!mounted) {
                 return;
@@ -364,12 +358,6 @@ class FlowController<T> extends ChangeNotifier {
 class FakeFlowController<T> extends FlowController<T> {
   /// {@macro fake_flow_controller}
   FakeFlowController(super.state);
-
-  @override
-  T get state => _state;
-
-  @override
-  bool get completed => _completed;
 
   @override
   void update(FlowCallback<T> callback) {
