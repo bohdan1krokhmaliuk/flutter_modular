@@ -101,7 +101,6 @@ melos:
 
     coverage:clean:
       run: |
-        |
         if [ "$1" = "--only-packages" ]; then
           echo "Skipping root coverage folder cleanup..."
         else
