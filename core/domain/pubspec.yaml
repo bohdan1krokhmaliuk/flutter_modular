@@ -12,3 +12,5 @@ dependencies:
 
 dev_dependencies:
   analysis:
+  checks:
+  test:
