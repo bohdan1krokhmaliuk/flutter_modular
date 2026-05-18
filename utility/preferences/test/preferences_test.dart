@@ -90,7 +90,9 @@ void main() {
 
   group('setString', () {
     test('delegates to SharedPreferences and returns result', () async {
-      when(() => shared.setString('key', 'hello')).thenAnswer((_) async => true);
+      when(
+        () => shared.setString('key', 'hello'),
+      ).thenAnswer((_) async => true);
 
       final result = await prefs.setString('key', 'hello');
 

@@ -226,7 +226,9 @@ void main() {
     });
 
     test('wraps thrown exception in Failure', () async {
-      final r = await Result.fromAsync<int>(() async => throw Exception('boom'));
+      final r = await Result.fromAsync<int>(
+        () async => throw Exception('boom'),
+      );
 
       check(r).isA<Failure<int, FailureException>>();
     });
@@ -297,17 +299,20 @@ void main() {
   });
 
   group('Result.fromPeriodic', () {
-    test('stops after first yield when stopWhen returns true immediately', () async {
-      final results = await Result.fromPeriodic<int>(
-        () async => 1,
-        interval: (_) => Duration.zero,
-        stopWhen: (_, _) => true,
-      ).toList();
+    test(
+      'stops after first yield when stopWhen returns true immediately',
+      () async {
+        final results = await Result.fromPeriodic<int>(
+          () async => 1,
+          interval: (_) => Duration.zero,
+          stopWhen: (_, _) => true,
+        ).toList();
 
-      check(results).length.equals(1);
-      check(results.first).isA<Success<int, FailureException>>();
-      check((results.first as Success).value).equals(1);
-    });
+        check(results).length.equals(1);
+        check(results.first).isA<Success<int, FailureException>>();
+        check((results.first as Success).value).equals(1);
+      },
+    );
 
     test('yields multiple results before stopping', () async {
       var count = 0;
@@ -319,8 +324,9 @@ void main() {
       ).toList();
 
       check(results).length.equals(3);
-      check(results.map((r) => (r as Success).value).toList())
-          .deepEquals([1, 2, 3]);
+      check(
+        results.map((r) => (r as Success).value).toList(),
+      ).deepEquals([1, 2, 3]);
     });
 
     test('includes Failure results in the stream', () async {
@@ -360,7 +366,8 @@ void main() {
       var count = 0;
 
       final results = await Result.doPeriodic<int>(
-        (get) async => await get(Future.value(success<int, FailureException>(++count))),
+        (get) async =>
+            await get(Future.value(success<int, FailureException>(++count))),
         interval: (_) => Duration.zero,
         stopWhen: (_, i) => i == 1,
       ).toList();
@@ -376,7 +383,9 @@ void main() {
       final results = await Result.doPeriodic<int>(
         (get) async {
           await get(
-            Future.value(failure<int, FailureException>(FailureException.empty())),
+            Future.value(
+              failure<int, FailureException>(FailureException.empty()),
+            ),
           );
           afterGetCalled = true;
           return 0;

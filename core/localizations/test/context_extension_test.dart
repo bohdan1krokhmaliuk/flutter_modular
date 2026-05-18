@@ -57,9 +57,9 @@ void main() {
         localizationsDelegates: [CommonTranslationsLocalizationsDelegate()],
       );
 
-      check(context.getTranslations<CommonTranslations>()).isA<
-        CommonTranslations_en_GB
-      >();
+      check(
+        context.getTranslations<CommonTranslations>(),
+      ).isA<CommonTranslations_en_GB>();
     });
   });
 

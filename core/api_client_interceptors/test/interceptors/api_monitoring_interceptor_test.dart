@@ -18,9 +18,7 @@ class _MockErrorInterceptorHandler extends Mock
 void main() {
   setUpAll(() {
     registerFallbackValue(RequestOptions());
-    registerFallbackValue(
-      Response<dynamic>(requestOptions: RequestOptions()),
-    );
+    registerFallbackValue(Response<dynamic>(requestOptions: RequestOptions()));
     registerFallbackValue(DioException(requestOptions: RequestOptions()));
   });
 
@@ -86,7 +84,9 @@ void main() {
     test('onError records non-fatal with name api', () {
       final errorHandler = _MockErrorInterceptorHandler();
       when(() => errorHandler.next(any())).thenAnswer((_) {});
-      final error = DioException(requestOptions: RequestOptions(path: '/users'));
+      final error = DioException(
+        requestOptions: RequestOptions(path: '/users'),
+      );
 
       interceptor.onError(error, errorHandler);
 

@@ -28,17 +28,13 @@ void main() {
     test('logs truncated event string up to opening parenthesis', () {
       observer.onEvent(bloc, 'MyEvent(data: 123)');
 
-      verify(
-        () => monitoring.debug('event: MyEvent', name: 'bloc'),
-      ).called(1);
+      verify(() => monitoring.debug('event: MyEvent', name: 'bloc')).called(1);
     });
 
     test('logs full event string when no parenthesis present', () {
       observer.onEvent(bloc, 'MyEvent');
 
-      verify(
-        () => monitoring.debug('event: MyEvent', name: 'bloc'),
-      ).called(1);
+      verify(() => monitoring.debug('event: MyEvent', name: 'bloc')).called(1);
     });
 
     test('skips logging when event is null', () {
@@ -50,16 +46,11 @@ void main() {
 
   group('onChange', () {
     test('logs truncated next state string up to opening parenthesis', () {
-      const change = Change(
-        currentState: null,
-        nextState: 'MyState(value: 1)',
-      );
+      const change = Change(currentState: null, nextState: 'MyState(value: 1)');
 
       observer.onChange(bloc, change);
 
-      verify(
-        () => monitoring.debug('state: MyState', name: 'bloc'),
-      ).called(1);
+      verify(() => monitoring.debug('state: MyState', name: 'bloc')).called(1);
     });
 
     test('logs full next state string when no parenthesis present', () {
@@ -67,9 +58,7 @@ void main() {
 
       observer.onChange(bloc, change);
 
-      verify(
-        () => monitoring.debug('state: MyState', name: 'bloc'),
-      ).called(1);
+      verify(() => monitoring.debug('state: MyState', name: 'bloc')).called(1);
     });
   });
 

@@ -91,8 +91,9 @@ void main() {
 
       await repo.setActiveScenario(_flatScenario);
 
-      verify(() => prefs.setString(_activeScenarioKey, 'flat_scenario'))
-          .called(1);
+      verify(
+        () => prefs.setString(_activeScenarioKey, 'flat_scenario'),
+      ).called(1);
     });
   });
 

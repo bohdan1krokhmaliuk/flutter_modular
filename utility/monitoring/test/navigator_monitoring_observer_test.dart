@@ -32,7 +32,8 @@ void main() {
       observer.didPush(to, from);
 
       verify(
-        () => monitoring.debug('Push from /home to /detail', name: 'navigation'),
+        () =>
+            monitoring.debug('Push from /home to /detail', name: 'navigation'),
       ).called(1);
     });
 

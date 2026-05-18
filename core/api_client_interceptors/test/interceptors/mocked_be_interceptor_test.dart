@@ -21,9 +21,7 @@ final _matchNone = RequestHandler((_) => false, sendSuccess('{"ok": true}'));
 void main() {
   setUpAll(() {
     registerFallbackValue(RequestOptions());
-    registerFallbackValue(
-      Response<dynamic>(requestOptions: RequestOptions()),
-    );
+    registerFallbackValue(Response<dynamic>(requestOptions: RequestOptions()));
     registerFallbackValue(DioException(requestOptions: RequestOptions()));
   });
 
@@ -57,19 +55,22 @@ void main() {
       verifyNever(() => handler.reject(any()));
     });
 
-    test('resolves when active scenario has matching success handler', () async {
-      final scenario = Scenario('test', [_matchAll]);
-      when(
-        () => repository.getActiveScenario(fallback: any(named: 'fallback')),
-      ).thenReturn(scenario);
-      when(() => handler.isCompleted).thenReturn(true);
-      when(() => handler.resolve(any(), any())).thenAnswer((_) {});
+    test(
+      'resolves when active scenario has matching success handler',
+      () async {
+        final scenario = Scenario('test', [_matchAll]);
+        when(
+          () => repository.getActiveScenario(fallback: any(named: 'fallback')),
+        ).thenReturn(scenario);
+        when(() => handler.isCompleted).thenReturn(true);
+        when(() => handler.resolve(any(), any())).thenAnswer((_) {});
 
-      await interceptor.onRequest(RequestOptions(), handler);
+        await interceptor.onRequest(RequestOptions(), handler);
 
-      verify(() => handler.resolve(any(), any())).called(1);
-      verifyNever(() => handler.next(any()));
-    });
+        verify(() => handler.resolve(any(), any())).called(1);
+        verifyNever(() => handler.next(any()));
+      },
+    );
 
     test('rejects when active scenario has matching error handler', () async {
       final scenario = Scenario('test', [

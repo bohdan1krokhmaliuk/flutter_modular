@@ -8,15 +8,14 @@ Request _makeRequest({
   String path = '/api',
   Map<String, dynamic>? queryParams,
   Map<String, dynamic>? headers,
-}) =>
-    Request.fromOptions(
-      RequestOptions(
-        method: method,
-        path: path,
-        queryParameters: queryParams ?? {},
-        headers: headers ?? {},
-      ),
-    );
+}) => Request.fromOptions(
+  RequestOptions(
+    method: method,
+    path: path,
+    queryParameters: queryParams ?? {},
+    headers: headers ?? {},
+  ),
+);
 
 void main() {
   group('hasMethod', () {

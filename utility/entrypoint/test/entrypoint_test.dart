@@ -61,30 +61,29 @@ void main() {
       expect(find.byKey(childKey), findsOneWidget);
     });
 
-    testWidgets(
-      'shows SizedBox.shrink when no placeholder during async init',
-      (tester) async {
-        await _setUpDI(tester);
-        final completer = Completer<void>();
-        const childKey = Key('__child__');
+    testWidgets('shows SizedBox.shrink when no placeholder during async init', (
+      tester,
+    ) async {
+      await _setUpDI(tester);
+      final completer = Completer<void>();
+      const childKey = Key('__child__');
 
-        await tester.pumpWidget(
-          MaterialApp(
-            home: Entrypoint<void>.widget(
-              initializer: DIInitializer((_, _) => completer.future),
-              child: const SizedBox(key: childKey),
-            ),
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Entrypoint<void>.widget(
+            initializer: DIInitializer((_, _) => completer.future),
+            child: const SizedBox(key: childKey),
           ),
-        );
+        ),
+      );
 
-        expect(find.byKey(childKey), findsNothing);
+      expect(find.byKey(childKey), findsNothing);
 
-        completer.complete();
-        await tester.pumpAndSettle();
+      completer.complete();
+      await tester.pumpAndSettle();
 
-        expect(find.byKey(childKey), findsOneWidget);
-      },
-    );
+      expect(find.byKey(childKey), findsOneWidget);
+    });
 
     testWidgets('does not wrap child in ColoredBox', (tester) async {
       await _setUpDI(tester);
@@ -186,7 +185,7 @@ void main() {
           );
         }),
       );
-      return (navKey: navKey,);
+      return (navKey: navKey);
     }
 
     testWidgets('renders initial flow page', (tester) async {

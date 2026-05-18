@@ -7,9 +7,9 @@ void main() {
   group('SupportedLocale', () {
     group('locales', () {
       test('returns a locale for every enum value', () {
-        check(SupportedLocale.locales.toList()).length.equals(
-          SupportedLocale.values.length,
-        );
+        check(
+          SupportedLocale.locales.toList(),
+        ).length.equals(SupportedLocale.values.length);
       });
 
       test('contains en-GB and en-US', () {
@@ -32,12 +32,12 @@ void main() {
 
     group('from', () {
       test('returns the matching enum value', () {
-        check(SupportedLocale.from(const Locale('en', 'GB'))).equals(
-          SupportedLocale.enGB,
-        );
-        check(SupportedLocale.from(const Locale('en', 'US'))).equals(
-          SupportedLocale.enUS,
-        );
+        check(
+          SupportedLocale.from(const Locale('en', 'GB')),
+        ).equals(SupportedLocale.enGB);
+        check(
+          SupportedLocale.from(const Locale('en', 'US')),
+        ).equals(SupportedLocale.enUS);
       });
 
       test('returns null for an unsupported locale', () {

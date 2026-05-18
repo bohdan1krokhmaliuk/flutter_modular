@@ -1501,9 +1501,7 @@ void main() {
                   ),
                 ),
                 if (state == 1)
-                  MaterialPage<void>(
-                    child: Scaffold(appBar: AppBar()),
-                  ),
+                  MaterialPage<void>(child: Scaffold(appBar: AppBar())),
               ];
             },
           ),
