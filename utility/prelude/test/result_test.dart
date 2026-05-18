@@ -1,5 +1,6 @@
 import 'package:checks/checks.dart';
-import 'package:prelude/prelude.dart';
+import 'package:prelude/src/exception.dart';
+import 'package:prelude/src/result.dart';
 import 'package:test/test.dart';
 
 void main() {

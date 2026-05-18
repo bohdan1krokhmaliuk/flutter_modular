@@ -1,7 +1,7 @@
 import 'package:checks/checks.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocked_be/core.dart';
-import 'package:mocked_be/mocked_be.dart';
+import 'package:mocked_be/src/core/scenario.dart';
+import 'package:mocked_be/src/repository/scenario_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:preferences/preferences.dart';
 

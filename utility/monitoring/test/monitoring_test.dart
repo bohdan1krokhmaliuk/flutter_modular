@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:monitoring/monitoring.dart';
+import 'package:monitoring/src/monitoring.dart';
 
 void main() {
   // Stub implementation — delegates directly to dart:developer with no
