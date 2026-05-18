@@ -154,14 +154,14 @@ melos:
 
     generate:
       run: >
-        melos exec -c 6 --depends-on="build_runner" -- "dart run build_runner
+        melos exec -c 1 --depends-on="build_runner" -- "dart run build_runner
         build --delete-conflicting-outputs --build-filter=\"lib/**\"
         --build-filter=\"test/**\""
       description: Generate code for all packages
 
     generate:clean:
       run: >
-        melos exec -c 6 --depends-on="build_runner" -- "flutter clean && flutter
+        melos exec -c 1 --depends-on="build_runner" -- "flutter clean && flutter
         pub get && dart run build_runner clean && dart run build_runner build
         --delete-conflicting-outputs --build-filter=\"lib/**\"
         --build-filter=\"test/**\""
@@ -169,7 +169,7 @@ melos:
 
     generate:diff:
       run: >
-        melos exec -c 6 --fail-fast --diff=origin/main...HEAD
+        melos exec -c 1 --fail-fast --diff=origin/main...HEAD
         --depends-on="build_runner" -- "dart run build_runner build
         --delete-conflicting-outputs --build-filter=\"lib/**\"
         --build-filter=\"test/**\""
@@ -177,7 +177,7 @@ melos:
 
     generate:local_diff:
       run: >
-        melos exec -c 6 --fail-fast --depends-on="build_runner" --
+        melos exec -c 1 --fail-fast --depends-on="build_runner" --
         $MELOS_ROOT_PATH/.tools/scripts/generate_if_local_changes.sh
       description: Generate code for packages with local uncommitted changes
 
