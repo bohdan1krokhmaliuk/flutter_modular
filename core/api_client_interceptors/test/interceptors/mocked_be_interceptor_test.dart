@@ -138,5 +138,69 @@ void main() {
       ).captured;
       check(captured.single as String).contains('my_scenario');
     });
+
+    test('resolves with raw string for plain response type', () async {
+      final scenario = Scenario('test', [_matchAll]);
+      when(
+        () => repository.getActiveScenario(fallback: any(named: 'fallback')),
+      ).thenReturn(scenario);
+      when(() => handler.isCompleted).thenReturn(true);
+      when(() => handler.resolve(any(), any())).thenAnswer((_) {});
+
+      await interceptor.onRequest(
+        RequestOptions(responseType: ResponseType.plain),
+        handler,
+      );
+
+      final captured = verify(
+        () => handler.resolve(captureAny(), any()),
+      ).captured;
+      check((captured.single as Response<dynamic>).data).isA<String>();
+    });
+
+    test('rejects with unknown DioException when handler throws non-Dio exception',
+        () async {
+      final scenario = Scenario('test', [
+        RequestHandler((_) => true, sendException(Exception('boom'))),
+      ]);
+      when(
+        () => repository.getActiveScenario(fallback: any(named: 'fallback')),
+      ).thenReturn(scenario);
+      when(() => handler.isCompleted).thenReturn(true);
+      when(() => handler.reject(any())).thenAnswer((_) {});
+
+      await interceptor.onRequest(RequestOptions(), handler);
+
+      final captured = verify(
+        () => handler.reject(captureAny()),
+      ).captured;
+      final error = captured.single as DioException;
+      check(error.type).equals(DioExceptionType.unknown);
+      check(error.response).isNull();
+    });
+
+    test('rejects with the original DioException when handler throws one',
+        () async {
+      final original = DioException(
+        requestOptions: RequestOptions(),
+        type: DioExceptionType.sendTimeout,
+      );
+      final scenario = Scenario('test', [
+        RequestHandler((_) => true, sendException(original)),
+      ]);
+      when(
+        () => repository.getActiveScenario(fallback: any(named: 'fallback')),
+      ).thenReturn(scenario);
+      when(() => handler.isCompleted).thenReturn(true);
+      when(() => handler.reject(any())).thenAnswer((_) {});
+
+      await interceptor.onRequest(RequestOptions(), handler);
+
+      final captured = verify(
+        () => handler.reject(captureAny()),
+      ).captured;
+      final error = captured.single as DioException;
+      check(error.type).equals(DioExceptionType.sendTimeout);
+    });
   });
 }
