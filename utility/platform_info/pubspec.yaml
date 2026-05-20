@@ -8,11 +8,5 @@ environment:
 
 resolution: workspace
 
-dependencies:
-  flutter:
-    sdk: flutter
-
 dev_dependencies:
   analysis:
-  flutter_test:
-    sdk: flutter
