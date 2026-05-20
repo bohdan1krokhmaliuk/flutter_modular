@@ -12,20 +12,20 @@ part of 'questionnaire_state.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$QuestionarrieState {
+mixin _$QuestionnaireState {
 
  List<Question> get questions; List<Answer> get selected; Question? get next; bool? get isCorrect;
-/// Create a copy of QuestionarrieState
+/// Create a copy of QuestionnaireState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$QuestionarrieStateCopyWith<QuestionarrieState> get copyWith => _$QuestionarrieStateCopyWithImpl<QuestionarrieState>(this as QuestionarrieState, _$identity);
+$QuestionnaireStateCopyWith<QuestionnaireState> get copyWith => _$QuestionnaireStateCopyWithImpl<QuestionnaireState>(this as QuestionnaireState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestionarrieState&&const DeepCollectionEquality().equals(other.questions, questions)&&const DeepCollectionEquality().equals(other.selected, selected)&&(identical(other.next, next) || other.next == next)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is QuestionnaireState&&const DeepCollectionEquality().equals(other.questions, questions)&&const DeepCollectionEquality().equals(other.selected, selected)&&(identical(other.next, next) || other.next == next)&&(identical(other.isCorrect, isCorrect) || other.isCorrect == isCorrect));
 }
 
 
@@ -34,15 +34,15 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'QuestionarrieState(questions: $questions, selected: $selected, next: $next, isCorrect: $isCorrect)';
+  return 'QuestionnaireState(questions: $questions, selected: $selected, next: $next, isCorrect: $isCorrect)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $QuestionarrieStateCopyWith<$Res>  {
-  factory $QuestionarrieStateCopyWith(QuestionarrieState value, $Res Function(QuestionarrieState) _then) = _$QuestionarrieStateCopyWithImpl;
+abstract mixin class $QuestionnaireStateCopyWith<$Res>  {
+  factory $QuestionnaireStateCopyWith(QuestionnaireState value, $Res Function(QuestionnaireState) _then) = _$QuestionnaireStateCopyWithImpl;
 @useResult
 $Res call({
  List<Question> questions, List<Answer> selected, Question? next, bool? isCorrect
@@ -53,14 +53,14 @@ $QuestionCopyWith<$Res>? get next;
 
 }
 /// @nodoc
-class _$QuestionarrieStateCopyWithImpl<$Res>
-    implements $QuestionarrieStateCopyWith<$Res> {
-  _$QuestionarrieStateCopyWithImpl(this._self, this._then);
+class _$QuestionnaireStateCopyWithImpl<$Res>
+    implements $QuestionnaireStateCopyWith<$Res> {
+  _$QuestionnaireStateCopyWithImpl(this._self, this._then);
 
-  final QuestionarrieState _self;
-  final $Res Function(QuestionarrieState) _then;
+  final QuestionnaireState _self;
+  final $Res Function(QuestionnaireState) _then;
 
-/// Create a copy of QuestionarrieState
+/// Create a copy of QuestionnaireState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? questions = null,Object? selected = null,Object? next = freezed,Object? isCorrect = freezed,}) {
   return _then(_self.copyWith(
@@ -71,7 +71,7 @@ as Question?,isCorrect: freezed == isCorrect ? _self.isCorrect : isCorrect // ig
 as bool?,
   ));
 }
-/// Create a copy of QuestionarrieState
+/// Create a copy of QuestionnaireState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -87,8 +87,8 @@ $QuestionCopyWith<$Res>? get next {
 }
 
 
-/// Adds pattern-matching-related methods to [QuestionarrieState].
-extension QuestionarrieStatePatterns on QuestionarrieState {
+/// Adds pattern-matching-related methods to [QuestionnaireState].
+extension QuestionnaireStatePatterns on QuestionnaireState {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -214,7 +214,7 @@ return $default(_that.questions,_that.selected,_that.next,_that.isCorrect);case 
 /// @nodoc
 
 
-class _State implements QuestionarrieState {
+class _State implements QuestionnaireState {
   const _State({final  List<Question> questions = const [], final  List<Answer> selected = const [], this.next, this.isCorrect}): _questions = questions,_selected = selected;
   
 
@@ -235,7 +235,7 @@ class _State implements QuestionarrieState {
 @override final  Question? next;
 @override final  bool? isCorrect;
 
-/// Create a copy of QuestionarrieState
+/// Create a copy of QuestionnaireState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -254,14 +254,14 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'QuestionarrieState(questions: $questions, selected: $selected, next: $next, isCorrect: $isCorrect)';
+  return 'QuestionnaireState(questions: $questions, selected: $selected, next: $next, isCorrect: $isCorrect)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$StateCopyWith<$Res> implements $QuestionarrieStateCopyWith<$Res> {
+abstract mixin class _$StateCopyWith<$Res> implements $QuestionnaireStateCopyWith<$Res> {
   factory _$StateCopyWith(_State value, $Res Function(_State) _then) = __$StateCopyWithImpl;
 @override @useResult
 $Res call({
@@ -280,7 +280,7 @@ class __$StateCopyWithImpl<$Res>
   final _State _self;
   final $Res Function(_State) _then;
 
-/// Create a copy of QuestionarrieState
+/// Create a copy of QuestionnaireState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? questions = null,Object? selected = null,Object? next = freezed,Object? isCorrect = freezed,}) {
   return _then(_State(
@@ -292,7 +292,7 @@ as bool?,
   ));
 }
 
-/// Create a copy of QuestionarrieState
+/// Create a copy of QuestionnaireState
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')

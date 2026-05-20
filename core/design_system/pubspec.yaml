@@ -1,6 +1,6 @@
 name: design_system
 description: "Package which contains designs system elements: constants, base
-  widgets implementations, fucntional ui templates"
+  widgets implementations, functional ui templates"
 version: 0.0.1
 publish_to: none
 

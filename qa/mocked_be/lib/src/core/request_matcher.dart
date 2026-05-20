@@ -18,4 +18,4 @@ RequestMatcher multiMatcherAnd(List<RequestMatcher> matchers) =>
     (r) => matchers.fold(true, (value, matcher) => value && matcher(r));
 
 RequestMatcher multiMatcherOr(List<RequestMatcher> matchers) =>
-    (r) => matchers.fold(true, (value, matcher) => value || matcher(r));
+    (r) => matchers.fold(false, (value, matcher) => value || matcher(r));

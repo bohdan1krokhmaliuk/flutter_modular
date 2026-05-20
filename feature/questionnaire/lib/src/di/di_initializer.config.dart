@@ -21,8 +21,8 @@ import 'package:questionnaire/src/presentation/completed/bloc/completed_bloc.dar
     as _i902;
 import 'package:questionnaire/src/presentation/questions/bloc/question_bloc.dart'
     as _i398;
-import 'package:questionnaire/src/presentation/wellcome/bloc/wellcome_bloc.dart'
-    as _i612;
+import 'package:questionnaire/src/presentation/welcome/bloc/welcome_bloc.dart'
+    as _i460;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -33,7 +33,7 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.factoryParam<_i902.CompletedBloc, bool, dynamic>(
       (isCorrect, _) => _i902.CompletedBloc(
-        gh<_i185.FeatureFlowController<_i702.QuestionarrieState>>(),
+        gh<_i185.FeatureFlowController<_i702.QuestionnaireState>>(),
         isCorrect,
       ),
     );
@@ -43,15 +43,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i998.QuestionsRepository>(
       () => _i998.QuestionsRepository(gh<_i663.QuestionnaireApi>()),
     );
-    gh.factory<_i612.WellcomeBloc>(
-      () => _i612.WellcomeBloc(
-        gh<_i185.FeatureFlowController<_i702.QuestionarrieState>>(),
+    gh.factory<_i460.WelcomeBloc>(
+      () => _i460.WelcomeBloc(
+        gh<_i185.FeatureFlowController<_i702.QuestionnaireState>>(),
         gh<_i998.QuestionsRepository>(),
       ),
     );
-    gh.factoryParam<_i398.QuestionBloc, _i398.QuesstionBlocParams, dynamic>(
+    gh.factoryParam<_i398.QuestionBloc, _i398.QuestionBlocParams, dynamic>(
       (params, _) => _i398.QuestionBloc(
-        gh<_i185.FeatureFlowController<_i702.QuestionarrieState>>(),
+        gh<_i185.FeatureFlowController<_i702.QuestionnaireState>>(),
         gh<_i998.QuestionsRepository>(),
         params,
       ),

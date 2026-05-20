@@ -33,6 +33,8 @@ dev_dependencies:
   json_serializable: 6.13.1
   retrofit_generator: 10.2.5
   auto_route_generator: 10.5.0
+  checks: 0.3.1
+  test: 1.30.0
 
 workspace:
   - app/miniclient
@@ -64,52 +66,89 @@ melos:
 
   scripts:
     test:
-      run: melos exec -c 1 --dir-exists="test" --fail-fast -- flutter test --no-pub
+      run: melos exec -c 6 --dir-exists="test" --fail-fast -- flutter test --no-pub
       description: Runs tests in all packages which have tests
 
     test:diff:
       run: |
-        melos exec -c 1 --fail-fast --diff=origin/main...HEAD --include-dependents -- \$MELOS_ROOT_PATH/.tools/scripts/run_tests.sh
+        melos exec -c 6 --fail-fast --diff=origin/main...HEAD --include-dependents -- \$MELOS_ROOT_PATH/.tools/scripts/run_tests.sh
       description:
         Runs tests in all changed packages which have tests, enforcing
         tests for features
 
     coverage:
       run: |
-        melos exec -c 1 --dir-exists="test" -- \
+        melos exec -c 6 --dir-exists="test" -- \
         "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
       description: Generate and filter coverage data
 
     coverage:diff:
       run: |
-        melos exec -c 1 --dir-exists="test" --diff=origin/main...HEAD -- \
+        melos exec -c 6 --dir-exists="test" --diff=origin/main...HEAD -- \
         "flutter test --coverage --no-pub && dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/filter_generated.dart"
       description: Generate and filter coverage data for changes
 
-    coverage:report:
-      run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart
-      description: Calculate and print report for packages including .lcov files
+    coverage:gen_report:
+      run: dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/calculate.dart "$@"
+      description: Calculate and print report for existing lcov files in project
 
-    coverage:html_report:
+    coverage:gen_html_report:
       run: |
         dart \$MELOS_ROOT_PATH/.tools/scripts/coverage/merge.dart
         genhtml coverage/lcov.info -o coverage/html --hierarchical --legend --title "Flutter Monorepo Coverage"
         open coverage/html/index.html
-      description: Calculate and generate html report for packages including .lcov files
+      description: Calculate and generagte html report for existing lcov files in project
 
     coverage:clean:
       run: |
-        rm -rf coverage/
+        if [ "$1" = "--only-packages" ]; then
+          echo "Skipping root coverage folder cleanup..."
+        else
+          rm -rf coverage/
+        fi
+
         melos exec -- "rm -rf coverage/"
       description: Removes all coverage folders and lcov.info files.
 
+    coverage:report:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage > /dev/null 2>&1
+        - melos run coverage:gen_report -- --no-fail
+        - melos run coverage:clean > /dev/null 2>&1
+      description: Cleans old coverage, runs coverage tests and generates report
+
+    coverage:report:diff:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage:diff > /dev/null 2>&1
+        - melos run coverage:gen_report -- --no-fail
+        - melos run coverage:clean > /dev/null 2>&1
+      description: Cleans old coverage, runs coverage:diff tests and generates report
+
+    coverage:html_report:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage > /dev/null 2>&1
+        - melos run coverage:gen_html_report > /dev/null 2>&1
+        - melos run coverage:clean -- --only-packages
+      description: Cleans old coverage, runs coverage tests and generates html report
+
+    coverage:html_report:diff:
+      steps:
+        - melos run coverage:clean > /dev/null 2>&1
+        - melos run coverage:diff > /dev/null 2>&1
+        - melos run coverage:gen_html_report > /dev/null 2>&1
+        - melos run coverage:clean -- --only-packages
+      description: Cleans old coverage, runs coverage:diff tests and generates html report
+
     analyze:
-      run: melos exec -c 1 -- flutter analyze . --no-congratulate --no-pub
+      run: melos exec -c 6 -- flutter analyze . --no-congratulate --no-pub
       description: Run analyzer in all packages
 
     analyze:diff:
       run: >
-        melos exec -c 1 --fail-fast --diff=origin/main...HEAD
+        melos exec -c 6 --fail-fast --diff=origin/main...HEAD
         --include-dependents -- flutter analyze . --no-congratulate --no-pub
       description: Run analyzer in changed packages
 
@@ -136,6 +175,12 @@ melos:
         --build-filter=\"test/**\""
       description: Clean and generate code for all packages diff with main
 
+    generate:local_diff:
+      run: >
+        melos exec -c 1 --fail-fast --depends-on="build_runner" --
+        $MELOS_ROOT_PATH/.tools/scripts/generate_if_local_changes.sh
+      description: Generate code for packages with local uncommitted changes
+
     validate_barrel_file_imports:
       run: melos exec -- dart
         \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
@@ -144,18 +189,18 @@ melos:
         package instead of its file import)
 
     validate_barrel_file_imports:diff:
-      run: melos exec -c 1 --diff=origin/main...HEAD -- dart
+      run: melos exec -c 6 --diff=origin/main...HEAD -- dart
         \$MELOS_ROOT_PATH/.tools/scripts/validate_barrel_file_imports.dart
       description: Runs barrel file imports check for all changed packages
 
     unused_dependencies:
       run: |
-        melos exec -c 1 -- "dart pub global run dependency_validator"
+        melos exec -c 6 -- "dart pub global run dependency_validator"
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
     unused_dependencies:diff:
       run: |
-        melos exec -c 1 --diff=origin/main...HEAD -- "dart pub global run dependency_validator"
+        melos exec -c 6 --diff=origin/main...HEAD -- "dart pub global run dependency_validator"
       description: Runs `dependency_validator` in all packages (finds unused dependencies)
 
     circular_dependencies:
@@ -168,63 +213,62 @@ melos:
 
     unused_files:
       run: >
-        melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-files lib
+        melos exec -c 6 --ignore="bdd_steps" -- "metrics check-unused-files lib
         --no-congratulate --disable-sunset-warning"
       description: Run `metrics --check-unused-files` in all packages
 
     unused_files:diff:
       run: >
-        melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
+        melos exec -c 6 --ignore="bdd_steps" --diff=origin/main...HEAD --
         "metrics check-unused-files lib --no-congratulate
         --disable-sunset-warning"
       description: Run `metrics --check-unused-files` in all changed packages
 
     unused_code:
       run: >
-        melos exec -c 1 --ignore="bdd_steps" -- "metrics check-unused-code lib
+        melos exec -c 6 --ignore="bdd_steps" -- "metrics check-unused-code lib
         --no-congratulate --disable-sunset-warning"
       description: Run `metrics --check-unused-code` in all packages
 
     unused_code:diff:
       run: >
-        melos exec -c 1 --ignore="bdd_steps" --diff=origin/main...HEAD --
+        melos exec -c 6 --ignore="bdd_steps" --diff=origin/main...HEAD --
         "metrics check-unused-code lib --no-congratulate
         --disable-sunset-warning"
       description: Run `metrics --check-unused-code` in all changed packages
 
     code_checks:
-      steps:
-        - melos run analyze
-        - melos run unused_dependencies
-        - melos run circular_dependencies
-        - melos run validate_barrel_file_imports
-        - melos run unused_files
-        - melos run unused_code
-        - melos run test
+      run: >
+        bash \$MELOS_ROOT_PATH/.tools/scripts/melos/run.sh
+        analyze
+        unused_dependencies
+        circular_dependencies
+        validate_barrel_file_imports
+        unused_files
+        unused_code
+        test
+        coverage:report
       description: Runs code checks on the project
 
     code_checks:diff:
-      steps:
-        - melos run analyze:diff
-        - melos run unused_dependencies:diff
-        - melos run circular_dependencies:diff
-        - melos run validate_barrel_file_imports:diff
-        - melos run unused_files:diff
-        - melos run unused_code:diff
-        - melos run test:diff
+      run: >
+        bash \$MELOS_ROOT_PATH/.tools/scripts/melos/run.sh
+        analyze:diff
+        unused_dependencies:diff
+        circular_dependencies:diff
+        validate_barrel_file_imports:diff
+        unused_files:diff
+        unused_code:diff
+        test:diff
+        coverage:report:diff
       description: Runs code checks on the project diff
 
     format:
       run: |
-        find . \
-          \( -path "./.tools" -o -path "*/build" -o -path "*/.dart_tool" -o -path "*/__brick__" \) -prune \
-          -o -name "*.dart" \
-          -not -name "*.freezed.dart" \
-          -not -name "*.g.dart" \
-          -not -name "*.config.dart" \
-          -not -name "*.gr.dart" \
-          -not -name "*.gen.dart" \
-          -not -name "*.i69n.dart" \
-          -not -path "*/test/feature/*_test.dart" \
-          -print | xargs dart format > /dev/null
-      description: Format all non generated dart files
+        melos exec -- \$MELOS_ROOT_PATH/.tools/scripts/melos/format_non_generated.sh
+      description: Format non-generated dart files in all packages
+
+    format:diff:
+      run: |
+        melos exec --diff=origin/main...HEAD -- \$MELOS_ROOT_PATH/.tools/scripts/melos/format_non_generated.sh
+      description: Format non-generated dart files in committed-changed packages only

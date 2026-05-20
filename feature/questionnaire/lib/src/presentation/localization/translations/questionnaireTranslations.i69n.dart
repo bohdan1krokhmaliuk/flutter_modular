@@ -36,8 +36,8 @@ String _cardinal(int count,
 
 class QuestionnaireTranslations implements i69n.I69nMessageBundle {
   const QuestionnaireTranslations();
-  WellcomeQuestionnaireTranslations get wellcome =>
-      WellcomeQuestionnaireTranslations(this);
+  WelcomeQuestionnaireTranslations get welcome =>
+      WelcomeQuestionnaireTranslations(this);
   CompletedQuestionnaireTranslations get completed =>
       CompletedQuestionnaireTranslations(this);
   Object operator [](String key) {
@@ -46,9 +46,9 @@ class QuestionnaireTranslations implements i69n.I69nMessageBundle {
   }
 }
 
-class WellcomeQuestionnaireTranslations implements i69n.I69nMessageBundle {
+class WelcomeQuestionnaireTranslations implements i69n.I69nMessageBundle {
   final QuestionnaireTranslations _parent;
-  const WellcomeQuestionnaireTranslations(this._parent);
+  const WelcomeQuestionnaireTranslations(this._parent);
   String get pageTitle => "Check your knowledge";
   String get button => "Start quiz";
   String get title => "Ready to test your knowledge?";
@@ -56,7 +56,7 @@ class WellcomeQuestionnaireTranslations implements i69n.I69nMessageBundle {
       "Welcome to the quiz! These questions are designed to help you reinforce what you've learned and discover new insights. Take your time and focus on the details. Good luck";
   Object operator [](String key) {
     throw Exception(
-        '[] operator is disabled in en.wellcome, see _i69n: nomap, notraverse flag.');
+        '[] operator is disabled in en.welcome, see _i69n: nomap, notraverse flag.');
   }
 }
 

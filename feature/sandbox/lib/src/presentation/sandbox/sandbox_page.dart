@@ -41,7 +41,7 @@ class SandboxPage extends StatelessWidget {
                                   .main
                                   .rickAndMortyDescription,
                               onTap: () => bloc.add(
-                                const SandboxEvent.openRickAndMory(),
+                                const SandboxEvent.openRickAndMorty(),
                               ),
                             ),
                           if (state.isQuestionnaireAvailable)
@@ -59,7 +59,7 @@ class SandboxPage extends StatelessWidget {
                             description:
                                 translations.defaultExceptionDescription,
                             onTap: () => bloc.add(
-                              const SandboxEvent.tirggerDefaultExceptionPresentation(),
+                              const SandboxEvent.triggerDefaultExceptionPresentation(),
                             ),
                           ),
                           PlatformCard(
@@ -68,7 +68,7 @@ class SandboxPage extends StatelessWidget {
                             description:
                                 translations.customExceptionDescription,
                             onTap: () => bloc.add(
-                              const SandboxEvent.tirggerCustomExceptionPresentation(),
+                              const SandboxEvent.triggerCustomExceptionPresentation(),
                             ),
                           ),
                         ],

@@ -4,27 +4,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presenter/presenter.dart';
 import 'package:questionnaire/src/presentation/localization/translations_extension.dart';
-import 'package:questionnaire/src/presentation/wellcome/bloc/wellcome_bloc.dart';
+import 'package:questionnaire/src/presentation/welcome/bloc/welcome_bloc.dart';
 
-class WellcomePage extends StatelessWidget {
-  const WellcomePage({super.key});
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final translations = context.translations.wellcome;
+    final translations = context.translations.welcome;
     return PlatformScaffold(
       appBar: PlatformAppBar(title: translations.pageTitle),
       body: BlocProvider(
-        create: (_) => diContainer<WellcomeBloc>(),
-        child: DefaultPresenter<WellcomeBloc, WellcomeState>(
-          child: BlocBuilder<WellcomeBloc, WellcomeState>(
+        create: (_) => diContainer<WelcomeBloc>(),
+        child: DefaultPresenter<WelcomeBloc, WelcomeState>(
+          child: BlocBuilder<WelcomeBloc, WelcomeState>(
             builder: (context, state) {
-              final bloc = context.read<WellcomeBloc>();
+              final bloc = context.read<WelcomeBloc>();
               return SubmitPage(
                 bottom: FilledButton(
                   onPressed: state.isLoading
                       ? null
-                      : () => bloc.add(const WellcomeEvent.proceed()),
+                      : () => bloc.add(const WelcomeEvent.proceed()),
                   child: Text(translations.button),
                 ),
                 child: Padding(

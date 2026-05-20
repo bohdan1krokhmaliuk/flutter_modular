@@ -20,4 +20,8 @@ dependencies:
 dev_dependencies:
   analysis:
   build_runner:
+  checks:
+  flutter_test:
+    sdk: flutter
   injectable_generator:
+  mocktail:

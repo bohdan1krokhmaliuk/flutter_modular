@@ -13,8 +13,8 @@ class BlocMonitoringObserver extends BlocObserver {
   final Monitoring _monitoring;
 
   @postConstruct
-  void init() {
-    if (kDebugMode) {
+  void init({bool isDebug = kDebugMode}) {
+    if (isDebug) {
       Bloc.observer = this;
     }
   }

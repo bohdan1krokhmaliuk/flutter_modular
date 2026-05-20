@@ -8,7 +8,7 @@ abstract class FeatureFlowController<T> {
   T get state;
 
   final Monitoring _monitoring;
-  late bool _isCompleted;
+  bool _isCompleted;
 
   void update(FeatureFlowCallback<T> callback);
 
@@ -28,7 +28,7 @@ abstract class FeatureFlowController<T> {
       }
     } else {
       _monitoring.recordNonFatal(
-        Exception('FeatureFlowController.complete failed to get context'),
+        Exception('FeatureFlowController.complete called after completion'),
       );
     }
   }

@@ -9,6 +9,7 @@ void main(List<String> args) {
     exit(1);
   }
 
+  final excludes = [...ignoreFiles, ..._localExcludes(Directory.current)];
   final lines = file.readAsLinesSync();
   final filteredLines = <String>[];
 
@@ -16,7 +17,7 @@ void main(List<String> args) {
 
   for (final line in lines) {
     if (line.startsWith('SF:')) {
-      skipCurrentFile = ignoreFiles.any((p) => line.contains(p));
+      skipCurrentFile = excludes.any((p) => line.contains(p));
     }
 
     if (!skipCurrentFile) {
@@ -30,4 +31,13 @@ void main(List<String> args) {
 
   file.writeAsStringSync(filteredLines.join('\n'));
   print('Successfully filtered coverage/lcov.info');
+}
+
+List<String> _localExcludes(Directory packageDir) {
+  final file = File('${packageDir.path}/.coverage_exclude');
+  if (!file.existsSync()) return const [];
+  return file
+      .readAsLinesSync()
+      .where((l) => l.isNotEmpty && !l.startsWith('#'))
+      .toList();
 }

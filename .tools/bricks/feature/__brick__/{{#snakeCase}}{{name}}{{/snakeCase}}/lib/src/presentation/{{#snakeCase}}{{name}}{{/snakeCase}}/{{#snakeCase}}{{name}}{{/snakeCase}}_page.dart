@@ -14,7 +14,7 @@ class {{#pascalCase}}{{name}}{{/pascalCase}}Page extends StatelessWidget {
       appBar: AppBar(title: Text(context.translations.stub)),
       body: BlocProvider(
         create: (_) => diContainer<{{#pascalCase}}{{name}}{{/pascalCase}}Bloc>(),
-        child: Placeholder(),
+        child: const SizedBox.shrink(),
       ),
     );
   }

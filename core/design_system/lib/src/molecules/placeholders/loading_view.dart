@@ -10,8 +10,8 @@ class LoadingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const loader = Center(child: PlatformProgressIndicator());
-    if (backgroundColor != null) {
-      ColoredBox(color: backgroundColor!, child: loader);
+    if (backgroundColor case final color?) {
+      return ColoredBox(color: color, child: loader);
     }
 
     return loader;

@@ -19,10 +19,10 @@ class SandboxBloc extends Bloc<SandboxEvent, SandboxState> {
     on<SandboxEvent>(
       (event, emit) => event.map(
         load: (_) => _onLoad(emit),
-        openRickAndMory: (_) => _onOpenRickAndMorty(),
+        openRickAndMorty: (_) => _onOpenRickAndMorty(),
         openQuestionnaire: (_) => _onOpenQuestionnaire(emit),
-        tirggerDefaultExceptionPresentation: (_) => _onDefaultException(emit),
-        tirggerCustomExceptionPresentation: (_) => _onCustomPresentation(emit),
+        triggerDefaultExceptionPresentation: (_) => _onDefaultException(emit),
+        triggerCustomExceptionPresentation: (_) => _onCustomPresentation(emit),
       ),
     );
 
