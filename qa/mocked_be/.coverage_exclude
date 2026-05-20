@@ -1,0 +1,3 @@
+# Scenario definitions are hardcoded mock BE fixtures, not testable logic.
+scenarios/scenarios.dart
+scenarios/questionnaire.dart

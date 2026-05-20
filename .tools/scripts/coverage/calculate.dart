@@ -33,6 +33,11 @@ void main(List<String> args) {
     final segments = file.uri.pathSegments;
     final pkgName = segments[segments.length - 3];
 
+    final excludes = [
+      ...ignoreFiles,
+      ..._localExcludes(file.parent.parent),
+    ];
+
     int pkgLF = 0;
     int pkgLH = 0;
     bool skipFile = false;
@@ -40,7 +45,7 @@ void main(List<String> args) {
     for (var line in lines) {
       switch (line.substring(0, 3)) {
         case 'SF:':
-          skipFile = ignoreFiles.any(line.endsWith);
+          skipFile = excludes.any(line.endsWith);
         case 'LF:' when !skipFile:
           pkgLF += int.parse(line.split(':').last);
         case 'LH:' when !skipFile:
@@ -78,4 +83,13 @@ void main(List<String> args) {
       exit(1);
     }
   }
+}
+
+List<String> _localExcludes(Directory packageDir) {
+  final file = File('${packageDir.path}/.coverage_exclude');
+  if (!file.existsSync()) return const [];
+  return file
+      .readAsLinesSync()
+      .where((l) => l.isNotEmpty && !l.startsWith('#'))
+      .toList();
 }

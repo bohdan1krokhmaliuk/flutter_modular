@@ -409,7 +409,27 @@ expect(capturedResult, true);
 
 ---
 
-## 9. Quick Reference
+## 9. Excluding Files from Coverage
+
+`utility/` packages must maintain 100% line coverage. Some files inside a package are pure configuration or fixture data — no logic to test — and including them in the coverage count is misleading. Two layers of exclusion exist.
+
+**Global exclusions** — `ignore_files.dart` in `.tools/scripts/coverage/` lists file-name suffixes that are always excluded across every package (generated files, DI wiring, etc.). Edit this only for patterns that apply project-wide.
+
+**Package-local exclusions** — drop a `.coverage_exclude` file at the package root. Both `filter_generated.dart` (run per-package after `flutter test --coverage`) and `calculate.dart` (run from the repo root to build the report) read this file automatically and merge its patterns with the global list.
+
+Format: one path-suffix pattern per line, `#` for comments, blank lines ignored.
+
+```
+# Scenario definitions are hardcoded mock BE fixtures, not testable logic.
+scenarios/scenarios.dart
+scenarios/questionnaire.dart
+```
+
+A pattern matches if the `SF:` line in `lcov.info` ends with it (e.g. `SF:lib/src/scenarios/scenarios.dart` matches `scenarios/scenarios.dart`). Use the most specific suffix that won't accidentally match unrelated files in other packages.
+
+---
+
+## 10. Quick Reference
 
 ### Choosing your test type
 
