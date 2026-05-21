@@ -48,6 +48,7 @@ workspace:
   - utility/monitoring
   - utility/state_management
   - utility/preferences
+  - utility/platform_info
   - core/domain
   - core/api_client
   - core/api_client_interceptors

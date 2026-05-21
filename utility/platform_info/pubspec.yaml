@@ -1,0 +1,12 @@
+name: platform_info
+description: Platform information utility
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.11.5
+
+resolution: workspace
+
+dev_dependencies:
+  analysis:
